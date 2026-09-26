@@ -1,16 +1,3 @@
-<HTML></HTML>
-<!DOCTYPE html>
-<html lang="sk">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Môj Web</title>
-  <!-- Tailwind CSS: štýly pre dizajn načítané priamo z internetu -->
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-white text-gray-900">
-
-  <!-- SEM BUDEME VKLADAŤ KÓD OD CLAUDEA -->
 <!-- ZÁKLADNÁ KOSTRA START -->
 <!DOCTYPE html>
 <html lang="sk">
@@ -18,6 +5,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rodinná poradňa od A po Z</title>
+  <meta name="description" content="Sprevádzam rodiny náročnými obdobiami. Mgr. Adriana Záskalanová – rodinná poradkyňa, psychologička a koučka. Online a v okolí Banskej Bystrice.">
+
+  <!-- IKONKA A NÁHĽAD PRI ZDIEĽANÍ START -->
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+  <meta property="og:title" content="Rodinná poradňa od A po Z">
+  <meta property="og:description" content="Sprevádzam rodiny náročnými obdobiami. Mgr. Adriana Záskalanová.">
+  <meta property="og:image" content="images/og-image.png">
+  <meta property="og:type" content="website">
+  <!-- IKONKA A NÁHĽAD PRI ZDIEĽANÍ END -->
 
   <!-- FONT START -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,7 +36,7 @@
             primary:   { 500: '#3D2217' },
             secondary: { 500: '#F0E9D5' },
             neutral:   { 500: '#764B2A', 600: '#6B4426' },
-            accent:    { 500: '#F1D1E7', 600: '#DBBED2' },
+            accent:    { 300: '#F6E0EF', 500: '#F1D1E7', 600: '#ECC0DE' },
             tertiary:  { 300: '#DEE1B7', 500: '#B8BA87' },
             yellow:    { 50: '#FDEDD3', 500: '#F5AA33' }
           }
@@ -60,44 +57,44 @@
   </style>
   <!-- ZRNITÁ TEXTÚRA END -->
 </head>
-<body class="bg-secondary-500 text-primary-500 font-serif antialiased">
+<body class="bg-secondary-500 text-primary-500 antialiased">
 
   <!-- HEADER START -->
 <header class="sticky top-0 z-50 bg-secondary-500">
-  <div class="h-16 md:h-20 lg:h-[82px] px-5 md:px-8 lg:pl-16 lg:pr-[72px] flex items-center justify-between">
+  <div class="h-[72px] lg:h-[82px] px-4 lg:pl-16 lg:pr-[72px] flex items-center justify-between">
 
     <!-- Logo -->
-    <a href="#" class="italic text-lg lg:text-[22.5px] lg:-mt-1.5 text-primary-500">Rodinná poradňa od A po Z</a>
+    <a href="#" class="italic text-xl lg:text-[22.5px] lg:-mt-1.5 text-primary-500">Rodinná poradňa od A po Z</a>
 
-    <!-- Menu pre PC -->
+    <!-- Menu pre PC (hover = ružová, kliknutie = svetloružová) -->
     <nav class="hidden lg:flex items-center gap-[34px] text-base text-primary-500">
-      <a href="#o-mne" class="hover:text-neutral-500 transition">O mne</a>
-      <a href="#sluzby" class="hover:text-neutral-500 transition">Služby</a>
-      <a href="#ako-sa-stretneme" class="hover:text-neutral-500 transition">Ako sa stretneme</a>
-      <a href="#prax" class="hover:text-neutral-500 transition">Prax a vzdelanie</a>
-      <a href="#kontakt" class="hover:text-neutral-500 transition">Kontakt</a>
+      <a href="#o-mne" class="-mx-2 px-2 h-[34px] inline-flex items-center rounded-lg hover:bg-accent-500 active:bg-accent-300 transition-colors">O mne</a>
+      <a href="#sluzby" class="-mx-2 px-2 h-[34px] inline-flex items-center rounded-lg hover:bg-accent-500 active:bg-accent-300 transition-colors">Služby</a>
+      <a href="#ako-sa-stretneme" class="-mx-2 px-2 h-[34px] inline-flex items-center rounded-lg hover:bg-accent-500 active:bg-accent-300 transition-colors">Ako sa stretneme</a>
+      <a href="prax-a-vzdelanie.html" class="-mx-2 px-2 h-[34px] inline-flex items-center rounded-lg hover:bg-accent-500 active:bg-accent-300 transition-colors">Prax a vzdelanie</a>
+      <a href="#kontakt" class="-mx-2 px-2 h-[34px] inline-flex items-center rounded-lg hover:bg-accent-500 active:bg-accent-300 transition-colors">Kontakt</a>
     </nav>
 
     <!-- Hamburger pre mobil a tablet -->
-    <button id="menu-open" class="lg:hidden p-2 -mr-2 text-primary-500" aria-label="Otvoriť menu">
-      <i data-lucide="menu" class="w-6 h-6 stroke-[1.5]"></i>
+    <button id="menu-open" class="lg:hidden w-10 h-10 inline-flex items-center justify-center text-primary-500" aria-label="Otvoriť menu">
+      <i data-lucide="menu" class="w-7 h-7 stroke-[1.25]"></i>
     </button>
   </div>
 
   <!-- Mobilné menu (celá obrazovka) -->
   <div id="mobile-menu" class="fixed inset-0 bg-secondary-500 hidden flex-col lg:hidden">
-    <div class="h-16 md:h-20 px-5 md:px-8 flex items-center justify-between">
-      <span class="italic text-lg text-primary-500">Rodinná poradňa od A po Z</span>
-      <button id="menu-close" class="p-2 -mr-2 text-primary-500" aria-label="Zavrieť menu">
-        <i data-lucide="x" class="w-6 h-6 stroke-[1.5]"></i>
+    <div class="h-[72px] px-4 flex items-center justify-between">
+      <span class="italic text-xl text-primary-500">Rodinná poradňa od A po Z</span>
+      <button id="menu-close" class="w-10 h-10 inline-flex items-center justify-center text-primary-500" aria-label="Zavrieť menu">
+        <i data-lucide="x" class="w-7 h-7 stroke-[1.25]"></i>
       </button>
     </div>
-    <nav class="flex-1 flex flex-col items-center justify-center gap-8 text-xl text-primary-500">
-      <a href="#o-mne" class="menu-link">O mne</a>
-      <a href="#sluzby" class="menu-link">Služby</a>
-      <a href="#ako-sa-stretneme" class="menu-link">Ako sa stretneme</a>
-      <a href="#prax" class="menu-link">Prax a vzdelanie</a>
-      <a href="#kontakt" class="menu-link">Kontakt</a>
+    <nav class="flex-1 flex flex-col items-center justify-center gap-[43px] text-2xl text-primary-500">
+      <a href="#o-mne" class="menu-link px-2 h-10 inline-flex items-center rounded-lg hover:bg-accent-500 active:bg-accent-300 transition-colors">O mne</a>
+      <a href="#sluzby" class="menu-link px-2 h-10 inline-flex items-center rounded-lg hover:bg-accent-500 active:bg-accent-300 transition-colors">Služby</a>
+      <a href="#ako-sa-stretneme" class="menu-link px-2 h-10 inline-flex items-center rounded-lg hover:bg-accent-500 active:bg-accent-300 transition-colors">Ako sa stretneme</a>
+      <a href="prax-a-vzdelanie.html" class="menu-link px-2 h-10 inline-flex items-center rounded-lg hover:bg-accent-500 active:bg-accent-300 transition-colors">Prax a vzdelanie</a>
+      <a href="#kontakt" class="menu-link px-2 h-10 inline-flex items-center rounded-lg hover:bg-accent-500 active:bg-accent-300 transition-colors">Kontakt</a>
     </nav>
   </div>
 </header>
@@ -111,165 +108,171 @@
 </script>
 <!-- HEADER END -->
 
-  <!-- SEM BUDEME VKLADAŤ ĎALŠIE SEKCIE (hero, služby, ...) -->
 <!-- HERO SEKCIA START -->
-<section id="o-mne" class="grid lg:grid-cols-[724fr_716fr] lg:h-[794px] bg-secondary-500">
+<section id="uvod" class="grid md:grid-cols-[342px_336px] md:justify-between md:pl-8 md:pt-10 md:pb-[81px] lg:grid-cols-[724fr_716fr] lg:p-0 lg:h-[794px] bg-secondary-500">
 
   <!-- Text -->
-  <div class="flex justify-center px-5 md:px-12 lg:px-0 lg:pl-[29px] pt-14 md:pt-20 lg:pt-[101px] pb-16 md:pb-20 lg:pb-0">
-    <div class="relative w-full max-w-[540px] flex flex-col items-center text-center">
+  <div class="flex justify-center px-4 pt-8 md:p-0 md:block lg:flex lg:justify-center lg:pl-[29px] lg:pt-[101px]">
+    <div class="relative w-full max-w-[540px] flex flex-col items-center text-center md:items-start md:text-left lg:items-center lg:text-center">
 
-      <h1 class="text-primary-500 font-light text-[44px] md:text-[64px] lg:text-[80px] leading-[1.1] tracking-[-0.03em]">
+      <h1 class="text-primary-500 font-light text-[40px] leading-[1.15] md:text-[48px] md:leading-none md:tracking-[-0.02em] lg:text-[80px] lg:leading-[1.1] lg:tracking-[-0.03em]">
         Sprevádzam rodiny náročnými obdobiami
       </h1>
 
-      <p class="mt-6 lg:mt-8 text-neutral-500 font-light text-lg lg:text-xl leading-[1.3] lg:leading-[1.3]">
+      <p class="mt-6 lg:mt-8 text-primary-500 md:text-neutral-500 font-light text-xl leading-[1.3]">
         Som Adriana Záskalanová, mama štyroch detí a k tomu psychologička, rodinná poradkyňa aj koučka.
         Už 25 rokov som pri rodinách – od prvej myšlienky na bábätko až po dospievanie.
       </p>
 
       <a href="#kontakt"
-         class="mt-8 lg:mt-10 inline-flex items-center gap-2 h-[46px] px-6 rounded-full bg-primary-500 text-secondary-500 italic text-base shadow-[2px_2px_6px_rgba(0,0,0,0.02)] hover:bg-neutral-500 transition">
+         class="grain mt-8 lg:mt-10 inline-flex items-center gap-2 h-[46px] px-6 rounded-full bg-primary-500 text-secondary-500 italic text-base shadow-[2px_2px_6px_rgba(0,0,0,0.02)] hover:bg-accent-500 hover:text-primary-500 active:bg-accent-600 transition-colors">
         Napíšte mi
         <svg width="13" height="8" viewBox="408 617 13 8" fill="currentColor" aria-hidden="true"><path d="M420.354 621.211C420.549 621.016 420.549 620.699 420.354 620.504L417.172 617.322C416.976 617.127 416.66 617.127 416.464 617.322C416.269 617.517 416.269 617.834 416.464 618.029L419.293 620.858L416.464 623.686C416.269 623.881 416.269 624.198 416.464 624.393C416.66 624.588 416.976 624.588 417.172 624.393L420.354 621.211ZM408 620.858V621.358H420V620.858V620.358H408V620.858Z"/></svg>
       </a>
 
-      <!-- Ručne písaný text -->
-      <p class="font-script text-neutral-500 text-2xl leading-[1.3] text-left self-start mt-12 lg:mt-0 lg:absolute lg:left-[7px] lg:top-[536px] -rotate-[11deg] origin-top-left">
-        Online a v okolí<br>Banskej Bystrice
+      <!-- Ručne písaný text (mobil a PC; na tablete je pod fotkou) -->
+      <p class="md:hidden lg:block font-script text-neutral-500 text-lg leading-6 mt-6 lg:mt-0 lg:text-2xl lg:leading-[1.3] lg:text-left lg:self-start lg:absolute lg:left-[7px] lg:top-[536px] lg:-rotate-[11deg] lg:origin-top-left">
+        Online a v okolí<br class="hidden lg:inline"> Banskej Bystrice
       </p>
     </div>
   </div>
 
   <!-- Fotka -->
-  <div class="h-[420px] md:h-[560px] lg:h-full">
-    <img src="images/hero.png" alt="Adriana Záskalanová" class="w-full h-full object-cover">
+  <div class="mt-6 md:mt-0 lg:h-full">
+    <img src="images/hero.png" alt="Adriana Záskalanová" class="w-full h-[432px] md:h-[372px] lg:h-full object-cover">
+    <p class="hidden md:block lg:hidden mt-4 font-script text-neutral-500 text-xl leading-[1.2] -rotate-[3.12deg] origin-left" aria-hidden="true">
+      Online a v okolí Banskej Bystrice
+    </p>
   </div>
 
 </section>
 <!-- HERO SEKCIA END -->
  <!-- SLUŽBY SEKCIA START -->
 <section id="sluzby" class="grain bg-neutral-500 text-secondary-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
-  <div class="max-w-[1090px] mx-auto px-5 md:px-8 lg:px-0 pt-16 md:pt-20 lg:pt-[88px] pb-16 md:pb-20 lg:pb-[88px]">
+  <div class="max-w-[1090px] mx-auto px-4 md:px-8 lg:px-0 py-12 md:py-16 lg:py-[88px]">
 
-    <div class="grid lg:grid-cols-[1fr_535px] gap-10 lg:gap-0">
+    <div class="grid gap-y-8 md:grid-cols-[343px_321px] md:grid-rows-[auto_1fr] md:justify-between md:gap-x-10 lg:grid-cols-[1fr_535px] lg:gap-x-0 lg:gap-y-10">
 
       <!-- Úvod -->
-      <div>
-        <h2 class="font-light text-[44px] md:text-[56px] lg:text-[64px] leading-[1.1] tracking-[-0.02em] lg:-mt-0.5">
+      <div class="md:col-start-1 md:row-start-1">
+        <h2 class="font-light text-[36px] leading-[1.2] tracking-[-0.02em] md:text-[44px] md:leading-[49px] md:tracking-normal lg:text-[64px] lg:leading-[1.1] lg:tracking-[-0.02em] lg:-mt-0.5">
           S čím <em class="italic">pomáham</em>
         </h2>
-        <p class="mt-3 font-light text-lg lg:text-xl leading-[1.3] lg:leading-[1.3] max-w-[430px]">
+        <p class="mt-4 lg:mt-3 font-light text-xl leading-[1.3] max-w-[430px]">
           Nemusíte presne vedieť, čo potrebujete. Spoznajte, čo je vám blízke – a napíšte mi.
         </p>
+      </div>
+
+      <!-- Rozbaľovacie karty -->
+      <div class="md:col-start-2 md:row-start-1 md:row-span-2 flex flex-col gap-3 lg:gap-4">
+
+        <details class="group grain rounded-2xl bg-accent-500 text-neutral-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)] hover:bg-accent-600 open:hover:bg-accent-500 transition-colors">
+          <summary class="flex items-center justify-between gap-4 min-h-[63px] lg:min-h-[70px] px-6 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+            <span class="text-[28px] leading-[1.1] tracking-[-0.02em] lg:text-[30px] lg:tracking-normal">Máme bábätko</span>
+            <i data-lucide="plus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] group-open:hidden"></i>
+            <i data-lucide="minus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] hidden group-open:block"></i>
+          </summary>
+          <div class="px-6 pb-6">
+            <p class="font-light text-xl leading-[1.3] lg:leading-[1.4]">
+              Dieťatko milujete a zároveň máte pocit, že ste za posledné mesiace zmizli? Že už neviete, kto ste, keď nie ste mama alebo ocko?
+              To sa hovorí ťažko – nahlas ešte ťažšie. Prídem za vami domov alebo sa spojíme online. Bez kočíka a bez cestovania.
+            </p>
+            <div class="mt-8 lg:mt-4 flex flex-wrap gap-2">
+              <span class="inline-flex items-center h-[30px] px-2.5 rounded-lg bg-yellow-50 text-neutral-600 text-xl">Som dobrá mama?</span>
+              <span class="inline-flex items-center h-[30px] px-2.5 rounded-lg bg-yellow-50 text-neutral-600 text-xl">Rodičovské vyhorenie</span>
+              <span class="inline-flex items-center h-[30px] px-2.5 rounded-lg bg-yellow-50 text-neutral-600 text-xl">Emócie po pôrode</span>
+            </div>
+          </div>
+        </details>
+
+        <details class="group grain rounded-2xl bg-accent-500 text-neutral-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)] hover:bg-accent-600 open:hover:bg-accent-500 transition-colors">
+          <summary class="flex items-center justify-between gap-4 min-h-[63px] lg:min-h-[70px] px-6 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+            <span class="text-[28px] leading-[1.1] tracking-[-0.02em] lg:text-[30px] lg:tracking-normal">Škola nám robí starosti</span>
+            <i data-lucide="plus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] group-open:hidden"></i>
+            <i data-lucide="minus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] hidden group-open:block"></i>
+          </summary>
+          <div class="px-6 pb-6">
+            <p class="font-light text-xl leading-[1.3] lg:leading-[1.4]">TEXT DOPLNIŤ</p>
+            <div class="mt-8 lg:mt-4 flex flex-wrap gap-2">
+              <span class="inline-flex items-center h-[30px] px-2.5 rounded-lg bg-yellow-50 text-neutral-600 text-xl">Štítok</span>
+            </div>
+          </div>
+        </details>
+
+        <details class="group grain rounded-2xl bg-accent-500 text-neutral-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)] hover:bg-accent-600 open:hover:bg-accent-500 transition-colors">
+          <summary class="flex items-center justify-between gap-4 min-h-[63px] lg:min-h-[70px] px-6 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+            <span class="text-[28px] leading-[1.1] tracking-[-0.02em] lg:text-[30px] lg:tracking-normal">Rozvádzame sa</span>
+            <i data-lucide="plus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] group-open:hidden"></i>
+            <i data-lucide="minus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] hidden group-open:block"></i>
+          </summary>
+          <div class="px-6 pb-6">
+            <p class="font-light text-xl leading-[1.3] lg:leading-[1.4]">TEXT DOPLNIŤ</p>
+            <div class="mt-8 lg:mt-4 flex flex-wrap gap-2">
+              <span class="inline-flex items-center h-[30px] px-2.5 rounded-lg bg-yellow-50 text-neutral-600 text-xl">Štítok</span>
+            </div>
+          </div>
+        </details>
+
+        <details class="group grain rounded-2xl bg-accent-500 text-neutral-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)] hover:bg-accent-600 open:hover:bg-accent-500 transition-colors">
+          <summary class="flex items-center justify-between gap-4 min-h-[63px] lg:min-h-[70px] px-6 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+            <span class="text-[28px] leading-[1.1] tracking-[-0.02em] lg:text-[30px] lg:tracking-normal">Doma je stále dusno</span>
+            <i data-lucide="plus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] group-open:hidden"></i>
+            <i data-lucide="minus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] hidden group-open:block"></i>
+          </summary>
+          <div class="px-6 pb-6">
+            <p class="font-light text-xl leading-[1.3] lg:leading-[1.4]">TEXT DOPLNIŤ</p>
+            <div class="mt-8 lg:mt-4 flex flex-wrap gap-2">
+              <span class="inline-flex items-center h-[30px] px-2.5 rounded-lg bg-yellow-50 text-neutral-600 text-xl">Štítok</span>
+            </div>
+          </div>
+        </details>
+
+        <details class="group grain rounded-2xl bg-accent-500 text-neutral-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)] hover:bg-accent-600 open:hover:bg-accent-500 transition-colors">
+          <summary class="flex items-center justify-between gap-4 min-h-[63px] lg:min-h-[70px] px-6 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+            <span class="text-[28px] leading-[1.1] tracking-[-0.02em] lg:text-[30px] lg:tracking-normal">Naše dieťa sa trápi</span>
+            <i data-lucide="plus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] group-open:hidden"></i>
+            <i data-lucide="minus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] hidden group-open:block"></i>
+          </summary>
+          <div class="px-6 pb-6">
+            <p class="font-light text-xl leading-[1.3] lg:leading-[1.4]">TEXT DOPLNIŤ</p>
+            <div class="mt-8 lg:mt-4 flex flex-wrap gap-2">
+              <span class="inline-flex items-center h-[30px] px-2.5 rounded-lg bg-yellow-50 text-neutral-600 text-xl">Štítok</span>
+            </div>
+          </div>
+        </details>
+
+        <details class="group grain rounded-2xl bg-accent-500 text-neutral-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)] hover:bg-accent-600 open:hover:bg-accent-500 transition-colors">
+          <summary class="flex items-center justify-between gap-4 min-h-[63px] lg:min-h-[70px] px-6 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+            <span class="text-[28px] leading-[1.1] tracking-[-0.02em] lg:text-[30px] lg:tracking-normal">Dospieva nám</span>
+            <i data-lucide="plus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] group-open:hidden"></i>
+            <i data-lucide="minus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] hidden group-open:block"></i>
+          </summary>
+          <div class="px-6 pb-6">
+            <p class="font-light text-xl leading-[1.3] lg:leading-[1.4]">TEXT DOPLNIŤ</p>
+            <div class="mt-8 lg:mt-4 flex flex-wrap gap-2">
+              <span class="inline-flex items-center h-[30px] px-2.5 rounded-lg bg-yellow-50 text-neutral-600 text-xl">Štítok</span>
+            </div>
+          </div>
+        </details>
+
+      </div>
+
+      <!-- Tlačidlo (na mobile pod kartami, od tabletu pod úvodom) -->
+      <div class="md:col-start-1 md:row-start-2">
         <a href="#kontakt"
-           class="grain mt-8 lg:mt-10 inline-flex items-center gap-2 h-[46px] px-6 rounded-full bg-secondary-500 text-primary-500 italic text-base shadow-[2px_2px_6px_rgba(0,0,0,0.02)] hover:bg-yellow-50 transition">
+           class="grain inline-flex items-center gap-2 h-[46px] px-6 rounded-full bg-secondary-500 text-primary-500 italic text-base shadow-[2px_2px_6px_rgba(0,0,0,0.02)] hover:bg-accent-500 active:bg-accent-600 transition-colors">
           Objednať konzultáciu
           <svg width="13" height="8" viewBox="408 617 13 8" fill="currentColor" aria-hidden="true"><path d="M420.354 621.211C420.549 621.016 420.549 620.699 420.354 620.504L417.172 617.322C416.976 617.127 416.66 617.127 416.464 617.322C416.269 617.517 416.269 617.834 416.464 618.029L419.293 620.858L416.464 623.686C416.269 623.881 416.269 624.198 416.464 624.393C416.66 624.588 416.976 624.588 417.172 624.393L420.354 621.211ZM408 620.858V621.358H420V620.858V620.358H408V620.858Z"/></svg>
         </a>
       </div>
-
-      <!-- Rozbaľovacie karty -->
-      <div class="flex flex-col gap-4">
-
-        <details class="group grain rounded-2xl bg-accent-500 text-neutral-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)] hover:bg-accent-600 open:hover:bg-accent-500 transition-colors">
-          <summary class="flex items-center justify-between gap-4 min-h-[70px] px-6 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
-            <span class="text-2xl lg:text-[30px] leading-[1.1]">Máme bábätko</span>
-            <i data-lucide="plus" class="w-6 h-6 shrink-0 stroke-[1.5] group-open:hidden"></i>
-            <i data-lucide="minus" class="w-6 h-6 shrink-0 stroke-[1.5] hidden group-open:block"></i>
-          </summary>
-          <div class="px-6 pb-6">
-            <p class="font-light text-lg lg:text-xl leading-[1.4] lg:leading-[1.4]">
-              Dieťatko milujete a zároveň máte pocit, že ste za posledné mesiace zmizli? Že už neviete, kto ste, keď nie ste mama alebo ocko?
-              To sa hovorí ťažko – nahlas ešte ťažšie. Prídem za vami domov alebo sa spojíme online. Bez kočíka a bez cestovania.
-            </p>
-            <div class="mt-4 flex flex-wrap gap-2">
-              <span class="bg-yellow-50 rounded px-2 py-0.5 text-base">Som dobrá mama?</span>
-              <span class="bg-yellow-50 rounded px-2 py-0.5 text-base">Rodičovské vyhorenie</span>
-              <span class="bg-yellow-50 rounded px-2 py-0.5 text-base">Emócie po pôrode</span>
-            </div>
-          </div>
-        </details>
-
-        <details class="group grain rounded-2xl bg-accent-500 text-neutral-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)] hover:bg-accent-600 open:hover:bg-accent-500 transition-colors">
-          <summary class="flex items-center justify-between gap-4 min-h-[70px] px-6 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
-            <span class="text-2xl lg:text-[30px] leading-[1.1]">Škola nám robí starosti</span>
-            <i data-lucide="plus" class="w-6 h-6 shrink-0 stroke-[1.5] group-open:hidden"></i>
-            <i data-lucide="minus" class="w-6 h-6 shrink-0 stroke-[1.5] hidden group-open:block"></i>
-          </summary>
-          <div class="px-6 pb-6">
-            <p class="font-light text-lg lg:text-xl leading-[1.4] lg:leading-[1.4]">TEXT DOPLNIŤ</p>
-            <div class="mt-4 flex flex-wrap gap-2">
-              <span class="bg-yellow-50 rounded px-2 py-0.5 text-base">Štítok</span>
-            </div>
-          </div>
-        </details>
-
-        <details class="group grain rounded-2xl bg-accent-500 text-neutral-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)] hover:bg-accent-600 open:hover:bg-accent-500 transition-colors">
-          <summary class="flex items-center justify-between gap-4 min-h-[70px] px-6 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
-            <span class="text-2xl lg:text-[30px] leading-[1.1]">Rozvádzame sa</span>
-            <i data-lucide="plus" class="w-6 h-6 shrink-0 stroke-[1.5] group-open:hidden"></i>
-            <i data-lucide="minus" class="w-6 h-6 shrink-0 stroke-[1.5] hidden group-open:block"></i>
-          </summary>
-          <div class="px-6 pb-6">
-            <p class="font-light text-lg lg:text-xl leading-[1.4] lg:leading-[1.4]">TEXT DOPLNIŤ</p>
-            <div class="mt-4 flex flex-wrap gap-2">
-              <span class="bg-yellow-50 rounded px-2 py-0.5 text-base">Štítok</span>
-            </div>
-          </div>
-        </details>
-
-        <details class="group grain rounded-2xl bg-accent-500 text-neutral-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)] hover:bg-accent-600 open:hover:bg-accent-500 transition-colors">
-          <summary class="flex items-center justify-between gap-4 min-h-[70px] px-6 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
-            <span class="text-2xl lg:text-[30px] leading-[1.1]">Doma je stále dusno</span>
-            <i data-lucide="plus" class="w-6 h-6 shrink-0 stroke-[1.5] group-open:hidden"></i>
-            <i data-lucide="minus" class="w-6 h-6 shrink-0 stroke-[1.5] hidden group-open:block"></i>
-          </summary>
-          <div class="px-6 pb-6">
-            <p class="font-light text-lg lg:text-xl leading-[1.4] lg:leading-[1.4]">TEXT DOPLNIŤ</p>
-            <div class="mt-4 flex flex-wrap gap-2">
-              <span class="bg-yellow-50 rounded px-2 py-0.5 text-base">Štítok</span>
-            </div>
-          </div>
-        </details>
-
-        <details class="group grain rounded-2xl bg-accent-500 text-neutral-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)] hover:bg-accent-600 open:hover:bg-accent-500 transition-colors">
-          <summary class="flex items-center justify-between gap-4 min-h-[70px] px-6 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
-            <span class="text-2xl lg:text-[30px] leading-[1.1]">Naše dieťa sa trápi</span>
-            <i data-lucide="plus" class="w-6 h-6 shrink-0 stroke-[1.5] group-open:hidden"></i>
-            <i data-lucide="minus" class="w-6 h-6 shrink-0 stroke-[1.5] hidden group-open:block"></i>
-          </summary>
-          <div class="px-6 pb-6">
-            <p class="font-light text-lg lg:text-xl leading-[1.4] lg:leading-[1.4]">TEXT DOPLNIŤ</p>
-            <div class="mt-4 flex flex-wrap gap-2">
-              <span class="bg-yellow-50 rounded px-2 py-0.5 text-base">Štítok</span>
-            </div>
-          </div>
-        </details>
-
-        <details class="group grain rounded-2xl bg-accent-500 text-neutral-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)] hover:bg-accent-600 open:hover:bg-accent-500 transition-colors">
-          <summary class="flex items-center justify-between gap-4 min-h-[70px] px-6 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
-            <span class="text-2xl lg:text-[30px] leading-[1.1]">Dospieva nám</span>
-            <i data-lucide="plus" class="w-6 h-6 shrink-0 stroke-[1.5] group-open:hidden"></i>
-            <i data-lucide="minus" class="w-6 h-6 shrink-0 stroke-[1.5] hidden group-open:block"></i>
-          </summary>
-          <div class="px-6 pb-6">
-            <p class="font-light text-lg lg:text-xl leading-[1.4] lg:leading-[1.4]">TEXT DOPLNIŤ</p>
-            <div class="mt-4 flex flex-wrap gap-2">
-              <span class="bg-yellow-50 rounded px-2 py-0.5 text-base">Štítok</span>
-            </div>
-          </div>
-        </details>
-
-      </div>
     </div>
 
     <!-- Spolupracujem -->
-    <div class="mt-16 lg:mt-[91px] max-w-[520px]">
-      <h3 class="font-light text-[32px] lg:text-[36px] leading-[1.1] tracking-[-0.03em]">Spolupracujem</h3>
-      <p class="mt-4 lg:mt-6 font-light text-lg lg:text-xl leading-[1.3] lg:leading-[1.3]">
+    <div class="mt-12 md:mt-16 md:flex md:justify-between md:gap-10 lg:block lg:mt-[91px] lg:max-w-[520px]">
+      <h3 class="shrink-0 font-light text-[32px] leading-[1.2] tracking-[-0.02em] lg:text-[36px] lg:leading-[1.1] lg:tracking-[-0.03em]">Spolupracujem</h3>
+      <p class="mt-4 md:mt-0 md:max-w-[432px] lg:max-w-none lg:mt-6 font-light text-xl leading-[1.3]">
         Spolupracujem s klinickým psychológom a psychoterapeutom
-        <a href="https://www.bbpsycholog.sk/index.php" target="_blank" rel="noopener" class="italic underline underline-offset-2 hover:text-accent-500 transition">Jánom Záskalanom</a>.
+        <a href="https://www.bbpsycholog.sk/index.php" target="_blank" rel="noopener" class="italic underline underline-offset-2 hover:text-accent-600 transition-colors">Jánom Záskalanom</a>.
         Ak budete potrebovať niečo, čo neponúkam – napríklad párovú terapiu – odporučím vás jemu.
       </p>
     </div>
@@ -278,33 +281,36 @@
 </section>
 <!-- SLUŽBY SEKCIA END -->
  <!-- O MNE SEKCIA START -->
-<section id="prax" class="bg-secondary-500 text-primary-500">
-  <div class="max-w-[1090px] mx-auto px-5 md:px-8 lg:px-0 pt-20 md:pt-24 lg:pt-[154px] pb-16 md:pb-20 lg:pb-[82px]">
-    <div class="grid lg:grid-cols-[1fr_535px] items-center gap-12 lg:gap-0">
+<section id="o-mne" class="bg-secondary-500 text-primary-500 scroll-mt-[72px] lg:scroll-mt-[82px]">
+  <div class="max-w-[1090px] mx-auto px-4 md:px-8 lg:px-0 py-12 md:py-16 lg:pt-[154px] lg:pb-[82px]">
+    <div class="grid md:grid-cols-[280px_384px] md:justify-between md:gap-x-10 lg:grid-cols-[1fr_535px] lg:gap-x-0">
 
-      <!-- Fotka -->
-      <div class="lg:pl-px">
-        <img src="images/o-mne.jpg" alt="Adriana Záskalanová" class="w-full max-w-[424px] aspect-[424/530] object-cover mx-auto lg:mx-0">
+      <!-- Ručne písaný popisok -->
+      <p class="md:col-start-2 lg:row-start-1 font-script text-neutral-500 text-lg leading-6 md:text-xl md:leading-[27px] lg:text-2xl lg:leading-8 lg:h-0 lg:relative lg:-top-[42px] lg:-left-[31px] lg:-rotate-[9deg] lg:origin-top-left whitespace-nowrap">
+        Niečo málo o mne
+      </p>
+
+      <h2 class="mt-3 md:mt-2 lg:mt-0 md:col-start-2 lg:row-start-2 font-light text-[36px] leading-[1.2] tracking-[-0.02em] md:text-[44px] md:leading-[49px] md:tracking-normal lg:text-[64px] lg:leading-none lg:tracking-[-0.02em]">
+        Rodičovstvo poznám<br class="hidden lg:inline"> z <em class="italic">oboch</em> strán
+      </h2>
+
+      <p class="mt-4 lg:mt-6 md:col-start-2 lg:row-start-3 lg:max-w-[526px] font-light text-xl leading-[1.3]">
+        Najprv nás podrobí skúške a až potom naučí pravidlá. Emócie našich detí – aj tie naše vlastné – dôverne poznám nielen z odborných kníh, ale najmä z vlastnej skúsenosti.
+      </p>
+
+      <!-- Fotka (na mobile medzi odsekmi, cez celú šírku) -->
+      <div class="-mx-4 mt-6 md:mx-0 md:mt-2 lg:mt-0 md:col-start-1 md:row-start-2 md:row-span-3 lg:row-start-1 lg:row-span-4 lg:self-center lg:pl-px">
+        <img src="images/o-mne.jpg" alt="Adriana Záskalanová" class="w-full aspect-[424/530] md:w-[280px] md:h-[360px] md:aspect-auto lg:w-[424px] lg:h-[530px] object-cover">
       </div>
 
-      <!-- Text -->
-      <div class="relative">
-        <p class="font-script text-neutral-500 text-2xl inline-block mb-4 lg:mb-0 lg:absolute lg:-top-[42px] lg:-left-[31px] -rotate-[9deg] origin-top-left whitespace-nowrap">
-          Niečo málo o mne
-        </p>
-
-        <h2 class="font-light text-[44px] md:text-[56px] lg:text-[64px] leading-[1.05] lg:leading-none tracking-[-0.02em]">
-          Rodičovstvo poznám<br>z <em class="italic">oboch</em> strán
-        </h2>
-
-        <div class="mt-6 max-w-[526px] space-y-6 font-light text-lg lg:text-xl leading-[1.3] lg:leading-[1.3]">
-          <p>Najprv nás podrobí skúške a až potom naučí pravidlá. Emócie našich detí – aj tie naše vlastné – dôverne poznám nielen z odborných kníh, ale najmä z vlastnej skúsenosti.</p>
+      <div class="mt-6 md:col-start-2 lg:row-start-4">
+        <div class="lg:max-w-[526px] space-y-6 font-light text-xl leading-[1.3]">
           <p>Bola som školskou psychologičkou na základnej a strednej škole, pracovala som s rodinami v rozvodovom konaní aj s deťmi, ktorým sa zrazu svet zdal príliš veľký. Desať rokov som viedla materské centrum a bola pri matkách, ktoré prvýkrát držia bábätko a nevedia, čo teraz. Každé z tých miest ma naučilo niečo iné.</p>
           <p>Moje vzdelanie a vlastné materstvo som spojila do Rodinnej poradne. Nie preto, aby som vám dávala rady. Ale aby ste odišli s tým, že svojej rodine rozumiete o čosi lepšie.</p>
         </div>
 
-        <a href="#"
-           class="mt-10 inline-flex items-center gap-2 h-[47px] px-6 rounded-full border border-[#644E45] text-primary-500 italic text-base shadow-[2px_2px_6px_rgba(0,0,0,0.02)] hover:bg-primary-500 hover:text-secondary-500 transition">
+        <a href="prax-a-vzdelanie.html"
+           class="mt-8 lg:mt-10 inline-flex items-center gap-2 h-[48px] px-6 rounded-full border border-[#644E45] text-primary-500 italic text-base shadow-[2px_2px_6px_rgba(0,0,0,0.02)] hover:bg-accent-500 hover:border-accent-500 active:bg-accent-600 active:border-accent-600 transition-colors">
           Viac o mojich skúsenostiach
           <svg width="13" height="8" viewBox="408 617 13 8" fill="currentColor" aria-hidden="true"><path d="M420.354 621.211C420.549 621.016 420.549 620.699 420.354 620.504L417.172 617.322C416.976 617.127 416.66 617.127 416.464 617.322C416.269 617.517 416.269 617.834 416.464 618.029L419.293 620.858L416.464 623.686C416.269 623.881 416.269 624.198 416.464 624.393C416.66 624.588 416.976 624.588 417.172 624.393L420.354 621.211ZM408 620.858V621.358H420V620.858V620.358H408V620.858Z"/></svg>
         </a>
@@ -317,8 +323,8 @@
  <!-- STRETNEME SA SEKCIA START -->
 <section id="ako-sa-stretneme" class="relative bg-secondary-500 text-primary-500">
 
-  <!-- Vlna -->
-  <svg class="block w-full h-[60px] md:h-[100px] lg:h-[136px]" viewBox="0 0 1440 136" preserveAspectRatio="none" aria-hidden="true">
+  <!-- Vlna (len na PC) -->
+  <svg class="hidden lg:block w-full h-[136px]" viewBox="0 0 1440 136" preserveAspectRatio="none" aria-hidden="true">
     <defs>
       <filter id="vlna-zrno" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
         <feTurbulence type="fractalNoise" baseFrequency="0.5" numOctaves="3" stitchTiles="stitch" seed="3585" result="noise"/>
@@ -333,31 +339,31 @@
     <path filter="url(#vlna-zrno)" fill="#B8BA87" d="M355.929 0C623.215 0 809.824 135.43 1060.36 135.43C1196.42 135.43 1333.2 105.56 1440 73.87V136H0L0 52.62C110.975 26.06 247.5 0 355.929 0Z"/>
   </svg>
 
-  <div class="grain bg-tertiary-500 -mt-px overflow-hidden">
-    <div class="max-w-[1090px] mx-auto px-5 md:px-8 lg:px-0 pt-6 lg:pt-[1px] pb-20 md:pb-24 lg:pb-[109px]">
+  <div class="grain bg-tertiary-500 lg:-mt-px overflow-hidden">
+    <div class="max-w-[1090px] mx-auto px-4 md:px-8 lg:px-0 pt-12 lg:pt-[1px] pb-12 lg:pb-[127px]">
 
       <!-- Nadpis -->
-      <h2 class="font-light text-[44px] md:text-[56px] lg:text-[64px] leading-[1.05] lg:leading-none tracking-[-0.02em] lg:-mt-1.5">
-        Stretneme sa tam,<br>kde <em class="italic">vám</em> je najlepšie
+      <h2 class="md:max-w-[388px] lg:max-w-none font-light text-[36px] leading-[1.2] tracking-[-0.02em] md:text-[44px] md:leading-[49px] md:tracking-normal lg:text-[64px] lg:leading-none lg:tracking-[-0.02em] lg:-mt-1.5">
+        Stretneme sa tam,<br class="hidden lg:inline"> kde <em class="italic">vám</em> je najlepšie
       </h2>
-      <p class="mt-4 lg:mt-[22px] font-light text-lg lg:text-xl leading-[1.3] lg:leading-[1.3] max-w-[520px]">
+      <p class="mt-4 lg:mt-[22px] font-light text-xl leading-[1.3] max-w-[520px] md:max-w-[388px] lg:max-w-[520px]">
         Nie každý rozhovor sa dá viesť za stolom. Vyberte si formu, ktorá sadne vášmu dňu.
       </p>
 
       <!-- Formy stretnutí -->
-      <div class="mt-14 lg:mt-[90px] grid md:grid-cols-2 gap-y-12 lg:gap-y-[70px] gap-x-10 lg:gap-x-0">
+      <div class="mt-12 md:mt-16 lg:mt-[90px] grid md:grid-cols-2 gap-y-12 lg:gap-y-[70px] md:gap-x-5 lg:gap-x-0">
 
         <div class="max-w-[420px]">
-          <h3 class="inline-block bg-tertiary-300 rounded-sm px-1 text-[28px] lg:text-[30px] leading-[38px]">Online</h3>
-          <p class="mt-4 font-light text-lg lg:text-xl leading-[1.3] lg:leading-[1.3]">
+          <h3 class="inline-block bg-tertiary-300 rounded-sm px-1 text-[28px] leading-[31px] tracking-[-0.02em] lg:text-[30px] lg:leading-[38px] lg:tracking-normal">Online</h3>
+          <p class="mt-4 font-light text-xl leading-[1.3]">
             Najčastejšia forma. <strong class="font-bold">Odkiaľkoľvek</strong> na Slovensku aj zo zahraničia – z gauča, spálne či kuchyne.
           </p>
-          <div class="hidden mt-4 space-y-4 font-light text-lg lg:text-xl leading-[1.3] lg:leading-[1.3]">
+          <div class="hidden mt-4 space-y-4 font-light text-xl leading-[1.3]">
             <p><strong class="font-bold">Dĺžka a cena:</strong> Základné sedenie trvá 60 minút a cena je 60 €. V prípade potreby komplexnejšieho rozboru je možné dĺžku stretnutia po vzájomnej dohode vopred upraviť.</p>
             <p><strong class="font-bold">Platformy:</strong> Konzultácie prebiehajú cez overené videohovory podľa vašich preferencií – Google Meet, WhatsApp alebo Messenger.</p>
             <p><strong class="font-bold">Prostredie:</strong> Pripravte si pokojné miesto, kde sa budete cítiť bezpečne, uvoľnene a kde nebudete počas rozhovoru nikým rušení.</p>
           </div>
-          <button type="button" data-more aria-expanded="false" class="group mt-4 inline-flex items-center gap-1.5 font-bold text-base leading-none hover:underline">
+          <button type="button" data-more aria-expanded="false" class="group mt-4 inline-flex items-center gap-1.5 font-bold text-base leading-none hover:text-neutral-500 transition-colors">
             <span class="group-aria-expanded:hidden">Viac informácií</span><span class="hidden group-aria-expanded:inline">Menej informácií</span>
             <i data-lucide="plus" class="w-3 h-3 stroke-[2.5] group-aria-expanded:hidden"></i>
             <i data-lucide="minus" class="w-3 h-3 stroke-[2.5] hidden group-aria-expanded:block"></i>
@@ -365,14 +371,14 @@
         </div>
 
         <div class="max-w-[420px]">
-          <h3 class="inline-block bg-tertiary-300 rounded-sm px-1 text-[28px] lg:text-[30px] leading-[38px]">U vás doma</h3>
-          <p class="mt-4 font-light text-lg lg:text-xl leading-[1.3] lg:leading-[1.3]">
+          <h3 class="inline-block bg-tertiary-300 rounded-sm px-1 text-[28px] leading-[31px] tracking-[-0.02em] lg:text-[30px] lg:leading-[38px] lg:tracking-normal">U vás doma</h3>
+          <p class="mt-4 font-light text-xl leading-[1.3]">
             Prídem za vami do <strong class="font-bold">Banskej Bystrice a okolia</strong> – všade, kam to mám do 30 minút. A vy nemusíte organizovať presun rodiny, ani cestu s kočíkom.
           </p>
-          <div class="hidden mt-4 space-y-4 font-light text-lg lg:text-xl leading-[1.3] lg:leading-[1.3]">
+          <div class="hidden mt-4 space-y-4 font-light text-xl leading-[1.3]">
             <p>TEXT DOPLNIŤ</p>
           </div>
-          <button type="button" data-more aria-expanded="false" class="group mt-4 inline-flex items-center gap-1.5 font-bold text-base leading-none hover:underline">
+          <button type="button" data-more aria-expanded="false" class="group mt-4 inline-flex items-center gap-1.5 font-bold text-base leading-none hover:text-neutral-500 transition-colors">
             <span class="group-aria-expanded:hidden">Viac informácií</span><span class="hidden group-aria-expanded:inline">Menej informácií</span>
             <i data-lucide="plus" class="w-3 h-3 stroke-[2.5] group-aria-expanded:hidden"></i>
             <i data-lucide="minus" class="w-3 h-3 stroke-[2.5] hidden group-aria-expanded:block"></i>
@@ -380,14 +386,14 @@
         </div>
 
         <div class="max-w-[420px]">
-          <h3 class="inline-block bg-tertiary-300 rounded-sm px-1 text-[28px] lg:text-[30px] leading-[38px]">Na prechádzke</h3>
-          <p class="mt-4 font-light text-lg lg:text-xl leading-[1.3] lg:leading-[1.3]">
+          <h3 class="inline-block bg-tertiary-300 rounded-sm px-1 text-[28px] leading-[31px] tracking-[-0.02em] lg:text-[30px] lg:leading-[38px] lg:tracking-normal">Na prechádzke</h3>
+          <p class="mt-4 font-light text-xl leading-[1.3]">
             Niektoré veci sa povedia ľahšie, keď sa ide vedľa seba a nemusíte sa pozerať do očí.
           </p>
-          <div class="hidden mt-4 space-y-4 font-light text-lg lg:text-xl leading-[1.3] lg:leading-[1.3]">
+          <div class="hidden mt-4 space-y-4 font-light text-xl leading-[1.3]">
             <p>TEXT DOPLNIŤ</p>
           </div>
-          <button type="button" data-more aria-expanded="false" class="group mt-4 inline-flex items-center gap-1.5 font-bold text-base leading-none hover:underline">
+          <button type="button" data-more aria-expanded="false" class="group mt-4 inline-flex items-center gap-1.5 font-bold text-base leading-none hover:text-neutral-500 transition-colors">
             <span class="group-aria-expanded:hidden">Viac informácií</span><span class="hidden group-aria-expanded:inline">Menej informácií</span>
             <i data-lucide="plus" class="w-3 h-3 stroke-[2.5] group-aria-expanded:hidden"></i>
             <i data-lucide="minus" class="w-3 h-3 stroke-[2.5] hidden group-aria-expanded:block"></i>
@@ -395,14 +401,14 @@
         </div>
 
         <div class="max-w-[420px]">
-          <h3 class="inline-block bg-tertiary-300 rounded-sm px-1 text-[28px] lg:text-[30px] leading-[38px]">E-mailom</h3>
-          <p class="mt-4 font-light text-lg lg:text-xl leading-[1.3] lg:leading-[1.3]">
+          <h3 class="inline-block bg-tertiary-300 rounded-sm px-1 text-[28px] leading-[31px] tracking-[-0.02em] lg:text-[30px] lg:leading-[38px] lg:tracking-normal">E-mailom</h3>
+          <p class="mt-4 font-light text-xl leading-[1.3]">
             Keď to potrebujete napísať skôr, než to poviete nahlas. Alebo keď na rozhovor zatiaľ nemáte silu.
           </p>
-          <div class="hidden mt-4 space-y-4 font-light text-lg lg:text-xl leading-[1.3] lg:leading-[1.3]">
+          <div class="hidden mt-4 space-y-4 font-light text-xl leading-[1.3]">
             <p>TEXT DOPLNIŤ</p>
           </div>
-          <button type="button" data-more aria-expanded="false" class="group mt-4 inline-flex items-center gap-1.5 font-bold text-base leading-none hover:underline">
+          <button type="button" data-more aria-expanded="false" class="group mt-4 inline-flex items-center gap-1.5 font-bold text-base leading-none hover:text-neutral-500 transition-colors">
             <span class="group-aria-expanded:hidden">Viac informácií</span><span class="hidden group-aria-expanded:inline">Menej informácií</span>
             <i data-lucide="plus" class="w-3 h-3 stroke-[2.5] group-aria-expanded:hidden"></i>
             <i data-lucide="minus" class="w-3 h-3 stroke-[2.5] hidden group-aria-expanded:block"></i>
@@ -411,14 +417,14 @@
 
       </div>
 
-      <!-- Natočená karta -->
-      <div class="mt-16 lg:mt-[147px] flex justify-center">
-        <div class="grain w-full max-w-[535px] lg:h-[364px] bg-secondary-500 rotate-[2deg] lg:rotate-[3.14deg] shadow-[2px_2px_4px_rgba(0,0,0,0.03)] flex flex-col items-center justify-center text-center px-8 py-12 lg:px-[64px] lg:py-0">
-          <p class="text-xl lg:text-[24px] leading-[1.3] lg:leading-[1.25]">
+      <!-- Natočená karta (tablet: text a tlačidlo vedľa seba) -->
+      <div class="mt-20 md:mt-16 lg:mt-[147px] flex justify-center">
+        <div class="grain w-full max-w-[535px] md:max-w-[608px] lg:max-w-[535px] lg:h-[364px] bg-secondary-500 rotate-[1.78deg] lg:rotate-[3.14deg] shadow-[2px_2px_4px_rgba(0,0,0,0.03)] flex flex-col md:flex-row lg:flex-col items-center justify-center text-center md:text-left lg:text-center gap-8 lg:gap-0 px-6 py-10 md:px-8 md:py-12 lg:px-[64px] lg:py-0">
+          <p class="text-xl leading-[1.3] lg:text-[24px] lg:leading-[1.25]">
             Rozprávať sa môžeme <em class="italic">len vy a ja, v páre, s dieťaťom aj s celou rodinou</em> – podľa toho, čo vám dáva zmysel. Ak neviete, napíšte mi a vyberieme to spolu.
           </p>
           <a href="#kontakt"
-             class="mt-9 inline-flex items-center gap-2 h-[47px] px-6 rounded-full border border-neutral-500 text-primary-500 italic text-base hover:bg-primary-500 hover:text-secondary-500 transition">
+             class="shrink-0 lg:mt-9 inline-flex items-center gap-2 h-[48px] px-6 rounded-full border border-[#644E45] text-primary-500 italic text-base shadow-[2px_2px_6px_rgba(0,0,0,0.02)] hover:bg-accent-500 hover:border-accent-500 active:bg-accent-600 active:border-accent-600 transition-colors">
             Napíšte mi
             <svg width="13" height="8" viewBox="408 617 13 8" fill="currentColor" aria-hidden="true"><path d="M420.354 621.211C420.549 621.016 420.549 620.699 420.354 620.504L417.172 617.322C416.976 617.127 416.66 617.127 416.464 617.322C416.269 617.517 416.269 617.834 416.464 618.029L419.293 620.858L416.464 623.686C416.269 623.881 416.269 624.198 416.464 624.393C416.66 624.588 416.976 624.588 417.172 624.393L420.354 621.211ZM408 620.858V621.358H420V620.858V620.358H408V620.858Z"/></svg>
           </a>
@@ -438,146 +444,146 @@
 <!-- STRETNEME SA SEKCIA END -->
  <!-- OTÁZKY SEKCIA START -->
 <section id="otazky" class="bg-secondary-500 text-primary-500">
-  <div class="max-w-[866px] mx-auto px-5 md:px-8 lg:px-0 pt-20 md:pt-24 lg:pt-[88px] pb-20 md:pb-24 lg:pb-[94px]">
+  <div class="max-w-[866px] mx-auto px-4 md:px-8 lg:px-0 pt-12 md:pt-16 lg:pt-[88px] pb-12 md:pb-16 lg:pb-[94px]">
 
     <!-- Nadpis -->
     <div class="text-center">
-      <p class="font-script text-neutral-500 text-xl lg:text-2xl">Máte otázky? Rada odpoviem.</p>
-      <h2 class="mt-4 lg:mt-[22px] font-light text-[40px] md:text-[56px] lg:text-[64px] leading-[1.05] lg:leading-none tracking-[-0.02em]">
+      <p class="font-script text-primary-500 md:text-neutral-500 text-lg leading-6 md:text-xl lg:text-2xl lg:leading-8">Máte otázky? Rada odpoviem.</p>
+      <h2 class="mt-4 lg:mt-[22px] font-light text-[36px] leading-[1.2] tracking-[-0.02em] md:text-[44px] md:leading-[49px] md:tracking-normal lg:text-[64px] lg:leading-none lg:tracking-[-0.02em]">
         Možno by ste sa ešte chceli <em class="italic">spýtať</em>
       </h2>
-      <p class="mt-5 lg:mt-[22px] mx-auto max-w-[580px] font-light text-lg lg:text-xl leading-[1.3] lg:leading-[1.3]">
+      <p class="mt-4 lg:mt-[22px] mx-auto max-w-[580px] font-light text-xl leading-[1.3]">
         Pripravila som pre vás prehľad najčastejších otázok, s ktorými sa na mňa rodiny obracajú pred začatím našej spolupráce.
       </p>
     </div>
 
     <!-- Otázky -->
-    <div class="mt-14 lg:mt-[90px] flex flex-col gap-4 lg:gap-6">
+    <div class="mt-12 lg:mt-[90px] flex flex-col gap-5 md:gap-4 lg:gap-6">
 
-        <details class="group grain rounded-2xl bg-secondary-500 open:bg-accent-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
-          <summary class="flex items-center justify-between gap-6 px-5 md:px-8 py-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
-            <span class="text-2xl lg:text-[30px] leading-[1.25] lg:leading-[38px]">Čo je to rodinné poradenstvo?</span>
-            <i data-lucide="plus" class="w-6 h-6 shrink-0 stroke-[1.5] group-open:hidden"></i>
-            <i data-lucide="minus" class="w-6 h-6 shrink-0 stroke-[1.5] hidden group-open:block"></i>
+        <details class="group grain -mx-4 md:mx-0 md:rounded-2xl bg-secondary-500 open:bg-accent-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
+          <summary class="flex items-center justify-between gap-6 px-8 py-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+            <span class="text-xl leading-[1.3] md:text-2xl md:leading-[1.25] lg:text-[30px] lg:leading-[38px]">Čo je to rodinné poradenstvo?</span>
+            <i data-lucide="plus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] group-open:hidden"></i>
+            <i data-lucide="minus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] hidden group-open:block"></i>
           </summary>
-          <div class="px-5 md:px-8 pb-4 space-y-6 font-light text-lg lg:text-xl leading-[1.3] lg:leading-[1.3]">
+          <div class="px-8 pb-6 lg:pb-4 space-y-6 font-light text-xl leading-[1.3]">
               <p>TEXT DOPLNIŤ</p>
           </div>
         </details>
 
-        <details class="group grain rounded-2xl bg-secondary-500 open:bg-tertiary-300 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
-          <summary class="flex items-center justify-between gap-6 px-5 md:px-8 py-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
-            <span class="text-2xl lg:text-[30px] leading-[1.25] lg:leading-[38px]">Ako si dohodnúť návštevu?</span>
-            <i data-lucide="plus" class="w-6 h-6 shrink-0 stroke-[1.5] group-open:hidden"></i>
-            <i data-lucide="minus" class="w-6 h-6 shrink-0 stroke-[1.5] hidden group-open:block"></i>
+        <details class="group grain -mx-4 md:mx-0 md:rounded-2xl bg-secondary-500 open:bg-tertiary-300 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
+          <summary class="flex items-center justify-between gap-6 px-8 py-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+            <span class="text-xl leading-[1.3] md:text-2xl md:leading-[1.25] lg:text-[30px] lg:leading-[38px]">Ako si dohodnúť návštevu?</span>
+            <i data-lucide="plus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] group-open:hidden"></i>
+            <i data-lucide="minus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] hidden group-open:block"></i>
           </summary>
-          <div class="px-5 md:px-8 pb-4 space-y-6 font-light text-lg lg:text-xl leading-[1.3] lg:leading-[1.3]">
+          <div class="px-8 pb-6 lg:pb-4 space-y-6 font-light text-xl leading-[1.3]">
               <p>Napíšte mi krátky popis vašej situácie a lokalitu, kde bývate. Spoločne nájdeme termín, ktorý vám bude najlepšie vyhovovať a dohodneme si podmienky stretnutia.</p>
           </div>
         </details>
 
-        <details class="group grain rounded-2xl bg-secondary-500 open:bg-accent-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
-          <summary class="flex items-center justify-between gap-6 px-5 md:px-8 py-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
-            <span class="text-2xl lg:text-[30px] leading-[1.25] lg:leading-[38px]">Prečo a ako si vybrať poradenstvo doma?</span>
-            <i data-lucide="plus" class="w-6 h-6 shrink-0 stroke-[1.5] group-open:hidden"></i>
-            <i data-lucide="minus" class="w-6 h-6 shrink-0 stroke-[1.5] hidden group-open:block"></i>
+        <details class="group grain -mx-4 md:mx-0 md:rounded-2xl bg-secondary-500 open:bg-accent-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
+          <summary class="flex items-center justify-between gap-6 px-8 py-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+            <span class="text-xl leading-[1.3] md:text-2xl md:leading-[1.25] lg:text-[30px] lg:leading-[38px]">Prečo a ako si vybrať poradenstvo doma?</span>
+            <i data-lucide="plus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] group-open:hidden"></i>
+            <i data-lucide="minus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] hidden group-open:block"></i>
           </summary>
-          <div class="px-5 md:px-8 pb-4 space-y-6 font-light text-lg lg:text-xl leading-[1.3] lg:leading-[1.3]">
+          <div class="px-8 pb-6 lg:pb-4 space-y-6 font-light text-xl leading-[1.3]">
               <p>TEXT DOPLNIŤ</p>
           </div>
         </details>
 
-        <details class="group grain rounded-2xl bg-secondary-500 open:bg-accent-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
-          <summary class="flex items-center justify-between gap-6 px-5 md:px-8 py-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
-            <span class="text-2xl lg:text-[30px] leading-[1.25] lg:leading-[38px]">Ako presne funguje poradenstvo e-mailom?</span>
-            <i data-lucide="plus" class="w-6 h-6 shrink-0 stroke-[1.5] group-open:hidden"></i>
-            <i data-lucide="minus" class="w-6 h-6 shrink-0 stroke-[1.5] hidden group-open:block"></i>
+        <details class="group grain -mx-4 md:mx-0 md:rounded-2xl bg-secondary-500 open:bg-accent-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
+          <summary class="flex items-center justify-between gap-6 px-8 py-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+            <span class="text-xl leading-[1.3] md:text-2xl md:leading-[1.25] lg:text-[30px] lg:leading-[38px]">Ako presne funguje poradenstvo e-mailom?</span>
+            <i data-lucide="plus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] group-open:hidden"></i>
+            <i data-lucide="minus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] hidden group-open:block"></i>
           </summary>
-          <div class="px-5 md:px-8 pb-4 space-y-6 font-light text-lg lg:text-xl leading-[1.3] lg:leading-[1.3]">
+          <div class="px-8 pb-6 lg:pb-4 space-y-6 font-light text-xl leading-[1.3]">
               <p>Ak radšej svoje myšlienky formulujete písomne, potrebujete si veci najprv v pokoji utriediť, alebo vám váš harmonogram nedovoľuje zladiť sa na konkrétny čas hovoru, e-mailová konzultácia je diskrétny a flexibilný spôsob, ako získať odborný pohľad na vašu rodinnú situáciu. K celej odpovedi sa môžete kedykoľvek vrátiť, prečítať si ju znovu s odstupom času alebo si dôležité body pripomenúť.</p>
               <p>Výhodou e-mailového poradenstva je <strong class="font-bold">flexibilita</strong>, <strong class="font-bold">nie ste viazaní</strong> na presný dátum ani čas stretnutia. Máte čas na <strong class="font-bold">premyslenie</strong>, a <strong class="font-bold">písanie</strong> vám umožní pomenovať aj veci, ktoré by sa pri osobnom rozhovore hovorili ťažko. Je to diskrétne a pohodlné, <strong class="font-bold">konzultáciu</strong> riešite odkiaľkoľvek, bez nutnosti zapínať kameru či mikrofón.</p>
           </div>
         </details>
 
-        <details class="group grain rounded-2xl bg-secondary-500 open:bg-accent-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
-          <summary class="flex items-center justify-between gap-6 px-5 md:px-8 py-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
-            <span class="text-2xl lg:text-[30px] leading-[1.25] lg:leading-[38px]">Prečo si vybrať konzultáciu na prechádzke (Walk &amp; Talk)?</span>
-            <i data-lucide="plus" class="w-6 h-6 shrink-0 stroke-[1.5] group-open:hidden"></i>
-            <i data-lucide="minus" class="w-6 h-6 shrink-0 stroke-[1.5] hidden group-open:block"></i>
+        <details class="group grain -mx-4 md:mx-0 md:rounded-2xl bg-secondary-500 open:bg-accent-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
+          <summary class="flex items-center justify-between gap-6 px-8 py-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+            <span class="text-xl leading-[1.3] md:text-2xl md:leading-[1.25] lg:text-[30px] lg:leading-[38px]">Prečo si vybrať konzultáciu na prechádzke (Walk &amp; Talk)?</span>
+            <i data-lucide="plus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] group-open:hidden"></i>
+            <i data-lucide="minus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] hidden group-open:block"></i>
           </summary>
-          <div class="px-5 md:px-8 pb-4 space-y-6 font-light text-lg lg:text-xl leading-[1.3] lg:leading-[1.3]">
+          <div class="px-8 pb-6 lg:pb-4 space-y-6 font-light text-xl leading-[1.3]">
               <p>TEXT DOPLNIŤ</p>
           </div>
         </details>
 
-        <details class="group grain rounded-2xl bg-secondary-500 open:bg-accent-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
-          <summary class="flex items-center justify-between gap-6 px-5 md:px-8 py-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
-            <span class="text-2xl lg:text-[30px] leading-[1.25] lg:leading-[38px]">Môžem dohodnúť konzultáciu aj pre dieťa?</span>
-            <i data-lucide="plus" class="w-6 h-6 shrink-0 stroke-[1.5] group-open:hidden"></i>
-            <i data-lucide="minus" class="w-6 h-6 shrink-0 stroke-[1.5] hidden group-open:block"></i>
+        <details class="group grain -mx-4 md:mx-0 md:rounded-2xl bg-secondary-500 open:bg-accent-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
+          <summary class="flex items-center justify-between gap-6 px-8 py-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+            <span class="text-xl leading-[1.3] md:text-2xl md:leading-[1.25] lg:text-[30px] lg:leading-[38px]">Môžem dohodnúť konzultáciu aj pre dieťa?</span>
+            <i data-lucide="plus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] group-open:hidden"></i>
+            <i data-lucide="minus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] hidden group-open:block"></i>
           </summary>
-          <div class="px-5 md:px-8 pb-4 space-y-6 font-light text-lg lg:text-xl leading-[1.3] lg:leading-[1.3]">
+          <div class="px-8 pb-6 lg:pb-4 space-y-6 font-light text-xl leading-[1.3]">
               <p>TEXT DOPLNIŤ</p>
           </div>
         </details>
 
-        <details class="group grain rounded-2xl bg-secondary-500 open:bg-accent-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
-          <summary class="flex items-center justify-between gap-6 px-5 md:px-8 py-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
-            <span class="text-2xl lg:text-[30px] leading-[1.25] lg:leading-[38px]">Je rodinné poradenstvo psychoterapia?</span>
-            <i data-lucide="plus" class="w-6 h-6 shrink-0 stroke-[1.5] group-open:hidden"></i>
-            <i data-lucide="minus" class="w-6 h-6 shrink-0 stroke-[1.5] hidden group-open:block"></i>
+        <details class="group grain -mx-4 md:mx-0 md:rounded-2xl bg-secondary-500 open:bg-accent-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
+          <summary class="flex items-center justify-between gap-6 px-8 py-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+            <span class="text-xl leading-[1.3] md:text-2xl md:leading-[1.25] lg:text-[30px] lg:leading-[38px]">Je rodinné poradenstvo psychoterapia?</span>
+            <i data-lucide="plus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] group-open:hidden"></i>
+            <i data-lucide="minus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] hidden group-open:block"></i>
           </summary>
-          <div class="px-5 md:px-8 pb-4 space-y-6 font-light text-lg lg:text-xl leading-[1.3] lg:leading-[1.3]">
+          <div class="px-8 pb-6 lg:pb-4 space-y-6 font-light text-xl leading-[1.3]">
               <p>TEXT DOPLNIŤ</p>
           </div>
         </details>
 
-        <details class="group grain rounded-2xl bg-secondary-500 open:bg-tertiary-300 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
-          <summary class="flex items-center justify-between gap-6 px-5 md:px-8 py-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
-            <span class="text-2xl lg:text-[30px] leading-[1.25] lg:leading-[38px]">Poskytujete posudky pre súd v rozvodovom konaní?</span>
-            <i data-lucide="plus" class="w-6 h-6 shrink-0 stroke-[1.5] group-open:hidden"></i>
-            <i data-lucide="minus" class="w-6 h-6 shrink-0 stroke-[1.5] hidden group-open:block"></i>
+        <details class="group grain -mx-4 md:mx-0 md:rounded-2xl bg-secondary-500 open:bg-tertiary-300 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
+          <summary class="flex items-center justify-between gap-6 px-8 py-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+            <span class="text-xl leading-[1.3] md:text-2xl md:leading-[1.25] lg:text-[30px] lg:leading-[38px]">Poskytujete posudky pre súd v rozvodovom konaní?</span>
+            <i data-lucide="plus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] group-open:hidden"></i>
+            <i data-lucide="minus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] hidden group-open:block"></i>
           </summary>
-          <div class="px-5 md:px-8 pb-4 space-y-6 font-light text-lg lg:text-xl leading-[1.3] lg:leading-[1.3]">
+          <div class="px-8 pb-6 lg:pb-4 space-y-6 font-light text-xl leading-[1.3]">
               <p>TEXT DOPLNIŤ</p>
           </div>
         </details>
 
-        <details class="group grain rounded-2xl bg-secondary-500 open:bg-accent-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
-          <summary class="flex items-center justify-between gap-6 px-5 md:px-8 py-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
-            <span class="text-2xl lg:text-[30px] leading-[1.25] lg:leading-[38px]">Ponúkate pri poradenstve aj konkrétne odporúčania?</span>
-            <i data-lucide="plus" class="w-6 h-6 shrink-0 stroke-[1.5] group-open:hidden"></i>
-            <i data-lucide="minus" class="w-6 h-6 shrink-0 stroke-[1.5] hidden group-open:block"></i>
+        <details class="group grain -mx-4 md:mx-0 md:rounded-2xl bg-secondary-500 open:bg-accent-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
+          <summary class="flex items-center justify-between gap-6 px-8 py-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+            <span class="text-xl leading-[1.3] md:text-2xl md:leading-[1.25] lg:text-[30px] lg:leading-[38px]">Ponúkate pri poradenstve aj konkrétne odporúčania?</span>
+            <i data-lucide="plus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] group-open:hidden"></i>
+            <i data-lucide="minus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] hidden group-open:block"></i>
           </summary>
-          <div class="px-5 md:px-8 pb-4 space-y-6 font-light text-lg lg:text-xl leading-[1.3] lg:leading-[1.3]">
+          <div class="px-8 pb-6 lg:pb-4 space-y-6 font-light text-xl leading-[1.3]">
               <p>TEXT DOPLNIŤ</p>
           </div>
         </details>
 
-        <details class="group grain rounded-2xl bg-secondary-500 open:bg-tertiary-300 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
-          <summary class="flex items-center justify-between gap-6 px-5 md:px-8 py-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
-            <span class="text-2xl lg:text-[30px] leading-[1.25] lg:leading-[38px]">Nahrádza poradenstvo psychologickú alebo zdravotnú starostlivosť?</span>
-            <i data-lucide="plus" class="w-6 h-6 shrink-0 stroke-[1.5] group-open:hidden"></i>
-            <i data-lucide="minus" class="w-6 h-6 shrink-0 stroke-[1.5] hidden group-open:block"></i>
+        <details class="group grain -mx-4 md:mx-0 md:rounded-2xl bg-secondary-500 open:bg-tertiary-300 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
+          <summary class="flex items-center justify-between gap-6 px-8 py-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+            <span class="text-xl leading-[1.3] md:text-2xl md:leading-[1.25] lg:text-[30px] lg:leading-[38px]">Nahrádza poradenstvo psychologickú alebo zdravotnú starostlivosť?</span>
+            <i data-lucide="plus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] group-open:hidden"></i>
+            <i data-lucide="minus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] hidden group-open:block"></i>
           </summary>
-          <div class="px-5 md:px-8 pb-4 space-y-6 font-light text-lg lg:text-xl leading-[1.3] lg:leading-[1.3]">
+          <div class="px-8 pb-6 lg:pb-4 space-y-6 font-light text-xl leading-[1.3]">
               <p>TEXT DOPLNIŤ</p>
           </div>
         </details>
 
     </div>
 
-    <!-- Karta: Nenašli ste odpoveď -->
-    <div class="mt-20 lg:mt-[88px] flex justify-center">
-      <div class="grain w-full max-w-[590px] lg:h-[384px] bg-yellow-50 rotate-[0.6deg] shadow-[2px_2px_4px_rgba(0,0,0,0.03)] flex flex-col items-center justify-center text-center px-8 py-12 lg:px-[50px] lg:py-0">
-        <h3 class="font-light text-[30px] lg:text-[36px] leading-[1.15] tracking-[-0.02em]">
+    <!-- Karta: Nenašli ste odpoveď (natočená od tabletu) -->
+    <div class="mt-12 md:mt-20 lg:mt-[88px] flex justify-center">
+      <div class="grain w-full max-w-[590px] lg:h-[384px] bg-yellow-50 md:rotate-[0.6deg] shadow-[2px_2px_4px_rgba(0,0,0,0.03)] flex flex-col items-center justify-center text-center px-6 py-10 md:px-8 md:py-12 lg:px-[50px] lg:py-0">
+        <h3 class="font-light text-[32px] leading-[1.2] tracking-[-0.02em] lg:text-[36px] lg:leading-[1.15]">
           Nenašli ste <em class="italic">odpoveď</em> na vašu otázku?
         </h3>
-        <p class="mt-4 max-w-[450px] text-lg lg:text-xl leading-[1.3] lg:leading-[1.3]">
+        <p class="mt-5 lg:mt-4 max-w-[450px] text-xl leading-[1.3]">
           Napíšte mi priamo na e-mail. Rada s vami preberiem akékoľvek nejasnosti a pomôžem vám vybrať optimálnu formu konzultácie.
         </p>
         <a href="mailto:zaskalanova@rodinna-poradna.sk"
-           class="grain mt-10 inline-flex items-center gap-2 h-[46px] px-6 rounded-full bg-primary-500 text-secondary-500 italic text-base shadow-[2px_2px_6px_rgba(0,0,0,0.02)] hover:bg-neutral-500 transition">
+           class="grain mt-5 lg:mt-10 inline-flex items-center gap-2 h-[46px] px-6 rounded-full bg-primary-500 text-secondary-500 italic text-base shadow-[2px_2px_6px_rgba(0,0,0,0.02)] hover:bg-accent-500 hover:text-primary-500 active:bg-accent-600 transition-colors">
           Napíšte mi správu
           <svg width="13" height="8" viewBox="408 617 13 8" fill="currentColor" aria-hidden="true"><path d="M420.354 621.211C420.549 621.016 420.549 620.699 420.354 620.504L417.172 617.322C416.976 617.127 416.66 617.127 416.464 617.322C416.269 617.517 416.269 617.834 416.464 618.029L419.293 620.858L416.464 623.686C416.269 623.881 416.269 624.198 416.464 624.393C416.66 624.588 416.976 624.588 417.172 624.393L420.354 621.211ZM408 620.858V621.358H420V620.858V620.358H408V620.858Z"/></svg>
         </a>
@@ -589,32 +595,32 @@
 <!-- OTÁZKY SEKCIA END -->
  <!-- KONTAKT SEKCIA START -->
 <section id="kontakt" class="grain bg-primary-500 text-secondary-500 overflow-hidden">
-  <div class="max-w-[1120px] mx-auto px-5 md:px-8 lg:px-0 pt-20 md:pt-24 lg:pt-[88px] pb-20 md:pb-24 lg:pb-[101px]">
-    <div class="grid lg:grid-cols-[1fr_535px] items-center gap-14 lg:gap-0 lg:pr-[11px]">
+  <div class="max-w-[1120px] mx-auto px-4 md:px-8 lg:px-0 py-12 lg:pt-[88px] lg:pb-[101px]">
+    <div class="grid lg:grid-cols-[1fr_535px] items-center gap-12 lg:gap-0 lg:pr-[11px]">
 
       <!-- Ľavá strana -->
       <div>
-        <h2 class="font-light text-[44px] md:text-[56px] lg:text-[64px] leading-[1.05] lg:leading-none tracking-[-0.02em]">
-          Poďme sa<br>porozprávať
+        <h2 class="font-light text-[36px] leading-[1.2] tracking-[-0.02em] md:text-[44px] md:leading-[49px] md:tracking-normal lg:text-[64px] lg:leading-none lg:tracking-[-0.02em]">
+          Poďme sa<br class="hidden lg:inline"> porozprávať
         </h2>
-        <p class="mt-4 lg:mt-[22px] font-light text-lg lg:text-xl leading-[1.3] lg:leading-[1.3]">
+        <p class="mt-4 lg:mt-[22px] font-light text-xl leading-[1.3]">
           Stačí pár viet o tom, čo sa u vás deje.
         </p>
 
-        <p class="mt-12 lg:mt-[88px] font-light text-lg lg:text-xl">E-mail</p>
-        <a href="mailto:zaskalanova@rodinna-poradna.sk" class="mt-3 lg:mt-4 inline-block font-light text-2xl md:text-[30px] leading-[1.2] break-all hover:text-accent-500 transition">
+        <p class="mt-8 lg:mt-[88px] font-light text-xl">E-mail</p>
+        <a href="mailto:zaskalanova@rodinna-poradna.sk" class="mt-4 inline-block font-light text-2xl leading-[1.4] md:text-[28px] md:leading-[1.1] lg:text-[30px] lg:leading-[1.2] break-all underline underline-offset-4 lg:no-underline hover:text-accent-600 transition-colors">
           zaskalanova@rodinna-poradna.sk
         </a>
-        <p class="mt-4 lg:mt-5 max-w-[360px] font-light text-lg lg:text-xl leading-[1.3] lg:leading-[1.3]">
+        <p class="mt-4 lg:mt-5 max-w-[424px] lg:max-w-[360px] font-light text-xl leading-[1.3]">
           Napíšte kedykoľvek. Odpoviem vám rýchlo a dohodneme sa na termíne aj forme.
         </p>
       </div>
 
-      <!-- Ružová karta -->
-      <div class="grain w-full lg:translate-y-3 lg:h-[419px] bg-accent-500 text-primary-500 rotate-[2deg] lg:rotate-[3.14deg] shadow-[2px_2px_4px_rgba(0,0,0,0.03)] flex flex-col justify-center px-8 py-12 lg:px-14 lg:py-0">
-        <p class="font-light text-lg lg:text-xl">Kde sa stretneme</p>
-        <h3 class="mt-3 lg:mt-4 text-[28px] lg:text-[33px] leading-[1.2]">Banská Bystrica a okolie</h3>
-        <div class="mt-3 lg:mt-4 space-y-6 text-lg lg:text-xl leading-[1.3] lg:leading-[1.3]">
+      <!-- Ružová karta (natočená len na PC) -->
+      <div class="grain w-full lg:translate-y-3 lg:h-[419px] bg-accent-500 text-primary-500 lg:rotate-[3.14deg] shadow-[2px_2px_4px_rgba(0,0,0,0.03)] flex flex-col justify-center px-6 py-10 md:py-12 lg:px-14 lg:py-0">
+        <p class="font-light text-xl">Kde sa stretneme</p>
+        <h3 class="mt-4 font-light text-[32px] leading-[1.2] tracking-[-0.02em] lg:font-normal lg:text-[33px] lg:tracking-normal">Banská Bystrica a okolie</h3>
+        <div class="mt-4 space-y-6 text-xl leading-[1.3]">
           <p>Prídem všade, kam to mám <strong class="font-bold">do pol hodiny</strong> – Zvolen, Sliač, Slovenská Ľupča aj Donovaly. A ak ste kúsok ďalej, <strong class="font-bold">napíšte mi aj tak</strong>, dohodneme sa.</p>
           <p>Online sa stretneme kdekoľvek – na Slovensku aj mimo neho.</p>
         </div>
@@ -626,15 +632,15 @@
 <!-- KONTAKT SEKCIA END -->
  <!-- ZÁVER SEKCIA START -->
 <section class="bg-secondary-500 text-primary-500">
-  <div class="max-w-[900px] mx-auto px-5 md:px-8 pt-20 md:pt-28 lg:pt-[159px] pb-20 md:pb-28 lg:pb-[145px] flex flex-col items-center text-center">
-    <h2 class="font-light text-[44px] md:text-[64px] lg:text-[80px] leading-[1.1] tracking-[-0.03em]">
+  <div class="max-w-[900px] mx-auto px-4 md:px-8 py-12 md:py-[144px] lg:pt-[159px] lg:pb-[145px] flex flex-col items-start text-left md:items-center md:text-center">
+    <h2 class="font-light text-[40px] leading-[1.15] md:text-[48px] md:leading-none md:tracking-[-0.02em] lg:text-[80px] lg:leading-[1.1] lg:tracking-[-0.03em]">
       Verím, že <em class="italic">každá rodina</em> v sebe má potenciál zvládať ťažké situácie
     </h2>
-    <p class="mt-8 lg:mt-[31px] max-w-[540px] text-neutral-500 font-light text-lg lg:text-xl leading-[1.3] lg:leading-[1.3]">
+    <p class="mt-4 md:mt-8 lg:mt-[31px] max-w-[540px] text-neutral-500 font-light text-xl leading-[1.3]">
       Niekedy je len treba, aby ju niekto sprevádzal, pomenoval to, čo sa deje, a pomohol nájsť nové riešenia.
     </p>
     <a href="#kontakt"
-       class="grain mt-10 inline-flex items-center gap-2 h-[46px] px-6 rounded-full bg-primary-500 text-secondary-500 italic text-base shadow-[2px_2px_6px_rgba(0,0,0,0.02)] hover:bg-neutral-500 transition">
+       class="grain mt-8 md:mt-10 inline-flex items-center gap-2 h-[46px] px-6 rounded-full bg-primary-500 text-secondary-500 italic text-base shadow-[2px_2px_6px_rgba(0,0,0,0.02)] hover:bg-accent-500 hover:text-primary-500 active:bg-accent-600 transition-colors">
       Napíšte mi
       <svg width="13" height="8" viewBox="408 617 13 8" fill="currentColor" aria-hidden="true"><path d="M420.354 621.211C420.549 621.016 420.549 620.699 420.354 620.504L417.172 617.322C416.976 617.127 416.66 617.127 416.464 617.322C416.269 617.517 416.269 617.834 416.464 618.029L419.293 620.858L416.464 623.686C416.269 623.881 416.269 624.198 416.464 624.393C416.66 624.588 416.976 624.588 417.172 624.393L420.354 621.211ZM408 620.858V621.358H420V620.858V620.358H408V620.858Z"/></svg>
     </a>
@@ -644,25 +650,27 @@
 
 <!-- PÄTIČKA START -->
 <footer class="bg-secondary-500 border-t border-neutral-500">
-  <div class="px-5 md:px-8 lg:px-16 pt-8 lg:pt-[33px] pb-10 grid gap-10 md:gap-x-0 md:grid-cols-[330px_1fr]">
+  <div class="px-4 md:px-8 lg:px-16 py-12 md:py-8 lg:pt-[33px] lg:pb-10 grid gap-12 md:gap-x-0 md:grid-cols-[321px_1fr] lg:grid-cols-[330px_1fr]">
 
     <div>
-      <p class="italic text-xl lg:text-[22.5px] text-primary-500">Rodinná poradňa od A po Z</p>
-      <p class="mt-3 lg:mt-[15px] text-lg lg:text-xl text-neutral-500">Mgr. Adriana Záskalanová</p>
+      <p class="italic text-2xl lg:text-[22.5px] text-primary-500">Rodinná poradňa od A po Z</p>
+      <p class="mt-4 lg:mt-[15px] text-xl text-neutral-500">Mgr. Adriana Záskalanová</p>
     </div>
 
-    <div class="flex flex-col items-start gap-4 lg:gap-[22px] text-lg lg:text-xl text-neutral-500">
+    <div class="flex flex-col items-start gap-4 lg:gap-[22px] text-xl text-neutral-500">
       <p class="text-base opacity-60">Moje sociálne siete</p>
       <a href="#" target="_blank" rel="noopener" class="hover:text-primary-500 transition">Instagram</a>
       <a href="#" target="_blank" rel="noopener" class="hover:text-primary-500 transition">Facebook</a>
-      <a href="mailto:rodinnaporadnaaz@gmail.com" class="underline-offset-2 hover:underline hover:text-accent-600 transition">rodinnaporadnaaz@gmail.com</a>
+      <a href="mailto:rodinnaporadnaaz@gmail.com" class="underline underline-offset-2 hover:text-accent-600 transition-colors">rodinnaporadnaaz@gmail.com</a>
     </div>
   </div>
 
-  <div class="mx-5 md:mx-8 lg:mx-16 border-t border-neutral-500/40 py-5 flex flex-col md:flex-row gap-2 md:gap-8 text-sm text-neutral-500">
-    <p>© Rodinná poradňa od A po Z 2026. All Rights Reserved</p>
-    <a href="#" class="hover:text-primary-500 transition">Ochrana osobných údajov</a>
-    <p class="md:ml-auto">Design by Klára Záskalanová</p>
+  <div class="border-t border-neutral-500">
+    <div class="px-4 md:px-8 lg:px-16 py-4 md:py-5 flex flex-col md:flex-row gap-4 md:gap-8 text-sm text-neutral-500">
+      <p>© Rodinná poradňa od A po Z 2026. All Rights Reserved</p>
+      <a href="#" class="hover:text-primary-500 transition-colors">Ochrana osobných údajov</a>
+      <p class="md:ml-auto">Design by Klára Záskalanová</p>
+    </div>
   </div>
 </footer>
 <!-- PÄTIČKA END -->
@@ -670,5 +678,3 @@
 </body>
 </html>
 <!-- ZÁKLADNÁ KOSTRA END -->
-</body>
-</html>
