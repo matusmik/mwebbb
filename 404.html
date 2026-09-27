@@ -1,0 +1,102 @@
+<!-- ZÁKLADNÁ KOSTRA START -->
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stránka sa nenašla – Rodinná poradňa od A po Z</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+
+  <!-- FONT START -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,200..900;1,200..900&family=Vujahday+Script&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Crimson Pro', serif; }
+    .font-script { font-family: 'Vujahday Script', cursive; }
+  </style>
+  <!-- FONT END -->
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary:   { 500: '#3D2217' },
+            secondary: { 500: '#F0E9D5' },
+            neutral:   { 500: '#764B2A', 600: '#6B4426' },
+            accent:    { 300: '#F6E0EF', 500: '#F1D1E7', 600: '#ECC0DE' },
+            tertiary:  { 300: '#DEE1B7', 500: '#B8BA87' },
+            yellow:    { 50: '#FDEDD3', 500: '#F5AA33' }
+          }
+        }
+      }
+    }
+  </script>
+  <!-- ZRNITÁ TEXTÚRA START -->
+  <style>
+    .grain { position: relative; isolation: isolate; }
+    .grain::after {
+      content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; border-radius: inherit;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.5' numOctaves='3' stitchTiles='stitch' seed='3585'/%3E%3CfeColorMatrix type='luminanceToAlpha' result='a'/%3E%3CfeComponentTransfer in='a' result='m1'%3E%3CfeFuncA type='discrete' tableValues='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0'/%3E%3C/feComponentTransfer%3E%3CfeComponentTransfer in='a' result='m2'%3E%3CfeFuncA type='discrete' tableValues='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0'/%3E%3C/feComponentTransfer%3E%3CfeFlood flood-color='rgb(194,116,78)' flood-opacity='0.2'/%3E%3CfeComposite in2='m1' operator='in' result='c1'/%3E%3CfeFlood flood-color='rgb(118,75,42)' flood-opacity='0.04'/%3E%3CfeComposite in2='m2' operator='in' result='c2'/%3E%3CfeMerge%3E%3CfeMergeNode in='c1'/%3E%3CfeMergeNode in='c2'/%3E%3C/feMerge%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+  </style>
+  <!-- ZRNITÁ TEXTÚRA END -->
+  <!-- ANIMÁCIE START -->
+  <style>
+    /* Obsah jemne dosadne ako úvod na homepage */
+    .settle { opacity: 0; translate: 0 28px; filter: blur(6px); animation: settle 1.6s cubic-bezier(.16,1,.3,1) forwards; animation-delay: var(--d, 0ms); }
+    @keyframes settle { to { opacity: 1; translate: 0 0; filter: none; } }
+    @media (prefers-reduced-motion: reduce) { .settle { animation: none; opacity: 1; translate: none; filter: none; } }
+  </style>
+  <!-- ANIMÁCIE END -->
+</head>
+<body class="bg-secondary-500 text-primary-500 antialiased">
+
+<!-- HEADER START -->
+<header class="bg-secondary-500">
+  <div class="h-[72px] lg:h-[82px] px-4 lg:pl-16 lg:pr-[72px] flex items-center justify-between">
+    <a href="/" class="italic text-xl lg:text-[22.5px] lg:-mt-1.5 text-primary-500">Rodinná poradňa od A po Z</a>
+  </div>
+</header>
+<!-- HEADER END -->
+
+<!-- CHYBA SEKCIA START -->
+<main class="min-h-[calc(100dvh-72px)] lg:min-h-[calc(100dvh-82px)] flex items-center justify-center px-4 md:px-8 py-12 md:py-16">
+  <div class="w-full max-w-[900px] flex flex-col items-start text-left md:items-center md:text-center">
+
+    <p class="settle font-script text-neutral-500 text-[20px] leading-6 lg:text-2xl md:-rotate-[3deg]" style="--d: 0ms">
+      chyba 404 – aj toto sa stáva
+    </p>
+
+    <h1 class="settle mt-4 lg:mt-6 font-light text-[40px] leading-[1.15] md:text-[48px] md:leading-none md:tracking-[-0.02em] lg:text-[80px] lg:leading-[1.1] lg:tracking-[-0.03em]" style="--d: 250ms">
+      Túto stránku sa nepodarilo <em class="italic">načítať</em>
+    </h1>
+
+    <p class="settle mt-4 md:mt-8 lg:mt-[31px] max-w-[540px] text-neutral-500 text-xl leading-[1.3]" style="--d: 550ms">
+      Možno sa zmenila adresa, alebo sa niečo pokazilo cestou. Nevadí – vráťte sa na úvod a pokračujeme ďalej.
+    </p>
+
+    <div class="settle mt-8 md:mt-10 flex flex-wrap items-center gap-3 md:justify-center" style="--d: 850ms">
+      <a href="/"
+         class="grain inline-flex items-center gap-2 h-[46px] px-6 rounded-full bg-primary-500 text-secondary-500 italic text-base shadow-[2px_2px_6px_rgba(0,0,0,0.02)] hover:bg-accent-500 hover:text-primary-500 active:bg-accent-600 transition-colors">
+        Späť na úvod
+        <svg width="13" height="8" viewBox="408 617 13 8" fill="currentColor" aria-hidden="true"><path d="M420.354 621.211C420.549 621.016 420.549 620.699 420.354 620.504L417.172 617.322C416.976 617.127 416.66 617.127 416.464 617.322C416.269 617.517 416.269 617.834 416.464 618.029L419.293 620.858L416.464 623.686C416.269 623.881 416.269 624.198 416.464 624.393C416.66 624.588 416.976 624.588 417.172 624.393L420.354 621.211ZM408 620.858V621.358H420V620.858V620.358H408V620.858Z"/></svg>
+      </a>
+    </div>
+
+  </div>
+</main>
+<!-- CHYBA SEKCIA END -->
+
+<script>
+  // Pri otvorení súboru priamo z počítača (file://) by odkazy „/“ neviedli na web – nahradia sa za index.html
+  if (location.protocol === 'file:') document.querySelectorAll('a[href^="/"]').forEach(a => a.setAttribute('href', a.getAttribute('href').replace(/^\//, 'index.html')));
+  if (location.protocol === 'file:') document.querySelector('link[rel="icon"]').href = 'images/favicon.svg';
+</script>
+</body>
+</html>
+<!-- ZÁKLADNÁ KOSTRA END -->

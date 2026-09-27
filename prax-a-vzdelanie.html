@@ -10,10 +10,22 @@
   <!-- IKONKA A NÁHĽAD PRI ZDIEĽANÍ START -->
   <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
   <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-  <meta property="og:title" content="Prax a vzdelanie – Rodinná poradňa od A po Z">
-  <meta property="og:description" content="Prax a vzdelanie Mgr. Adriany Záskalanovej.">
-  <meta property="og:image" content="images/og-image.png">
+  <!-- Náhľad pri zdieľaní odkazu (Messenger, iMessage, WhatsApp…) – adresy musia byť úplné, s doménou -->
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Rodinná poradňa od A po Z">
+  <meta property="og:locale" content="sk_SK">
+  <meta property="og:url" content="https://mwebbb.vercel.app/prax-a-vzdelanie.html">
+  <meta property="og:title" content="Prax a vzdelanie – Rodinná poradňa od A po Z">
+  <meta property="og:description" content="Už 25 rokov som pri rodinách – ako školská psychologička, v poradenskom centre aj v materskom centre. Pozrite si moju prax a vzdelanie.">
+  <meta property="og:image" content="https://mwebbb.vercel.app/images/og-image.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Rodinná poradňa od A po Z – Sprevádzam rodiny náročnými obdobiami. Mgr. Adriana Záskalanová">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Prax a vzdelanie – Rodinná poradňa od A po Z">
+  <meta name="twitter:description" content="Už 25 rokov som pri rodinách – ako školská psychologička, v poradenskom centre aj v materskom centre. Pozrite si moju prax a vzdelanie.">
+  <meta name="twitter:image" content="https://mwebbb.vercel.app/images/og-image.png">
   <!-- IKONKA A NÁHĽAD PRI ZDIEĽANÍ END -->
 
   <!-- FONT START -->
@@ -56,11 +68,116 @@
     }
   </style>
   <!-- ZRNITÁ TEXTÚRA END -->
+  <!-- ANIMÁCIE START -->
+  <style>
+    html { scroll-behavior: smooth; }
+    :root { interpolate-size: allow-keywords; }
+    /* Jemné objavenie pri scrollovaní (pridáva JS, bez JS je všetko viditeľné) */
+    /* Hover farby (tlačidlá, karty) bežia vždy hneď a rýchlo – oneskorenie má len samotné objavenie */
+    .reveal-anim .reveal {
+      opacity: 0; translate: 0 24px;
+      transition-property: opacity, translate, color, background-color, border-color;
+      transition-duration: .9s, .9s, .15s, .15s, .15s;
+      transition-timing-function: cubic-bezier(.22,1,.36,1), cubic-bezier(.22,1,.36,1), cubic-bezier(.4,0,.2,1), cubic-bezier(.4,0,.2,1), cubic-bezier(.4,0,.2,1);
+      transition-delay: var(--reveal-delay, 0ms), var(--reveal-delay, 0ms), 0s, 0s, 0s;
+    }
+    .reveal-anim .reveal.reveal--fade { translate: none; transition-duration: 1.2s, 1.2s, .15s, .15s, .15s; }
+    .reveal-anim .reveal.is-visible { opacity: 1; translate: 0 0; }
+    /* Plynulé rozbalenie kariet a otázok */
+    details { transition: background-color .3s ease; }
+    details::details-content { block-size: 0; overflow: clip; transition: block-size .45s cubic-bezier(.22,1,.36,1), content-visibility .45s allow-discrete; }
+    details[open]::details-content { block-size: auto; }
+    /* „Viac informácií“ – obsah sa jemne objaví */
+    div:has(+ [data-more][aria-expanded="true"]) { animation: fade-up .5s cubic-bezier(.22,1,.36,1); }
+    /* Ružové karty v Službách – pomalšia, plynulá kaskáda */
+    .reveal-anim .reveal.reveal--card { /* bez posunu – medzery medzi kartami ostávajú stále rovnaké */
+      translate: none; filter: blur(3px);
+      transition-property: opacity, filter, background-color;
+      transition-duration: 1.6s, 1.4s, .15s;
+      transition-timing-function: cubic-bezier(.33,1,.68,1), cubic-bezier(.33,1,.68,1), cubic-bezier(.4,0,.2,1);
+      transition-delay: var(--reveal-delay, 0ms), var(--reveal-delay, 0ms), 0s;
+    }
+    .reveal-anim .reveal.reveal--card.is-visible { filter: none; }
+    /* Úvod stránky – skrytý už pred prvým vykreslením, potom jemne dosadne */
+    .hero-anim :is(#uvod h1, #uvod h1 ~ *, #uvod img + p, #prax h1, #prax .font-script, #prax div:has(> p + svg)) {
+      opacity: 0; translate: 0 28px; filter: blur(6px);
+      transition: opacity 1.6s cubic-bezier(.16,1,.3,1), translate 2s cubic-bezier(.16,1,.3,1), filter 1.6s cubic-bezier(.16,1,.3,1);
+      transition-delay: var(--hero-delay, 0ms);
+    }
+    .hero-anim :is(#uvod img, #prax img) { opacity: 0; transition: opacity .8s cubic-bezier(.16,1,.3,1); transition-delay: var(--hero-delay, 0ms); }
+    .hero-in :is(#uvod h1, #uvod h1 ~ *, #uvod img, #uvod img + p, #prax h1, #prax img, #prax .font-script, #prax div:has(> p + svg)) { opacity: 1; translate: 0 0; filter: none; }
+    /* Mobilné menu */
+    #mobile-menu.flex { animation: fade-in .3s ease-out; }
+    #mobile-menu.flex nav a { animation: fade-up .5s cubic-bezier(.22,1,.36,1) backwards; }
+    #mobile-menu.flex nav a:nth-child(2) { animation-delay: 50ms; }
+    #mobile-menu.flex nav a:nth-child(3) { animation-delay: 100ms; }
+    #mobile-menu.flex nav a:nth-child(4) { animation-delay: 150ms; }
+    #mobile-menu.flex nav a:nth-child(5) { animation-delay: 200ms; }
+    @keyframes fade-in { from { opacity: 0; } }
+    @keyframes fade-up { from { opacity: 0; translate: 0 12px; } }
+    /* Kto má v systéme vypnuté animácie, nič sa nehýbe */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after, ::details-content { animation: none !important; transition: none !important; }
+      .reveal { opacity: 1; translate: none; }
+    }
+  </style>
+  <script>
+    // Prvky, ktoré sa objavia pri scrollovaní (jediný zoznam – používa ho aj skript na konci stránky)
+    window.revealSelectors = [
+      '#sluzby h2', '#sluzby h2 + p', '#sluzby details', '#sluzby a[href="#kontakt"]', '#sluzby h3', '#sluzby h3 + p',
+      '#o-mne .font-script', '#o-mne h2', '#o-mne h2 + p', '#o-mne img', '#o-mne .space-y-6', '#o-mne .space-y-6 + a',
+      '#ako-sa-stretneme h2', '#ako-sa-stretneme h2 + p', '#ako-sa-stretneme .grid > div', '#ako-sa-stretneme [class*="rotate-"]',
+      '#otazky .text-center > *', '#otazky details', '#otazky .bg-yellow-50',
+      '#kontakt h2', '#kontakt h2 ~ *', '#kontakt .bg-accent-500',
+      '#prax .gap-16 > div',
+      '#vzdelanie h2', '#vzdelanie h2 + p', '#vzdelanie .grid > div',
+      'section:not([id]) h2', 'section:not([id]) h2 ~ *'
+    ];
+    // Úvod aj tieto prvky sa skryjú ešte pred prvým vykreslením (aby nebliklo); poistka po 4 s ukáže všetko
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+      const html = document.documentElement;
+      html.classList.add('hero-anim', 'reveal-anim');
+      const style = document.createElement('style');
+      style.textContent = '.reveal-anim :is(' + revealSelectors.join(',') + '):not(.is-visible, .reveal-done) { opacity: 0; }';
+      document.head.appendChild(style);
+      setTimeout(() => { html.classList.add('hero-in'); if (!window.revealReady) html.classList.remove('reveal-anim'); }, 4000);
+    }
+  </script>
+  <!-- ANIMÁCIE END -->  <!-- GOOGLE ANALYTICS START -->
+  <script>
+    // Google Analytics (GA4) sa načíta až po súhlase s analytickými cookies v lište cookies
+    const GA_ID = 'G-PZQ82X76KK';
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('consent', 'default', { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
+    document.addEventListener('cookie-consent', e => {
+      if (!e.detail.analytics) {
+        // Súhlas odvolaný: zastaviť meranie a zmazať cookies Google Analytics
+        if (window.gaLoaded) gtag('consent', 'update', { analytics_storage: 'denied' });
+        document.cookie.split(';').map(c => c.split('=')[0].trim()).filter(n => n.startsWith('_ga')).forEach(n => {
+          [location.hostname, '.' + location.hostname].forEach(d => document.cookie = `${n}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=${d}`);
+          document.cookie = `${n}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
+        });
+        return;
+      }
+      gtag('consent', 'update', { analytics_storage: 'granted' });
+      if (window.gaLoaded) return;
+      window.gaLoaded = true;
+      const s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+      document.head.appendChild(s);
+      gtag('js', new Date());
+      gtag('config', GA_ID);
+    });
+  </script>
+  <!-- GOOGLE ANALYTICS END -->
 </head>
 <body class="bg-secondary-500 text-primary-500 antialiased">
 
   <!-- HEADER START -->
-<header class="sticky top-0 z-50 bg-secondary-500">
+<header id="site-header" class="sticky top-0 z-50 bg-secondary-500 transition-transform duration-300">
   <div class="h-[72px] lg:h-[82px] px-4 lg:pl-16 lg:pr-[72px] flex items-center justify-between">
 
     <!-- Logo -->
@@ -105,6 +222,18 @@
   const closeMenu = () => { menu.classList.add('hidden'); menu.classList.remove('flex'); };
   document.getElementById('menu-close').onclick = closeMenu;
   document.querySelectorAll('.menu-link').forEach(a => a.onclick = closeMenu);
+
+  // Pri scrollovaní dole sa celá hlavička skryje, pri pohybe hore sa znovu ukáže
+  const header = document.getElementById('site-header');
+  let lastY = window.scrollY;
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    if (Math.abs(y - lastY) < 5) return;
+    const hide = y > lastY && y > 82 && menu.classList.contains('hidden');
+    header.classList.toggle('-translate-y-full', hide);
+    document.documentElement.style.setProperty('--header-h', hide ? '0px' : '82px');
+    lastY = y;
+  }, { passive: true });
 </script>
 <!-- HEADER END -->
 
@@ -118,11 +247,11 @@
       Prax a vzdelanie
     </h1>
 
-    <!-- Fotka + ručný popisok -->
-    <div class="mt-6 md:mt-0 md:col-start-2 md:row-start-1 md:row-span-2 lg:pt-12 flex flex-col items-center lg:items-start">
+    <!-- Fotka + ručný popisok (na PC stojí na mieste, kým text vľavo nedôjde po hnedú sekciu) -->
+    <div class="mt-6 md:mt-0 md:col-start-2 md:row-start-1 md:row-span-2 lg:row-span-3 lg:self-start lg:sticky lg:top-[var(--header-h,82px)] lg:transition-[top] lg:duration-300 lg:pt-12 flex flex-col items-center lg:items-start">
       <img src="images/praxavzdelaniefoto.png" alt="Adriana Záskalanová" class="w-full md:w-[320px] lg:w-full lg:max-w-[424px] aspect-[424/530] object-cover">
       <div class="w-full px-4 md:px-0 mt-3 md:mt-2 lg:mt-0 flex justify-center lg:justify-end lg:h-[84px] items-center">
-        <p class="font-script text-neutral-500 text-lg leading-6 lg:text-2xl lg:leading-[1.2] text-center lg:text-left md:-rotate-[1.93deg] lg:-rotate-[7.47deg]">
+        <p class="font-script text-neutral-500 text-[20px] leading-6 lg:text-2xl lg:leading-[1.2] text-center lg:text-left md:-rotate-[1.93deg] lg:-rotate-[7.47deg]">
           stále spoznávam,<br class="hidden lg:inline"> ako deti vnímajú svet
         </p>
       </div>
@@ -130,7 +259,7 @@
 
     <!-- Pracovala som ako + šípka (šípka od tabletu) -->
     <div class="px-4 md:px-0 mt-16 md:mt-4 lg:mt-[13px] md:col-start-1 md:row-start-2 md:self-start flex lg:justify-center items-start gap-2 text-neutral-500">
-      <p class="font-light text-xl leading-[1.3]">Pracovala som ako<span class="md:hidden">:</span></p>
+      <p class="text-xl leading-[1.3]">Pracovala som ako<span class="md:hidden">:</span></p>
       <svg class="hidden md:block shrink-0" width="14" height="51" viewBox="475 391 14 51" fill="currentColor" aria-hidden="true"><path d="M481.225 407.178C481.44 407.419 481.74 407.929 481.892 408.216C481.895 408.221 481.898 408.226 481.901 408.231C481.937 408.297 481.974 408.363 482.016 408.436C482.08 408.547 482.156 408.679 482.262 408.89C482.326 409.016 482.402 409.174 482.488 409.371C482.57 409.517 482.651 409.664 482.729 409.81C483.581 411.398 484.265 413.056 484.79 414.777C484.799 414.798 484.808 414.819 484.817 414.841C484.993 415.258 485.204 415.782 485.272 416.131C485.348 416.522 485.383 416.809 485.407 417.044C485.41 417.076 485.413 417.107 485.416 417.137C485.734 418.546 485.962 419.971 486.169 421.393C486.211 421.684 486.253 421.975 486.294 422.265C486.316 422.421 486.338 422.573 486.36 422.729C486.403 423.031 486.445 423.335 486.486 423.634C486.501 423.741 486.516 423.845 486.53 423.954C486.591 424.191 486.655 424.419 486.708 424.647C486.784 424.965 486.834 425.29 486.834 425.555C486.835 425.918 486.774 426.267 486.707 426.57C486.654 426.805 486.594 427.025 486.541 427.214C486.522 427.285 486.503 427.352 486.486 427.414C486.44 427.765 486.39 428.113 486.337 428.462C486.32 428.483 486.303 428.504 486.286 428.526C486.07 428.793 485.997 429.153 485.864 429.722C485.821 429.905 485.771 430.111 485.707 430.342C485.684 430.424 485.66 430.507 485.633 430.596C485.566 430.815 485.478 430.916 485.408 430.999C485.387 431.023 485.367 431.046 485.35 431.069C485.29 431.15 485.297 431.253 485.299 431.376C485.303 431.536 485.3 431.734 485.15 431.944C484.758 432.489 484.641 432.79 484.585 433.031C484.573 433.083 484.563 433.132 484.554 433.177C484.539 433.252 484.524 433.318 484.499 433.382C484.419 433.587 484.215 433.828 484.044 433.997C483.908 434.132 483.74 434.457 483.618 434.708C483.573 434.803 483.491 434.919 483.393 435.055C483.291 435.197 483.174 435.358 483.059 435.54C483.046 435.559 483.035 435.578 483.023 435.596C482.764 436.009 482.517 436.313 482.286 436.485C482.22 436.537 482.159 436.579 482.1 436.618C481.992 436.689 481.876 436.754 481.754 436.819C481.665 436.867 481.572 436.914 481.478 436.961C481.216 437.092 480.949 437.218 480.746 437.314C480.296 437.493 479.846 437.666 479.395 437.838C479.299 437.874 479.204 437.91 479.109 437.946C478.844 438.042 478.584 438.129 478.376 438.172C478.361 438.175 478.348 438.178 478.334 438.18C478.122 438.216 478.008 438.229 478.008 438.232C478.007 438.23 478.126 438.21 478.314 438.123C478.326 438.117 478.339 438.111 478.351 438.104C478.531 438.013 478.741 437.848 478.964 437.684C479.045 437.625 479.125 437.565 479.206 437.504C479.603 437.205 479.995 436.896 480.383 436.585C480.655 436.367 480.927 436.147 481.186 435.927C481.327 435.808 481.459 435.691 481.541 435.589C481.622 435.489 481.675 435.389 481.752 435.24C481.805 435.137 481.86 435.023 481.918 434.904C482.079 434.574 482.24 434.241 482.401 433.909C482.423 433.863 482.446 433.817 482.468 433.77C482.604 433.365 482.729 432.96 482.824 432.686C482.892 432.491 482.967 432.356 483.034 432.245C483.045 432.226 483.056 432.209 483.066 432.192C483.118 432.107 483.163 432.034 483.19 431.952C483.204 431.907 483.222 431.847 483.242 431.775C483.328 431.476 483.415 431.008 483.556 430.543C483.614 430.359 483.696 430.144 483.779 429.927C483.788 429.904 483.798 429.88 483.807 429.856C483.938 429.514 484.063 429.187 484.064 429.012C484.067 428.703 484.149 428.363 484.222 428.062C484.292 427.774 484.353 427.523 484.321 427.369C484.283 427.186 484.326 427.043 484.389 426.829C484.432 426.686 484.484 426.511 484.523 426.277C484.525 426.268 484.526 426.259 484.528 426.251C484.574 425.965 484.633 425.783 484.677 425.631C484.74 425.418 484.779 425.26 484.686 425.014C484.582 424.742 484.486 424.434 484.479 424.178C484.476 424.091 484.464 423.998 484.449 423.897C484.444 423.863 484.438 423.827 484.432 423.79C484.403 423.606 484.371 423.415 484.376 423.236C484.38 423.089 484.426 422.96 484.466 422.846C484.479 422.811 484.49 422.777 484.5 422.744C484.49 422.678 484.479 422.612 484.469 422.546C484.46 422.498 484.452 422.449 484.444 422.399C484.43 422.382 484.416 422.365 484.401 422.346C484.327 422.253 484.235 422.139 484.175 421.99C484.078 421.755 484.077 421.534 484.074 421.3C484.072 421.12 484.069 420.929 484.019 420.721C483.985 420.579 483.929 420.422 483.872 420.265C483.789 420.033 483.705 419.805 483.694 419.636C483.69 419.572 483.718 419.512 483.744 419.45C483.745 419.45 483.745 419.45 483.745 419.449C483.747 419.445 483.748 419.441 483.75 419.437C483.637 419.043 483.518 418.653 483.394 418.263C483.377 418.231 483.36 418.198 483.342 418.166C483.259 418.01 483.178 417.857 483.093 417.768C483.075 417.749 483.057 417.724 483.038 417.693C482.96 417.564 482.874 417.334 482.783 417.096C482.71 416.902 482.634 416.703 482.559 416.544C482.515 416.451 482.527 416.346 482.539 416.238C482.55 416.138 482.561 416.035 482.527 415.936C482.51 415.886 482.482 415.836 482.453 415.782C482.427 415.734 482.399 415.684 482.376 415.629C482.355 415.579 482.344 415.455 482.329 415.296C482.319 415.197 482.308 415.086 482.292 414.97C482.196 414.68 482.101 414.39 482.008 414.1C481.965 414.047 481.917 414.005 481.862 413.977C481.823 413.957 481.779 413.944 481.734 413.93C481.673 413.911 481.611 413.892 481.556 413.854C481.514 413.825 481.49 413.782 481.496 413.745C481.499 413.728 481.509 413.712 481.517 413.698C481.527 413.681 481.535 413.667 481.532 413.654C481.529 413.645 481.518 413.638 481.505 413.63C481.484 413.616 481.456 413.599 481.447 413.561C481.412 413.42 481.382 413.257 481.353 413.096C481.32 412.918 481.287 412.743 481.25 412.608C481.208 412.456 481.188 412.227 481.165 411.997C481.149 411.838 481.132 411.676 481.108 411.542C481.085 411.411 481.038 411.282 480.994 411.157C480.94 411.007 480.891 410.863 480.882 410.726C480.88 410.699 480.899 410.657 480.922 410.605C480.938 410.567 480.956 410.524 480.97 410.478C480.929 410.317 480.889 410.155 480.849 409.991C480.845 409.987 480.84 409.982 480.835 409.978C480.835 409.978 480.835 409.978 480.835 409.978C480.739 409.888 480.618 409.764 480.59 409.549C480.586 409.517 480.583 409.484 480.582 409.449C480.581 409.377 480.598 409.328 480.611 409.28C480.625 409.235 480.637 409.194 480.629 409.146C480.62 409.091 480.589 409.031 480.558 408.968C480.512 408.878 480.465 408.779 480.457 408.661C480.456 408.653 480.456 408.645 480.455 408.636C480.449 408.551 480.44 408.426 480.447 408.294C480.363 407.946 480.277 407.6 480.183 407.257C480.059 406.808 479.925 406.362 479.742 405.941C479.692 405.826 479.639 405.711 479.586 405.598C479.462 405.336 479.341 405.084 479.232 404.911C479.125 404.736 479.032 404.663 479.031 404.665C479.031 404.664 479.126 404.73 479.278 404.874C479.43 405.017 479.634 405.217 479.831 405.438C479.917 405.534 480.002 405.631 480.086 405.729C480.321 406.005 480.536 406.298 480.742 406.592C480.758 406.613 480.773 406.633 480.789 406.654C480.904 406.809 481.021 406.946 481.142 407.083C481.169 407.114 481.198 407.148 481.225 407.178Z M478.667 428.106C478.698 427.97 478.744 427.852 478.803 427.753C478.88 427.66 478.965 427.612 479.058 427.611L479.032 427.603C479.229 427.633 479.444 427.749 479.676 427.951C479.922 428.171 480.147 428.407 480.349 428.658C480.548 428.922 480.667 429.133 480.705 429.291C480.715 429.41 480.701 429.552 480.664 429.716C480.605 429.976 480.513 430.299 480.388 430.684C480.281 431.075 480.189 431.478 480.113 431.894C480.024 432.451 479.918 433.039 479.795 433.659C479.673 434.279 479.546 434.876 479.416 435.45C479.302 436.029 479.196 436.537 479.097 436.975C478.994 437.426 478.918 437.76 478.868 437.979L478.859 438.02C478.837 438.116 478.773 438.191 478.668 438.247C478.563 438.303 478.458 438.315 478.354 438.284C478.215 438.242 478.11 438.093 478.038 437.838C477.967 437.583 478.017 437.16 478.188 436.569C478.316 436.17 478.398 435.727 478.434 435.242C478.488 434.761 478.506 434.358 478.487 434.031C478.476 433.999 478.483 433.847 478.507 433.577C478.546 433.326 478.588 433.018 478.634 432.652C478.677 432.3 478.722 431.941 478.768 431.575C478.814 431.21 478.848 430.899 478.869 430.642C478.908 430.391 478.921 430.249 478.91 430.217C478.907 430.069 478.866 429.962 478.789 429.895C478.708 429.842 478.65 429.729 478.615 429.558C478.577 429.4 478.567 429.2 478.585 428.958C478.62 428.72 478.633 428.541 478.623 428.422C478.615 428.375 478.618 428.325 478.63 428.27C478.639 428.229 478.652 428.175 478.667 428.106Z M488.306 438.477C488.444 438.453 488.564 438.414 488.666 438.359C488.763 438.287 488.815 438.204 488.82 438.112L488.827 438.138C488.807 437.94 488.702 437.72 488.512 437.478C488.304 437.221 488.08 436.985 487.84 436.77C487.585 436.558 487.381 436.429 487.225 436.382C487.106 436.367 486.964 436.373 486.798 436.402C486.536 436.448 486.209 436.524 485.817 436.629C485.421 436.717 485.014 436.789 484.596 436.844C484.035 436.905 483.442 436.982 482.817 437.073C482.191 437.165 481.589 437.261 481.009 437.363C480.425 437.447 479.912 437.528 479.47 437.605C479.015 437.685 478.677 437.745 478.456 437.783L478.415 437.791C478.318 437.808 478.239 437.867 478.178 437.97C478.117 438.072 478.1 438.176 478.126 438.282C478.161 438.422 478.304 438.535 478.555 438.619C478.806 438.704 479.231 438.675 479.83 438.533C480.235 438.425 480.681 438.365 481.168 438.353C481.65 438.324 482.054 438.326 482.38 438.361C482.412 438.374 482.563 438.375 482.834 438.364C483.087 438.338 483.397 438.311 483.765 438.283C484.118 438.258 484.479 438.231 484.847 438.203C485.214 438.176 485.526 438.158 485.784 438.149C486.036 438.123 486.179 438.116 486.211 438.129C486.358 438.14 486.462 438.186 486.526 438.267C486.575 438.35 486.684 438.413 486.854 438.457C487.009 438.503 487.209 438.523 487.452 438.517C487.691 438.493 487.87 438.489 487.989 438.505C488.035 438.516 488.085 438.516 488.14 438.506C488.182 438.499 488.237 438.489 488.306 438.477Z"/></svg>
     </div>
 
@@ -174,7 +303,7 @@
     <h2 class="max-w-[788px] font-light text-[36px] leading-[1.2] tracking-[-0.02em] md:text-[44px] md:leading-[49px] md:tracking-normal lg:text-[64px] lg:leading-none lg:tracking-[-0.02em]">
       Vzdelanie a certifikované<br class="hidden lg:inline"> výcviky
     </h2>
-    <p class="mt-4 max-w-[529px] font-light text-xl leading-[1.3]">
+    <p class="mt-4 max-w-[529px] text-xl leading-[1.3]">
       Nie každej rodine sedí to isté. Preto svoje vzdelanie neustále rozširujem o nové metódy:
     </p>
 
@@ -183,35 +312,35 @@
 
       <div class="max-w-[424px] md:pr-2 lg:px-4 md:max-lg:order-1">
         <h3 class="text-[28px] leading-[1.1] tracking-[-0.02em] lg:text-[32px] lg:leading-[1.2]">Vysokoškolské štúdium</h3>
-        <p class="mt-4 lg:mt-6 font-light text-xl leading-[1.3]">
+        <p class="mt-4 lg:mt-6 text-xl leading-[1.3]">
           Jednoodborová psychológia na Trnavskej univerzite a atestácia v kategórii psychológ a školský psychológ (NIVaM).
         </p>
       </div>
 
       <div class="max-w-[424px] md:pr-2 lg:px-4 md:max-lg:order-4">
         <h3 class="text-[28px] leading-[1.1] tracking-[-0.02em] lg:text-[32px] lg:leading-[1.2]">Terapeutické prístupy pre deti</h3>
-        <p class="mt-4 lg:mt-6 font-light text-xl leading-[1.3]">
+        <p class="mt-4 lg:mt-6 text-xl leading-[1.3]">
           Certifikovaný výcvik v <em class="italic">Terapii hrou</em>, <em class="italic">Filiálnej terapii</em>, kurz <em class="italic">koučingu</em> pre deti a dospievajúcich, komplexný kurz <em class="italic">Sandplaying</em> a <em class="italic">Familienbrett</em>.
         </p>
       </div>
 
       <div class="max-w-[424px] md:pr-2 lg:px-4 md:max-lg:order-2">
         <h3 class="text-[28px] leading-[1.1] tracking-[-0.02em] lg:text-[32px] lg:leading-[1.2]">Práca s rodinným systémom</h3>
-        <p class="mt-4 lg:mt-6 font-light text-xl leading-[1.3]">
+        <p class="mt-4 lg:mt-6 text-xl leading-[1.3]">
           Komplexný výcvik v <em class="italic">Rodinnej terapii</em> zameranej na vzťahovú väzbu, výcvik v integratívnej práci s rodinou a systémom.
         </p>
       </div>
 
       <div class="max-w-[424px] md:pr-2 lg:px-4 md:max-lg:order-5">
         <h3 class="text-[28px] leading-[1.1] tracking-[-0.02em] lg:text-[32px] lg:leading-[1.2]">Komunikácia a osobnostný rozvoj</h3>
-        <p class="mt-4 lg:mt-6 font-light text-xl leading-[1.3]">
+        <p class="mt-4 lg:mt-6 text-xl leading-[1.3]">
           Certifikované vzdelávanie v <em class="italic">Nenásilnej komunikácii</em>, <em class="italic">Systemickom rozhovore</em> a komplexný výcvik koučingu v <em class="italic">Power Coaching</em> s nadstavbou párového koučingu.
         </p>
       </div>
 
       <div class="max-w-[424px] md:pr-2 lg:px-4 md:max-lg:order-3">
         <h3 class="text-[28px] leading-[1.1] tracking-[-0.02em] lg:text-[32px] lg:leading-[1.2]">Krízová pomoc a podpora</h3>
-        <p class="mt-4 lg:mt-6 font-light text-xl leading-[1.3]">
+        <p class="mt-4 lg:mt-6 text-xl leading-[1.3]">
           Výcvik v <em class="italic">Krízovej intervencii pre pomáhajúce profesie</em>, špecializované kurzy zamerané na prevenciu šikanovania, rozvoj odolnosti detí v školskom prostredí a podpory duševného zdravia detí skupinovou formou.
         </p>
       </div>
@@ -227,7 +356,7 @@
     <h2 class="font-light text-[40px] leading-[1.15] md:text-[48px] md:leading-none md:tracking-[-0.02em] lg:text-[80px] lg:leading-[1.1] lg:tracking-[-0.03em]">
       Verím, že <em class="italic">každá rodina</em> v sebe má potenciál zvládať ťažké situácie
     </h2>
-    <p class="mt-4 md:mt-8 lg:mt-[31px] max-w-[540px] text-neutral-500 font-light text-xl leading-[1.3]">
+    <p class="mt-4 md:mt-8 lg:mt-[31px] max-w-[540px] text-neutral-500 text-xl leading-[1.3]">
       Niekedy je len treba, aby ju niekto sprevádzal, pomenoval to, čo sa deje, a pomohol nájsť nové riešenia.
     </p>
     <a href="index.html#kontakt"
@@ -260,11 +389,184 @@
     <div class="px-4 md:px-8 lg:px-16 py-4 md:py-5 flex flex-col md:flex-row gap-4 md:gap-8 text-sm text-neutral-500">
       <p>© Rodinná poradňa od A po Z 2026. All Rights Reserved</p>
       <a href="#" class="hover:text-primary-500 transition-colors">Ochrana osobných údajov</a>
+      <button type="button" data-cookie-settings class="text-left hover:text-primary-500 transition-colors">Nastavenia cookies</button>
+      <a href="404.html" class="hover:text-primary-500 transition-colors">Error</a> <!-- DOČASNÉ: test chybovej stránky, pred spustením zmazať -->
       <p class="md:ml-auto">Design by Klára Záskalanová</p>
     </div>
   </div>
 </footer>
 <!-- PÄTIČKA END -->
+  <!-- COOKIES LIŠTA START -->
+  <style>
+    #cookie-banner { opacity: 0; translate: 0 24px; filter: blur(6px); transition: opacity 1.2s cubic-bezier(.16,1,.3,1), translate 1.4s cubic-bezier(.16,1,.3,1), filter 1.2s cubic-bezier(.16,1,.3,1); }
+    #cookie-banner.is-in { opacity: 1; translate: 0 0; filter: none; }
+    #cookie-banner.is-out { opacity: 0; translate: 0 16px; transition-duration: .5s; }
+    #cookie-banner [data-view]:not([hidden]) { animation: fade-up .5s cubic-bezier(.22,1,.36,1); }
+  </style>
+  <div id="cookie-banner" role="region" aria-label="Súhlas s cookies" class="hidden fixed z-40 inset-x-4 bottom-4 md:inset-x-auto md:left-8 md:bottom-8 lg:left-16 md:w-[480px]">
+    <div class="grain bg-yellow-50 text-primary-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03),0_12px_40px_rgba(61,34,23,0.14)]">
+
+      <!-- Krížik = pokračovať len s nevyhnutnými -->
+      <button type="button" data-cookie-reject title="Pokračovať len s nevyhnutnými" aria-label="Odmietnuť voliteľné cookies a zavrieť" class="absolute top-3 right-3 z-10 w-9 h-9 inline-flex items-center justify-center rounded-full text-neutral-500 opacity-50 hover:opacity-100 hover:bg-accent-500 transition">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+
+      <div class="max-h-[calc(100dvh-2rem)] md:max-h-[calc(100dvh-4rem)] overflow-y-auto p-6 md:p-8">
+
+        <!-- Hlavný pohľad -->
+        <div data-view="main">
+          <p class="font-script text-neutral-500 text-[20px] leading-6 lg:text-2xl md:-rotate-[3deg] md:origin-left">ešte jedna drobnosť</p>
+          <h2 class="mt-2 pr-8 text-[28px] leading-[1.1] tracking-[-0.02em] lg:text-[30px] lg:tracking-normal">Pár slov o cookies</h2>
+          <p class="mt-4 text-xl leading-[1.3]">
+            Aby web fungoval tak, ako má, používam súbory cookies. S vaším súhlasom mi pomôžu aj pochopiť, čo vás tu zaujíma – a vďaka tomu ho robiť lepším pre rodiny, ako je tá vaša.
+          </p>
+          <div class="mt-6 flex flex-wrap items-center gap-3">
+            <button type="button" data-cookie-accept class="grain inline-flex items-center gap-2 h-[46px] px-6 rounded-full bg-primary-500 text-secondary-500 italic text-base shadow-[2px_2px_6px_rgba(0,0,0,0.02)] hover:bg-accent-500 hover:text-primary-500 active:bg-accent-600 transition-colors">Povoliť všetky</button>
+            <button type="button" data-cookie-prefs class="inline-flex items-center gap-2 h-[48px] px-6 rounded-full border border-[#644E45] text-primary-500 italic text-base shadow-[2px_2px_6px_rgba(0,0,0,0.02)] hover:bg-accent-500 hover:border-accent-500 active:bg-accent-600 active:border-accent-600 transition-colors">Upraviť predvoľby</button>
+          </div>
+        </div>
+
+        <!-- Predvoľby -->
+        <div data-view="prefs" hidden>
+          <h2 class="pr-8 text-[28px] leading-[1.1] tracking-[-0.02em] lg:text-[30px] lg:tracking-normal">Vyberte si, čo povolíte</h2>
+          <p class="mt-4 text-xl leading-[1.3]">Svoj výber môžete kedykoľvek zmeniť v pätičke webu.</p>
+
+          <div class="mt-6 flex flex-col gap-6">
+            <div>
+              <div class="flex items-center justify-between gap-4">
+                <p class="font-bold text-xl leading-[1.3]">Nevyhnutné</p>
+                <span class="shrink-0 inline-flex items-center h-[30px] px-2.5 rounded-lg bg-tertiary-300 text-neutral-600 text-xl">Vždy povolené</span>
+              </div>
+              <p class="mt-2 text-xl leading-[1.3]">Bez nich by web nefungoval. Zapamätajú si napríklad aj to, ako ste sa rozhodli práve teraz.</p>
+            </div>
+
+            <div>
+              <div class="flex items-center justify-between gap-4">
+                <p id="cookie-functional-label" class="font-bold text-xl leading-[1.3]">Funkčné</p>
+                <button type="button" role="switch" aria-checked="false" data-cookie="functional" aria-labelledby="cookie-functional-label" class="group relative shrink-0 w-12 h-7 rounded-full border border-[#644E45] bg-secondary-500 aria-checked:bg-primary-500 aria-checked:border-primary-500 transition-colors duration-300">
+                  <span class="absolute top-1/2 left-[3px] -translate-y-1/2 w-5 h-5 rounded-full bg-neutral-500 group-aria-checked:translate-x-5 group-aria-checked:bg-secondary-500 transition duration-300 ease-[cubic-bezier(.22,1,.36,1)]"></span>
+                </button>
+              </div>
+              <p class="mt-2 text-xl leading-[1.3]">Zapamätajú si vaše nastavenia – napríklad jazyk či región –, aby ste ich nemuseli zadávať znova.</p>
+            </div>
+
+            <div>
+              <div class="flex items-center justify-between gap-4">
+                <p id="cookie-analytics-label" class="font-bold text-xl leading-[1.3]">Analytické</p>
+                <button type="button" role="switch" aria-checked="false" data-cookie="analytics" aria-labelledby="cookie-analytics-label" class="group relative shrink-0 w-12 h-7 rounded-full border border-[#644E45] bg-secondary-500 aria-checked:bg-primary-500 aria-checked:border-primary-500 transition-colors duration-300">
+                  <span class="absolute top-1/2 left-[3px] -translate-y-1/2 w-5 h-5 rounded-full bg-neutral-500 group-aria-checked:translate-x-5 group-aria-checked:bg-secondary-500 transition duration-300 ease-[cubic-bezier(.22,1,.36,1)]"></span>
+                </button>
+              </div>
+              <p class="mt-2 text-xl leading-[1.3]">Pomáhajú mi pochopiť, ako web používate – čo čítate a kde sa zastavíte. Všetko anonymne.</p>
+            </div>
+          </div>
+
+          <div class="mt-8 flex flex-wrap items-center gap-3">
+            <button type="button" data-cookie-save class="grain inline-flex items-center gap-2 h-[46px] px-6 rounded-full bg-primary-500 text-secondary-500 italic text-base shadow-[2px_2px_6px_rgba(0,0,0,0.02)] hover:bg-accent-500 hover:text-primary-500 active:bg-accent-600 transition-colors">Uložiť výber</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <script>
+    (() => {
+      const KEY = 'cookie-consent';
+      const root = document.getElementById('cookie-banner');
+      const views = root.querySelectorAll('[data-view]');
+      const toggle = name => root.querySelector(`[data-cookie="${name}"]`);
+      const read = () => { try { return JSON.parse(localStorage.getItem(KEY)); } catch (e) { return null; } };
+      // Súhlas je dostupný pre ďalšie skripty (napr. analytiku): window.cookieConsent + udalosť 'cookie-consent'
+      const apply = c => { window.cookieConsent = c; document.dispatchEvent(new CustomEvent('cookie-consent', { detail: c })); };
+      const show = name => views.forEach(v => v.hidden = v.dataset.view !== name);
+      const open = name => {
+        show(name);
+        root.classList.remove('hidden', 'is-out');
+        requestAnimationFrame(() => requestAnimationFrame(() => root.classList.add('is-in')));
+      };
+      const close = () => {
+        root.classList.remove('is-in');
+        root.classList.add('is-out');
+        setTimeout(() => { root.classList.add('hidden'); root.classList.remove('is-out'); }, 500);
+      };
+      const save = (functional, analytics) => {
+        const c = { necessary: true, functional, analytics, date: new Date().toISOString() };
+        try { localStorage.setItem(KEY, JSON.stringify(c)); } catch (e) {}
+        apply(c);
+        close();
+      };
+      root.querySelectorAll('[role="switch"]').forEach(t => t.onclick = () => t.setAttribute('aria-checked', t.getAttribute('aria-checked') !== 'true'));
+      root.querySelectorAll('[data-cookie-accept]').forEach(b => b.onclick = () => save(true, true));
+      root.querySelector('[data-cookie-reject]').onclick = () => save(false, false);
+      root.querySelector('[data-cookie-prefs]').onclick = () => show('prefs');
+      root.querySelector('[data-cookie-save]').onclick = () => save(toggle('functional').getAttribute('aria-checked') === 'true', toggle('analytics').getAttribute('aria-checked') === 'true');
+      // Odkaz „Nastavenia cookies“ v pätičke
+      document.querySelectorAll('[data-cookie-settings]').forEach(b => b.onclick = () => {
+        const c = read() || {};
+        toggle('functional').setAttribute('aria-checked', !!c.functional);
+        toggle('analytics').setAttribute('aria-checked', !!c.analytics);
+        open('prefs');
+      });
+      const saved = read();
+      // Lišta sa ukáže až po dobehnutí úvodnej animácie
+      // Na testovanie: adresa s ?cookies (napr. index.html?cookies) zobrazí lištu vždy
+      if (saved && !/[?&]cookies\b/.test(location.search)) apply(saved);
+      else setTimeout(() => open('main'), document.querySelector('#uvod, #prax') ? 2600 : 600);
+    })();
+  </script>
+  <!-- COOKIES LIŠTA END -->
+
+  <!-- ANIMÁCIE SKRIPT START -->
+  <script>
+    // Úvod: počká na font, potom text postupne dosadne
+    (() => {
+      const hero = [
+        ['#uvod img', 0], ['#uvod h1', 350], ['#uvod h1 + p', 700], ['#uvod h1 ~ a', 1000], ['#uvod h1 ~ .font-script', 1350], ['#uvod img + p', 1350],
+        ['#prax img', 0], ['#prax h1', 350], ['#prax div:has(> p + svg)', 750], ['#prax .font-script', 1350]
+      ];
+      hero.forEach(([s, d]) => document.querySelectorAll(s).forEach(el => el.style.setProperty('--hero-delay', d + 'ms')));
+      const html = document.documentElement;
+      const show = () => requestAnimationFrame(() => requestAnimationFrame(() => {
+        html.classList.add('hero-in');
+        setTimeout(() => html.classList.remove('hero-anim', 'hero-in'), 3800); // potom platia bežné hover prechody
+      }));
+      (document.fonts ? document.fonts.ready : Promise.resolve()).then(show, show);
+    })();
+
+    (() => {
+      const html = document.documentElement;
+      if (!html.classList.contains('reveal-anim')) return;
+      window.revealReady = true;
+      const set = new Set(document.querySelectorAll(revealSelectors.join(',')));
+      // Ak sa objavuje rodič, jeho vnútro sa už samostatne neanimuje
+      const items = [...set].filter(el => { for (let p = el.parentElement; p; p = p.parentElement) if (set.has(p)) { el.classList.add('reveal-done'); return false; } return true; });
+      // Čo je vidno hneď pri načítaní, nabehne až po úvode
+      let first = true;
+      const io = new IntersectionObserver(entries => {
+        const base = first && document.querySelector('#uvod, #prax') ? 900 : 0;
+        first = false;
+        let card = 0;
+        entries.filter(e => e.isIntersecting).forEach((e, i) => {
+          // Ružové karty: každá o 160 ms po predchádzajúcej (len tie, ktoré sa objavia naraz)
+          const delay = base + (e.target.classList.contains('reveal--card') ? 120 + card++ * 160 : Math.min(i, 5) * 90);
+          e.target.style.setProperty('--reveal-delay', delay + 'ms');
+          e.target.classList.add('is-visible');
+          // Po dobehnutí sa pomocné triedy odstránia (vrátia sa pôvodné hover prechody)
+          const done = () => { e.target.classList.add('reveal-done'); e.target.classList.remove('reveal', 'reveal--card', 'reveal--fade', 'is-visible'); e.target.style.removeProperty('--reveal-delay'); };
+          e.target.addEventListener('transitionend', ev => { if (ev.target === e.target && ev.propertyName === 'opacity') done(); });
+          setTimeout(done, delay + 2000); // poistka, keby transitionend neprišiel
+          io.unobserve(e.target);
+        });
+      }, { rootMargin: '0px 0px -8% 0px' });
+      items.forEach(el => {
+        el.classList.add('reveal');
+        if (el.tagName === 'IMG') el.classList.add('reveal--fade');
+        io.observe(el);
+      });
+      document.querySelectorAll('#sluzby details.reveal').forEach(el => el.classList.add('reveal--card'));
+    })();
+  </script>
+  <!-- ANIMÁCIE SKRIPT END -->
   <script>lucide.createIcons();</script>
 </body>
 </html>

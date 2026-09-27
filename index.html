@@ -10,10 +10,22 @@
   <!-- IKONKA A NÁHĽAD PRI ZDIEĽANÍ START -->
   <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
   <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-  <meta property="og:title" content="Rodinná poradňa od A po Z">
-  <meta property="og:description" content="Sprevádzam rodiny náročnými obdobiami. Mgr. Adriana Záskalanová.">
-  <meta property="og:image" content="images/og-image.png">
+  <!-- Náhľad pri zdieľaní odkazu (Messenger, iMessage, WhatsApp…) – adresy musia byť úplné, s doménou -->
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Rodinná poradňa od A po Z">
+  <meta property="og:locale" content="sk_SK">
+  <meta property="og:url" content="https://mwebbb.vercel.app/">
+  <meta property="og:title" content="Rodinná poradňa od A po Z">
+  <meta property="og:description" content="Sprevádzam rodiny náročnými obdobiami – od prvej myšlienky na bábätko až po dospievanie. Mgr. Adriana Záskalanová, online a v okolí Banskej Bystrice.">
+  <meta property="og:image" content="https://mwebbb.vercel.app/images/og-image.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Rodinná poradňa od A po Z – Sprevádzam rodiny náročnými obdobiami. Mgr. Adriana Záskalanová">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Rodinná poradňa od A po Z">
+  <meta name="twitter:description" content="Sprevádzam rodiny náročnými obdobiami – od prvej myšlienky na bábätko až po dospievanie. Mgr. Adriana Záskalanová, online a v okolí Banskej Bystrice.">
+  <meta name="twitter:image" content="https://mwebbb.vercel.app/images/og-image.png">
   <!-- IKONKA A NÁHĽAD PRI ZDIEĽANÍ END -->
 
   <!-- FONT START -->
@@ -56,11 +68,116 @@
     }
   </style>
   <!-- ZRNITÁ TEXTÚRA END -->
+  <!-- ANIMÁCIE START -->
+  <style>
+    html { scroll-behavior: smooth; }
+    :root { interpolate-size: allow-keywords; }
+    /* Jemné objavenie pri scrollovaní (pridáva JS, bez JS je všetko viditeľné) */
+    /* Hover farby (tlačidlá, karty) bežia vždy hneď a rýchlo – oneskorenie má len samotné objavenie */
+    .reveal-anim .reveal {
+      opacity: 0; translate: 0 24px;
+      transition-property: opacity, translate, color, background-color, border-color;
+      transition-duration: .9s, .9s, .15s, .15s, .15s;
+      transition-timing-function: cubic-bezier(.22,1,.36,1), cubic-bezier(.22,1,.36,1), cubic-bezier(.4,0,.2,1), cubic-bezier(.4,0,.2,1), cubic-bezier(.4,0,.2,1);
+      transition-delay: var(--reveal-delay, 0ms), var(--reveal-delay, 0ms), 0s, 0s, 0s;
+    }
+    .reveal-anim .reveal.reveal--fade { translate: none; transition-duration: 1.2s, 1.2s, .15s, .15s, .15s; }
+    .reveal-anim .reveal.is-visible { opacity: 1; translate: 0 0; }
+    /* Plynulé rozbalenie kariet a otázok */
+    details { transition: background-color .3s ease; }
+    details::details-content { block-size: 0; overflow: clip; transition: block-size .45s cubic-bezier(.22,1,.36,1), content-visibility .45s allow-discrete; }
+    details[open]::details-content { block-size: auto; }
+    /* „Viac informácií“ – obsah sa jemne objaví */
+    div:has(+ [data-more][aria-expanded="true"]) { animation: fade-up .5s cubic-bezier(.22,1,.36,1); }
+    /* Ružové karty v Službách – pomalšia, plynulá kaskáda */
+    .reveal-anim .reveal.reveal--card { /* bez posunu – medzery medzi kartami ostávajú stále rovnaké */
+      translate: none; filter: blur(3px);
+      transition-property: opacity, filter, background-color;
+      transition-duration: 1.6s, 1.4s, .15s;
+      transition-timing-function: cubic-bezier(.33,1,.68,1), cubic-bezier(.33,1,.68,1), cubic-bezier(.4,0,.2,1);
+      transition-delay: var(--reveal-delay, 0ms), var(--reveal-delay, 0ms), 0s;
+    }
+    .reveal-anim .reveal.reveal--card.is-visible { filter: none; }
+    /* Úvod stránky – skrytý už pred prvým vykreslením, potom jemne dosadne */
+    .hero-anim :is(#uvod h1, #uvod h1 ~ *, #uvod img + p, #prax h1, #prax .font-script, #prax div:has(> p + svg)) {
+      opacity: 0; translate: 0 28px; filter: blur(6px);
+      transition: opacity 1.6s cubic-bezier(.16,1,.3,1), translate 2s cubic-bezier(.16,1,.3,1), filter 1.6s cubic-bezier(.16,1,.3,1);
+      transition-delay: var(--hero-delay, 0ms);
+    }
+    .hero-anim :is(#uvod img, #prax img) { opacity: 0; transition: opacity .8s cubic-bezier(.16,1,.3,1); transition-delay: var(--hero-delay, 0ms); }
+    .hero-in :is(#uvod h1, #uvod h1 ~ *, #uvod img, #uvod img + p, #prax h1, #prax img, #prax .font-script, #prax div:has(> p + svg)) { opacity: 1; translate: 0 0; filter: none; }
+    /* Mobilné menu */
+    #mobile-menu.flex { animation: fade-in .3s ease-out; }
+    #mobile-menu.flex nav a { animation: fade-up .5s cubic-bezier(.22,1,.36,1) backwards; }
+    #mobile-menu.flex nav a:nth-child(2) { animation-delay: 50ms; }
+    #mobile-menu.flex nav a:nth-child(3) { animation-delay: 100ms; }
+    #mobile-menu.flex nav a:nth-child(4) { animation-delay: 150ms; }
+    #mobile-menu.flex nav a:nth-child(5) { animation-delay: 200ms; }
+    @keyframes fade-in { from { opacity: 0; } }
+    @keyframes fade-up { from { opacity: 0; translate: 0 12px; } }
+    /* Kto má v systéme vypnuté animácie, nič sa nehýbe */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after, ::details-content { animation: none !important; transition: none !important; }
+      .reveal { opacity: 1; translate: none; }
+    }
+  </style>
+  <script>
+    // Prvky, ktoré sa objavia pri scrollovaní (jediný zoznam – používa ho aj skript na konci stránky)
+    window.revealSelectors = [
+      '#sluzby h2', '#sluzby h2 + p', '#sluzby details', '#sluzby a[href="#kontakt"]', '#sluzby h3', '#sluzby h3 + p',
+      '#o-mne .font-script', '#o-mne h2', '#o-mne h2 + p', '#o-mne img', '#o-mne .space-y-6', '#o-mne .space-y-6 + a',
+      '#ako-sa-stretneme h2', '#ako-sa-stretneme h2 + p', '#ako-sa-stretneme .grid > div', '#ako-sa-stretneme [class*="rotate-"]',
+      '#otazky .text-center > *', '#otazky details', '#otazky .bg-yellow-50',
+      '#kontakt h2', '#kontakt h2 ~ *', '#kontakt .bg-accent-500',
+      '#prax .gap-16 > div',
+      '#vzdelanie h2', '#vzdelanie h2 + p', '#vzdelanie .grid > div',
+      'section:not([id]) h2', 'section:not([id]) h2 ~ *'
+    ];
+    // Úvod aj tieto prvky sa skryjú ešte pred prvým vykreslením (aby nebliklo); poistka po 4 s ukáže všetko
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
+      const html = document.documentElement;
+      html.classList.add('hero-anim', 'reveal-anim');
+      const style = document.createElement('style');
+      style.textContent = '.reveal-anim :is(' + revealSelectors.join(',') + '):not(.is-visible, .reveal-done) { opacity: 0; }';
+      document.head.appendChild(style);
+      setTimeout(() => { html.classList.add('hero-in'); if (!window.revealReady) html.classList.remove('reveal-anim'); }, 4000);
+    }
+  </script>
+  <!-- ANIMÁCIE END -->  <!-- GOOGLE ANALYTICS START -->
+  <script>
+    // Google Analytics (GA4) sa načíta až po súhlase s analytickými cookies v lište cookies
+    const GA_ID = 'G-PZQ82X76KK';
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('consent', 'default', { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
+    document.addEventListener('cookie-consent', e => {
+      if (!e.detail.analytics) {
+        // Súhlas odvolaný: zastaviť meranie a zmazať cookies Google Analytics
+        if (window.gaLoaded) gtag('consent', 'update', { analytics_storage: 'denied' });
+        document.cookie.split(';').map(c => c.split('=')[0].trim()).filter(n => n.startsWith('_ga')).forEach(n => {
+          [location.hostname, '.' + location.hostname].forEach(d => document.cookie = `${n}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=${d}`);
+          document.cookie = `${n}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
+        });
+        return;
+      }
+      gtag('consent', 'update', { analytics_storage: 'granted' });
+      if (window.gaLoaded) return;
+      window.gaLoaded = true;
+      const s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+      document.head.appendChild(s);
+      gtag('js', new Date());
+      gtag('config', GA_ID);
+    });
+  </script>
+  <!-- GOOGLE ANALYTICS END -->
 </head>
 <body class="bg-secondary-500 text-primary-500 antialiased">
 
   <!-- HEADER START -->
-<header class="sticky top-0 z-50 bg-secondary-500">
+<header id="site-header" class="sticky top-0 z-50 bg-secondary-500 transition-transform duration-300">
   <div class="h-[72px] lg:h-[82px] px-4 lg:pl-16 lg:pr-[72px] flex items-center justify-between">
 
     <!-- Logo -->
@@ -105,11 +222,23 @@
   const closeMenu = () => { menu.classList.add('hidden'); menu.classList.remove('flex'); };
   document.getElementById('menu-close').onclick = closeMenu;
   document.querySelectorAll('.menu-link').forEach(a => a.onclick = closeMenu);
+
+  // Pri scrollovaní dole sa celá hlavička skryje, pri pohybe hore sa znovu ukáže
+  const header = document.getElementById('site-header');
+  let lastY = window.scrollY;
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    if (Math.abs(y - lastY) < 5) return;
+    const hide = y > lastY && y > 82 && menu.classList.contains('hidden');
+    header.classList.toggle('-translate-y-full', hide);
+    document.documentElement.style.setProperty('--header-h', hide ? '0px' : '82px');
+    lastY = y;
+  }, { passive: true });
 </script>
 <!-- HEADER END -->
 
 <!-- HERO SEKCIA START -->
-<section id="uvod" class="grid md:grid-cols-[342px_336px] md:justify-between md:pl-8 md:pt-10 md:pb-[81px] lg:grid-cols-[724fr_716fr] lg:p-0 lg:h-[794px] bg-secondary-500">
+<section id="uvod" class="grid md:grid-cols-[342px_336px] md:justify-between md:pl-8 md:pt-10 md:pb-[81px] lg:grid-cols-[724fr_716fr] lg:p-0 lg:h-[max(794px,55.14vw)] bg-secondary-500">
 
   <!-- Text -->
   <div class="flex justify-center px-4 pt-8 md:p-0 md:block lg:flex lg:justify-center lg:pl-[29px] lg:pt-[101px]">
@@ -119,7 +248,7 @@
         Sprevádzam rodiny náročnými obdobiami
       </h1>
 
-      <p class="mt-6 lg:mt-8 text-primary-500 md:text-neutral-500 font-light text-xl leading-[1.3]">
+      <p class="mt-6 lg:mt-8 text-primary-500 md:text-neutral-500 text-xl leading-[1.3]">
         Som Adriana Záskalanová, mama štyroch detí a k tomu psychologička, rodinná poradkyňa aj koučka.
         Už 25 rokov som pri rodinách – od prvej myšlienky na bábätko až po dospievanie.
       </p>
@@ -131,7 +260,7 @@
       </a>
 
       <!-- Ručne písaný text (mobil a PC; na tablete je pod fotkou) -->
-      <p class="md:hidden lg:block font-script text-neutral-500 text-lg leading-6 mt-6 lg:mt-0 lg:text-2xl lg:leading-[1.3] lg:text-left lg:self-start lg:absolute lg:left-[7px] lg:top-[536px] lg:-rotate-[11deg] lg:origin-top-left">
+      <p class="md:hidden lg:block font-script text-neutral-500 text-[20px] leading-6 mt-6 lg:mt-0 lg:text-2xl lg:leading-[1.3] lg:text-left lg:self-start lg:absolute lg:left-[7px] lg:top-[536px] lg:-rotate-[11deg] lg:origin-top-left">
         Online a v okolí<br class="hidden lg:inline"> Banskej Bystrice
       </p>
     </div>
@@ -139,8 +268,8 @@
 
   <!-- Fotka -->
   <div class="mt-6 md:mt-0 lg:h-full">
-    <img src="images/hero.png" alt="Adriana Záskalanová" class="w-full h-[432px] md:h-[372px] lg:h-full object-cover">
-    <p class="hidden md:block lg:hidden mt-4 font-script text-neutral-500 text-xl leading-[1.2] -rotate-[3.12deg] origin-left" aria-hidden="true">
+    <img src="images/hero.png" alt="Adriana Záskalanová" class="w-full aspect-[716/794] md:aspect-auto md:h-[372px] lg:h-full object-cover">
+    <p class="hidden md:block lg:hidden mt-4 font-script text-neutral-500 text-[20px] leading-[1.2] -rotate-[3.12deg] origin-left" aria-hidden="true">
       Online a v okolí Banskej Bystrice
     </p>
   </div>
@@ -158,7 +287,7 @@
         <h2 class="font-light text-[36px] leading-[1.2] tracking-[-0.02em] md:text-[44px] md:leading-[49px] md:tracking-normal lg:text-[64px] lg:leading-[1.1] lg:tracking-[-0.02em] lg:-mt-0.5">
           S čím <em class="italic">pomáham</em>
         </h2>
-        <p class="mt-4 lg:mt-3 font-light text-xl leading-[1.3] max-w-[430px]">
+        <p class="mt-4 lg:mt-3 text-xl leading-[1.3] max-w-[430px]">
           Nemusíte presne vedieť, čo potrebujete. Spoznajte, čo je vám blízke – a napíšte mi.
         </p>
       </div>
@@ -169,11 +298,11 @@
         <details class="group grain rounded-2xl bg-accent-500 text-neutral-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)] hover:bg-accent-600 open:hover:bg-accent-500 transition-colors">
           <summary class="flex items-center justify-between gap-4 min-h-[63px] lg:min-h-[70px] px-6 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
             <span class="text-[28px] leading-[1.1] tracking-[-0.02em] lg:text-[30px] lg:tracking-normal">Máme bábätko</span>
-            <i data-lucide="plus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] group-open:hidden"></i>
-            <i data-lucide="minus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] hidden group-open:block"></i>
+            <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 group-open:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5v14"/></svg>
+            <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 hidden group-open:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg>
           </summary>
           <div class="px-6 pb-6">
-            <p class="font-light text-xl leading-[1.3] lg:leading-[1.4]">
+            <p class="text-xl leading-[1.3] lg:leading-[1.4]">
               Dieťatko milujete a zároveň máte pocit, že ste za posledné mesiace zmizli? Že už neviete, kto ste, keď nie ste mama alebo ocko?
               To sa hovorí ťažko – nahlas ešte ťažšie. Prídem za vami domov alebo sa spojíme online. Bez kočíka a bez cestovania.
             </p>
@@ -188,11 +317,11 @@
         <details class="group grain rounded-2xl bg-accent-500 text-neutral-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)] hover:bg-accent-600 open:hover:bg-accent-500 transition-colors">
           <summary class="flex items-center justify-between gap-4 min-h-[63px] lg:min-h-[70px] px-6 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
             <span class="text-[28px] leading-[1.1] tracking-[-0.02em] lg:text-[30px] lg:tracking-normal">Škola nám robí starosti</span>
-            <i data-lucide="plus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] group-open:hidden"></i>
-            <i data-lucide="minus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] hidden group-open:block"></i>
+            <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 group-open:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5v14"/></svg>
+            <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 hidden group-open:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg>
           </summary>
           <div class="px-6 pb-6">
-            <p class="font-light text-xl leading-[1.3] lg:leading-[1.4]">TEXT DOPLNIŤ</p>
+            <p class="text-xl leading-[1.3] lg:leading-[1.4]">TEXT DOPLNIŤ</p>
             <div class="mt-8 lg:mt-4 flex flex-wrap gap-2">
               <span class="inline-flex items-center h-[30px] px-2.5 rounded-lg bg-yellow-50 text-neutral-600 text-xl">Štítok</span>
             </div>
@@ -202,11 +331,11 @@
         <details class="group grain rounded-2xl bg-accent-500 text-neutral-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)] hover:bg-accent-600 open:hover:bg-accent-500 transition-colors">
           <summary class="flex items-center justify-between gap-4 min-h-[63px] lg:min-h-[70px] px-6 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
             <span class="text-[28px] leading-[1.1] tracking-[-0.02em] lg:text-[30px] lg:tracking-normal">Rozvádzame sa</span>
-            <i data-lucide="plus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] group-open:hidden"></i>
-            <i data-lucide="minus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] hidden group-open:block"></i>
+            <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 group-open:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5v14"/></svg>
+            <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 hidden group-open:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg>
           </summary>
           <div class="px-6 pb-6">
-            <p class="font-light text-xl leading-[1.3] lg:leading-[1.4]">TEXT DOPLNIŤ</p>
+            <p class="text-xl leading-[1.3] lg:leading-[1.4]">TEXT DOPLNIŤ</p>
             <div class="mt-8 lg:mt-4 flex flex-wrap gap-2">
               <span class="inline-flex items-center h-[30px] px-2.5 rounded-lg bg-yellow-50 text-neutral-600 text-xl">Štítok</span>
             </div>
@@ -216,11 +345,11 @@
         <details class="group grain rounded-2xl bg-accent-500 text-neutral-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)] hover:bg-accent-600 open:hover:bg-accent-500 transition-colors">
           <summary class="flex items-center justify-between gap-4 min-h-[63px] lg:min-h-[70px] px-6 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
             <span class="text-[28px] leading-[1.1] tracking-[-0.02em] lg:text-[30px] lg:tracking-normal">Doma je stále dusno</span>
-            <i data-lucide="plus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] group-open:hidden"></i>
-            <i data-lucide="minus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] hidden group-open:block"></i>
+            <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 group-open:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5v14"/></svg>
+            <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 hidden group-open:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg>
           </summary>
           <div class="px-6 pb-6">
-            <p class="font-light text-xl leading-[1.3] lg:leading-[1.4]">TEXT DOPLNIŤ</p>
+            <p class="text-xl leading-[1.3] lg:leading-[1.4]">TEXT DOPLNIŤ</p>
             <div class="mt-8 lg:mt-4 flex flex-wrap gap-2">
               <span class="inline-flex items-center h-[30px] px-2.5 rounded-lg bg-yellow-50 text-neutral-600 text-xl">Štítok</span>
             </div>
@@ -230,11 +359,11 @@
         <details class="group grain rounded-2xl bg-accent-500 text-neutral-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)] hover:bg-accent-600 open:hover:bg-accent-500 transition-colors">
           <summary class="flex items-center justify-between gap-4 min-h-[63px] lg:min-h-[70px] px-6 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
             <span class="text-[28px] leading-[1.1] tracking-[-0.02em] lg:text-[30px] lg:tracking-normal">Naše dieťa sa trápi</span>
-            <i data-lucide="plus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] group-open:hidden"></i>
-            <i data-lucide="minus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] hidden group-open:block"></i>
+            <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 group-open:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5v14"/></svg>
+            <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 hidden group-open:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg>
           </summary>
           <div class="px-6 pb-6">
-            <p class="font-light text-xl leading-[1.3] lg:leading-[1.4]">TEXT DOPLNIŤ</p>
+            <p class="text-xl leading-[1.3] lg:leading-[1.4]">TEXT DOPLNIŤ</p>
             <div class="mt-8 lg:mt-4 flex flex-wrap gap-2">
               <span class="inline-flex items-center h-[30px] px-2.5 rounded-lg bg-yellow-50 text-neutral-600 text-xl">Štítok</span>
             </div>
@@ -244,11 +373,11 @@
         <details class="group grain rounded-2xl bg-accent-500 text-neutral-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)] hover:bg-accent-600 open:hover:bg-accent-500 transition-colors">
           <summary class="flex items-center justify-between gap-4 min-h-[63px] lg:min-h-[70px] px-6 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
             <span class="text-[28px] leading-[1.1] tracking-[-0.02em] lg:text-[30px] lg:tracking-normal">Dospieva nám</span>
-            <i data-lucide="plus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] group-open:hidden"></i>
-            <i data-lucide="minus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] hidden group-open:block"></i>
+            <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 group-open:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5v14"/></svg>
+            <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 hidden group-open:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg>
           </summary>
           <div class="px-6 pb-6">
-            <p class="font-light text-xl leading-[1.3] lg:leading-[1.4]">TEXT DOPLNIŤ</p>
+            <p class="text-xl leading-[1.3] lg:leading-[1.4]">TEXT DOPLNIŤ</p>
             <div class="mt-8 lg:mt-4 flex flex-wrap gap-2">
               <span class="inline-flex items-center h-[30px] px-2.5 rounded-lg bg-yellow-50 text-neutral-600 text-xl">Štítok</span>
             </div>
@@ -270,7 +399,7 @@
     <!-- Spolupracujem -->
     <div class="mt-12 md:mt-16 md:flex md:justify-between md:gap-10 lg:block lg:mt-[91px] lg:max-w-[520px]">
       <h3 class="shrink-0 font-light text-[32px] leading-[1.2] tracking-[-0.02em] lg:text-[36px] lg:leading-[1.1] lg:tracking-[-0.03em]">Spolupracujem</h3>
-      <p class="mt-4 md:mt-0 md:max-w-[432px] lg:max-w-none lg:mt-6 font-light text-xl leading-[1.3]">
+      <p class="mt-4 md:mt-0 md:max-w-[432px] lg:max-w-none lg:mt-6 text-xl leading-[1.3]">
         Spolupracujem s klinickým psychológom a psychoterapeutom
         <a href="https://www.bbpsycholog.sk/index.php" target="_blank" rel="noopener" class="italic underline underline-offset-2 hover:text-accent-600 transition-colors">Jánom Záskalanom</a>.
         Ak budete potrebovať niečo, čo neponúkam – napríklad párovú terapiu – odporučím vás jemu.
@@ -286,7 +415,7 @@
     <div class="grid md:grid-cols-[280px_384px] md:justify-between md:gap-x-10 lg:grid-cols-[1fr_535px] lg:gap-x-0">
 
       <!-- Ručne písaný popisok -->
-      <p class="md:col-start-2 lg:row-start-1 font-script text-neutral-500 text-lg leading-6 md:text-xl md:leading-[27px] lg:text-2xl lg:leading-8 lg:h-0 lg:relative lg:-top-[42px] lg:-left-[31px] lg:-rotate-[9deg] lg:origin-top-left whitespace-nowrap">
+      <p class="md:col-start-2 lg:row-start-1 font-script text-neutral-500 text-[20px] leading-6 md:leading-[27px] lg:text-2xl lg:leading-8 lg:h-0 lg:relative lg:-top-[42px] lg:-left-[31px] lg:-rotate-[9deg] lg:origin-top-left whitespace-nowrap">
         Niečo málo o mne
       </p>
 
@@ -294,7 +423,7 @@
         Rodičovstvo poznám<br class="hidden lg:inline"> z <em class="italic">oboch</em> strán
       </h2>
 
-      <p class="mt-4 lg:mt-6 md:col-start-2 lg:row-start-3 lg:max-w-[526px] font-light text-xl leading-[1.3]">
+      <p class="mt-4 lg:mt-6 md:col-start-2 lg:row-start-3 lg:max-w-[526px] text-xl leading-[1.3]">
         Najprv nás podrobí skúške a až potom naučí pravidlá. Emócie našich detí – aj tie naše vlastné – dôverne poznám nielen z odborných kníh, ale najmä z vlastnej skúsenosti.
       </p>
 
@@ -304,7 +433,7 @@
       </div>
 
       <div class="mt-6 md:col-start-2 lg:row-start-4">
-        <div class="lg:max-w-[526px] space-y-6 font-light text-xl leading-[1.3]">
+        <div class="lg:max-w-[526px] space-y-6 text-xl leading-[1.3]">
           <p>Bola som školskou psychologičkou na základnej a strednej škole, pracovala som s rodinami v rozvodovom konaní aj s deťmi, ktorým sa zrazu svet zdal príliš veľký. Desať rokov som viedla materské centrum a bola pri matkách, ktoré prvýkrát držia bábätko a nevedia, čo teraz. Každé z tých miest ma naučilo niečo iné.</p>
           <p>Moje vzdelanie a vlastné materstvo som spojila do Rodinnej poradne. Nie preto, aby som vám dávala rady. Ale aby ste odišli s tým, že svojej rodine rozumiete o čosi lepšie.</p>
         </div>
@@ -346,7 +475,7 @@
       <h2 class="md:max-w-[388px] lg:max-w-none font-light text-[36px] leading-[1.2] tracking-[-0.02em] md:text-[44px] md:leading-[49px] md:tracking-normal lg:text-[64px] lg:leading-none lg:tracking-[-0.02em] lg:-mt-1.5">
         Stretneme sa tam,<br class="hidden lg:inline"> kde <em class="italic">vám</em> je najlepšie
       </h2>
-      <p class="mt-4 lg:mt-[22px] font-light text-xl leading-[1.3] max-w-[520px] md:max-w-[388px] lg:max-w-[520px]">
+      <p class="mt-4 lg:mt-[22px] text-xl leading-[1.3] max-w-[520px] md:max-w-[388px] lg:max-w-[520px]">
         Nie každý rozhovor sa dá viesť za stolom. Vyberte si formu, ktorá sadne vášmu dňu.
       </p>
 
@@ -355,63 +484,63 @@
 
         <div class="max-w-[420px]">
           <h3 class="inline-block bg-tertiary-300 rounded-sm px-1 text-[28px] leading-[31px] tracking-[-0.02em] lg:text-[30px] lg:leading-[38px] lg:tracking-normal">Online</h3>
-          <p class="mt-4 font-light text-xl leading-[1.3]">
+          <p class="mt-4 text-xl leading-[1.3]">
             Najčastejšia forma. <strong class="font-bold">Odkiaľkoľvek</strong> na Slovensku aj zo zahraničia – z gauča, spálne či kuchyne.
           </p>
-          <div class="hidden mt-4 space-y-4 font-light text-xl leading-[1.3]">
+          <div class="hidden mt-4 space-y-4 text-xl leading-[1.3]">
             <p><strong class="font-bold">Dĺžka a cena:</strong> Základné sedenie trvá 60 minút a cena je 60 €. V prípade potreby komplexnejšieho rozboru je možné dĺžku stretnutia po vzájomnej dohode vopred upraviť.</p>
             <p><strong class="font-bold">Platformy:</strong> Konzultácie prebiehajú cez overené videohovory podľa vašich preferencií – Google Meet, WhatsApp alebo Messenger.</p>
             <p><strong class="font-bold">Prostredie:</strong> Pripravte si pokojné miesto, kde sa budete cítiť bezpečne, uvoľnene a kde nebudete počas rozhovoru nikým rušení.</p>
           </div>
           <button type="button" data-more aria-expanded="false" class="group mt-4 inline-flex items-center gap-1.5 font-bold text-base leading-none hover:text-neutral-500 transition-colors">
             <span class="group-aria-expanded:hidden">Viac informácií</span><span class="hidden group-aria-expanded:inline">Menej informácií</span>
-            <i data-lucide="plus" class="w-3 h-3 stroke-[2.5] group-aria-expanded:hidden"></i>
-            <i data-lucide="minus" class="w-3 h-3 stroke-[2.5] hidden group-aria-expanded:block"></i>
+            <svg class="w-3 h-3 group-aria-expanded:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5v14"/></svg>
+            <svg class="w-3 h-3 hidden group-aria-expanded:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg>
           </button>
         </div>
 
         <div class="max-w-[420px]">
           <h3 class="inline-block bg-tertiary-300 rounded-sm px-1 text-[28px] leading-[31px] tracking-[-0.02em] lg:text-[30px] lg:leading-[38px] lg:tracking-normal">U vás doma</h3>
-          <p class="mt-4 font-light text-xl leading-[1.3]">
+          <p class="mt-4 text-xl leading-[1.3]">
             Prídem za vami do <strong class="font-bold">Banskej Bystrice a okolia</strong> – všade, kam to mám do 30 minút. A vy nemusíte organizovať presun rodiny, ani cestu s kočíkom.
           </p>
-          <div class="hidden mt-4 space-y-4 font-light text-xl leading-[1.3]">
+          <div class="hidden mt-4 space-y-4 text-xl leading-[1.3]">
             <p>TEXT DOPLNIŤ</p>
           </div>
           <button type="button" data-more aria-expanded="false" class="group mt-4 inline-flex items-center gap-1.5 font-bold text-base leading-none hover:text-neutral-500 transition-colors">
             <span class="group-aria-expanded:hidden">Viac informácií</span><span class="hidden group-aria-expanded:inline">Menej informácií</span>
-            <i data-lucide="plus" class="w-3 h-3 stroke-[2.5] group-aria-expanded:hidden"></i>
-            <i data-lucide="minus" class="w-3 h-3 stroke-[2.5] hidden group-aria-expanded:block"></i>
+            <svg class="w-3 h-3 group-aria-expanded:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5v14"/></svg>
+            <svg class="w-3 h-3 hidden group-aria-expanded:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg>
           </button>
         </div>
 
         <div class="max-w-[420px]">
           <h3 class="inline-block bg-tertiary-300 rounded-sm px-1 text-[28px] leading-[31px] tracking-[-0.02em] lg:text-[30px] lg:leading-[38px] lg:tracking-normal">Na prechádzke</h3>
-          <p class="mt-4 font-light text-xl leading-[1.3]">
+          <p class="mt-4 text-xl leading-[1.3]">
             Niektoré veci sa povedia ľahšie, keď sa ide vedľa seba a nemusíte sa pozerať do očí.
           </p>
-          <div class="hidden mt-4 space-y-4 font-light text-xl leading-[1.3]">
+          <div class="hidden mt-4 space-y-4 text-xl leading-[1.3]">
             <p>TEXT DOPLNIŤ</p>
           </div>
           <button type="button" data-more aria-expanded="false" class="group mt-4 inline-flex items-center gap-1.5 font-bold text-base leading-none hover:text-neutral-500 transition-colors">
             <span class="group-aria-expanded:hidden">Viac informácií</span><span class="hidden group-aria-expanded:inline">Menej informácií</span>
-            <i data-lucide="plus" class="w-3 h-3 stroke-[2.5] group-aria-expanded:hidden"></i>
-            <i data-lucide="minus" class="w-3 h-3 stroke-[2.5] hidden group-aria-expanded:block"></i>
+            <svg class="w-3 h-3 group-aria-expanded:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5v14"/></svg>
+            <svg class="w-3 h-3 hidden group-aria-expanded:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg>
           </button>
         </div>
 
         <div class="max-w-[420px]">
           <h3 class="inline-block bg-tertiary-300 rounded-sm px-1 text-[28px] leading-[31px] tracking-[-0.02em] lg:text-[30px] lg:leading-[38px] lg:tracking-normal">E-mailom</h3>
-          <p class="mt-4 font-light text-xl leading-[1.3]">
+          <p class="mt-4 text-xl leading-[1.3]">
             Keď to potrebujete napísať skôr, než to poviete nahlas. Alebo keď na rozhovor zatiaľ nemáte silu.
           </p>
-          <div class="hidden mt-4 space-y-4 font-light text-xl leading-[1.3]">
+          <div class="hidden mt-4 space-y-4 text-xl leading-[1.3]">
             <p>TEXT DOPLNIŤ</p>
           </div>
           <button type="button" data-more aria-expanded="false" class="group mt-4 inline-flex items-center gap-1.5 font-bold text-base leading-none hover:text-neutral-500 transition-colors">
             <span class="group-aria-expanded:hidden">Viac informácií</span><span class="hidden group-aria-expanded:inline">Menej informácií</span>
-            <i data-lucide="plus" class="w-3 h-3 stroke-[2.5] group-aria-expanded:hidden"></i>
-            <i data-lucide="minus" class="w-3 h-3 stroke-[2.5] hidden group-aria-expanded:block"></i>
+            <svg class="w-3 h-3 group-aria-expanded:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5v14"/></svg>
+            <svg class="w-3 h-3 hidden group-aria-expanded:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg>
           </button>
         </div>
 
@@ -448,11 +577,11 @@
 
     <!-- Nadpis -->
     <div class="text-center">
-      <p class="font-script text-primary-500 md:text-neutral-500 text-lg leading-6 md:text-xl lg:text-2xl lg:leading-8">Máte otázky? Rada odpoviem.</p>
+      <p class="font-script text-neutral-500 text-[20px] leading-6 lg:text-2xl lg:leading-8">Máte otázky? Rada odpoviem.</p>
       <h2 class="mt-4 lg:mt-[22px] font-light text-[36px] leading-[1.2] tracking-[-0.02em] md:text-[44px] md:leading-[49px] md:tracking-normal lg:text-[64px] lg:leading-none lg:tracking-[-0.02em]">
         Možno by ste sa ešte chceli <em class="italic">spýtať</em>
       </h2>
-      <p class="mt-4 lg:mt-[22px] mx-auto max-w-[580px] font-light text-xl leading-[1.3]">
+      <p class="mt-4 lg:mt-[22px] mx-auto max-w-[580px] text-xl leading-[1.3]">
         Pripravila som pre vás prehľad najčastejších otázok, s ktorými sa na mňa rodiny obracajú pred začatím našej spolupráce.
       </p>
     </div>
@@ -463,10 +592,10 @@
         <details class="group grain -mx-4 md:mx-0 md:rounded-2xl bg-secondary-500 open:bg-accent-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
           <summary class="flex items-center justify-between gap-6 px-8 py-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
             <span class="text-xl leading-[1.3] md:text-2xl md:leading-[1.25] lg:text-[30px] lg:leading-[38px]">Čo je to rodinné poradenstvo?</span>
-            <i data-lucide="plus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] group-open:hidden"></i>
-            <i data-lucide="minus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] hidden group-open:block"></i>
+            <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 group-open:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5v14"/></svg>
+            <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 hidden group-open:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg>
           </summary>
-          <div class="px-8 pb-6 lg:pb-4 space-y-6 font-light text-xl leading-[1.3]">
+          <div class="px-8 pb-6 lg:pb-4 space-y-6 text-xl leading-[1.3]">
               <p>TEXT DOPLNIŤ</p>
           </div>
         </details>
@@ -474,10 +603,10 @@
         <details class="group grain -mx-4 md:mx-0 md:rounded-2xl bg-secondary-500 open:bg-tertiary-300 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
           <summary class="flex items-center justify-between gap-6 px-8 py-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
             <span class="text-xl leading-[1.3] md:text-2xl md:leading-[1.25] lg:text-[30px] lg:leading-[38px]">Ako si dohodnúť návštevu?</span>
-            <i data-lucide="plus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] group-open:hidden"></i>
-            <i data-lucide="minus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] hidden group-open:block"></i>
+            <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 group-open:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5v14"/></svg>
+            <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 hidden group-open:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg>
           </summary>
-          <div class="px-8 pb-6 lg:pb-4 space-y-6 font-light text-xl leading-[1.3]">
+          <div class="px-8 pb-6 lg:pb-4 space-y-6 text-xl leading-[1.3]">
               <p>Napíšte mi krátky popis vašej situácie a lokalitu, kde bývate. Spoločne nájdeme termín, ktorý vám bude najlepšie vyhovovať a dohodneme si podmienky stretnutia.</p>
           </div>
         </details>
@@ -485,10 +614,10 @@
         <details class="group grain -mx-4 md:mx-0 md:rounded-2xl bg-secondary-500 open:bg-accent-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
           <summary class="flex items-center justify-between gap-6 px-8 py-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
             <span class="text-xl leading-[1.3] md:text-2xl md:leading-[1.25] lg:text-[30px] lg:leading-[38px]">Prečo a ako si vybrať poradenstvo doma?</span>
-            <i data-lucide="plus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] group-open:hidden"></i>
-            <i data-lucide="minus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] hidden group-open:block"></i>
+            <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 group-open:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5v14"/></svg>
+            <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 hidden group-open:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg>
           </summary>
-          <div class="px-8 pb-6 lg:pb-4 space-y-6 font-light text-xl leading-[1.3]">
+          <div class="px-8 pb-6 lg:pb-4 space-y-6 text-xl leading-[1.3]">
               <p>TEXT DOPLNIŤ</p>
           </div>
         </details>
@@ -496,10 +625,10 @@
         <details class="group grain -mx-4 md:mx-0 md:rounded-2xl bg-secondary-500 open:bg-accent-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
           <summary class="flex items-center justify-between gap-6 px-8 py-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
             <span class="text-xl leading-[1.3] md:text-2xl md:leading-[1.25] lg:text-[30px] lg:leading-[38px]">Ako presne funguje poradenstvo e-mailom?</span>
-            <i data-lucide="plus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] group-open:hidden"></i>
-            <i data-lucide="minus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] hidden group-open:block"></i>
+            <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 group-open:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5v14"/></svg>
+            <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 hidden group-open:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg>
           </summary>
-          <div class="px-8 pb-6 lg:pb-4 space-y-6 font-light text-xl leading-[1.3]">
+          <div class="px-8 pb-6 lg:pb-4 space-y-6 text-xl leading-[1.3]">
               <p>Ak radšej svoje myšlienky formulujete písomne, potrebujete si veci najprv v pokoji utriediť, alebo vám váš harmonogram nedovoľuje zladiť sa na konkrétny čas hovoru, e-mailová konzultácia je diskrétny a flexibilný spôsob, ako získať odborný pohľad na vašu rodinnú situáciu. K celej odpovedi sa môžete kedykoľvek vrátiť, prečítať si ju znovu s odstupom času alebo si dôležité body pripomenúť.</p>
               <p>Výhodou e-mailového poradenstva je <strong class="font-bold">flexibilita</strong>, <strong class="font-bold">nie ste viazaní</strong> na presný dátum ani čas stretnutia. Máte čas na <strong class="font-bold">premyslenie</strong>, a <strong class="font-bold">písanie</strong> vám umožní pomenovať aj veci, ktoré by sa pri osobnom rozhovore hovorili ťažko. Je to diskrétne a pohodlné, <strong class="font-bold">konzultáciu</strong> riešite odkiaľkoľvek, bez nutnosti zapínať kameru či mikrofón.</p>
           </div>
@@ -508,10 +637,10 @@
         <details class="group grain -mx-4 md:mx-0 md:rounded-2xl bg-secondary-500 open:bg-accent-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
           <summary class="flex items-center justify-between gap-6 px-8 py-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
             <span class="text-xl leading-[1.3] md:text-2xl md:leading-[1.25] lg:text-[30px] lg:leading-[38px]">Prečo si vybrať konzultáciu na prechádzke (Walk &amp; Talk)?</span>
-            <i data-lucide="plus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] group-open:hidden"></i>
-            <i data-lucide="minus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] hidden group-open:block"></i>
+            <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 group-open:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5v14"/></svg>
+            <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 hidden group-open:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg>
           </summary>
-          <div class="px-8 pb-6 lg:pb-4 space-y-6 font-light text-xl leading-[1.3]">
+          <div class="px-8 pb-6 lg:pb-4 space-y-6 text-xl leading-[1.3]">
               <p>TEXT DOPLNIŤ</p>
           </div>
         </details>
@@ -519,10 +648,10 @@
         <details class="group grain -mx-4 md:mx-0 md:rounded-2xl bg-secondary-500 open:bg-accent-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
           <summary class="flex items-center justify-between gap-6 px-8 py-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
             <span class="text-xl leading-[1.3] md:text-2xl md:leading-[1.25] lg:text-[30px] lg:leading-[38px]">Môžem dohodnúť konzultáciu aj pre dieťa?</span>
-            <i data-lucide="plus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] group-open:hidden"></i>
-            <i data-lucide="minus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] hidden group-open:block"></i>
+            <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 group-open:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5v14"/></svg>
+            <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 hidden group-open:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg>
           </summary>
-          <div class="px-8 pb-6 lg:pb-4 space-y-6 font-light text-xl leading-[1.3]">
+          <div class="px-8 pb-6 lg:pb-4 space-y-6 text-xl leading-[1.3]">
               <p>TEXT DOPLNIŤ</p>
           </div>
         </details>
@@ -530,10 +659,10 @@
         <details class="group grain -mx-4 md:mx-0 md:rounded-2xl bg-secondary-500 open:bg-accent-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
           <summary class="flex items-center justify-between gap-6 px-8 py-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
             <span class="text-xl leading-[1.3] md:text-2xl md:leading-[1.25] lg:text-[30px] lg:leading-[38px]">Je rodinné poradenstvo psychoterapia?</span>
-            <i data-lucide="plus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] group-open:hidden"></i>
-            <i data-lucide="minus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] hidden group-open:block"></i>
+            <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 group-open:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5v14"/></svg>
+            <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 hidden group-open:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg>
           </summary>
-          <div class="px-8 pb-6 lg:pb-4 space-y-6 font-light text-xl leading-[1.3]">
+          <div class="px-8 pb-6 lg:pb-4 space-y-6 text-xl leading-[1.3]">
               <p>TEXT DOPLNIŤ</p>
           </div>
         </details>
@@ -541,10 +670,10 @@
         <details class="group grain -mx-4 md:mx-0 md:rounded-2xl bg-secondary-500 open:bg-tertiary-300 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
           <summary class="flex items-center justify-between gap-6 px-8 py-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
             <span class="text-xl leading-[1.3] md:text-2xl md:leading-[1.25] lg:text-[30px] lg:leading-[38px]">Poskytujete posudky pre súd v rozvodovom konaní?</span>
-            <i data-lucide="plus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] group-open:hidden"></i>
-            <i data-lucide="minus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] hidden group-open:block"></i>
+            <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 group-open:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5v14"/></svg>
+            <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 hidden group-open:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg>
           </summary>
-          <div class="px-8 pb-6 lg:pb-4 space-y-6 font-light text-xl leading-[1.3]">
+          <div class="px-8 pb-6 lg:pb-4 space-y-6 text-xl leading-[1.3]">
               <p>TEXT DOPLNIŤ</p>
           </div>
         </details>
@@ -552,10 +681,10 @@
         <details class="group grain -mx-4 md:mx-0 md:rounded-2xl bg-secondary-500 open:bg-accent-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
           <summary class="flex items-center justify-between gap-6 px-8 py-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
             <span class="text-xl leading-[1.3] md:text-2xl md:leading-[1.25] lg:text-[30px] lg:leading-[38px]">Ponúkate pri poradenstve aj konkrétne odporúčania?</span>
-            <i data-lucide="plus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] group-open:hidden"></i>
-            <i data-lucide="minus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] hidden group-open:block"></i>
+            <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 group-open:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5v14"/></svg>
+            <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 hidden group-open:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg>
           </summary>
-          <div class="px-8 pb-6 lg:pb-4 space-y-6 font-light text-xl leading-[1.3]">
+          <div class="px-8 pb-6 lg:pb-4 space-y-6 text-xl leading-[1.3]">
               <p>TEXT DOPLNIŤ</p>
           </div>
         </details>
@@ -563,10 +692,10 @@
         <details class="group grain -mx-4 md:mx-0 md:rounded-2xl bg-secondary-500 open:bg-tertiary-300 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
           <summary class="flex items-center justify-between gap-6 px-8 py-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
             <span class="text-xl leading-[1.3] md:text-2xl md:leading-[1.25] lg:text-[30px] lg:leading-[38px]">Nahrádza poradenstvo psychologickú alebo zdravotnú starostlivosť?</span>
-            <i data-lucide="plus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] group-open:hidden"></i>
-            <i data-lucide="minus" class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 stroke-[1.5] hidden group-open:block"></i>
+            <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 group-open:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5v14"/></svg>
+            <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 hidden group-open:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg>
           </summary>
-          <div class="px-8 pb-6 lg:pb-4 space-y-6 font-light text-xl leading-[1.3]">
+          <div class="px-8 pb-6 lg:pb-4 space-y-6 text-xl leading-[1.3]">
               <p>TEXT DOPLNIŤ</p>
           </div>
         </details>
@@ -603,22 +732,22 @@
         <h2 class="font-light text-[36px] leading-[1.2] tracking-[-0.02em] md:text-[44px] md:leading-[49px] md:tracking-normal lg:text-[64px] lg:leading-none lg:tracking-[-0.02em]">
           Poďme sa<br class="hidden lg:inline"> porozprávať
         </h2>
-        <p class="mt-4 lg:mt-[22px] font-light text-xl leading-[1.3]">
+        <p class="mt-4 lg:mt-[22px] text-xl leading-[1.3]">
           Stačí pár viet o tom, čo sa u vás deje.
         </p>
 
-        <p class="mt-8 lg:mt-[88px] font-light text-xl">E-mail</p>
+        <p class="mt-8 lg:mt-[88px] text-xl">E-mail</p>
         <a href="mailto:zaskalanova@rodinna-poradna.sk" class="mt-4 inline-block font-light text-2xl leading-[1.4] md:text-[28px] md:leading-[1.1] lg:text-[30px] lg:leading-[1.2] break-all underline underline-offset-4 lg:no-underline hover:text-accent-600 transition-colors">
           zaskalanova@rodinna-poradna.sk
         </a>
-        <p class="mt-4 lg:mt-5 max-w-[424px] lg:max-w-[360px] font-light text-xl leading-[1.3]">
+        <p class="mt-4 lg:mt-5 max-w-[424px] lg:max-w-[360px] text-xl leading-[1.3]">
           Napíšte kedykoľvek. Odpoviem vám rýchlo a dohodneme sa na termíne aj forme.
         </p>
       </div>
 
       <!-- Ružová karta (natočená len na PC) -->
       <div class="grain w-full lg:translate-y-3 lg:h-[419px] bg-accent-500 text-primary-500 lg:rotate-[3.14deg] shadow-[2px_2px_4px_rgba(0,0,0,0.03)] flex flex-col justify-center px-6 py-10 md:py-12 lg:px-14 lg:py-0">
-        <p class="font-light text-xl">Kde sa stretneme</p>
+        <p class="text-xl">Kde sa stretneme</p>
         <h3 class="mt-4 font-light text-[32px] leading-[1.2] tracking-[-0.02em] lg:font-normal lg:text-[33px] lg:tracking-normal">Banská Bystrica a okolie</h3>
         <div class="mt-4 space-y-6 text-xl leading-[1.3]">
           <p>Prídem všade, kam to mám <strong class="font-bold">do pol hodiny</strong> – Zvolen, Sliač, Slovenská Ľupča aj Donovaly. A ak ste kúsok ďalej, <strong class="font-bold">napíšte mi aj tak</strong>, dohodneme sa.</p>
@@ -636,7 +765,7 @@
     <h2 class="font-light text-[40px] leading-[1.15] md:text-[48px] md:leading-none md:tracking-[-0.02em] lg:text-[80px] lg:leading-[1.1] lg:tracking-[-0.03em]">
       Verím, že <em class="italic">každá rodina</em> v sebe má potenciál zvládať ťažké situácie
     </h2>
-    <p class="mt-4 md:mt-8 lg:mt-[31px] max-w-[540px] text-neutral-500 font-light text-xl leading-[1.3]">
+    <p class="mt-4 md:mt-8 lg:mt-[31px] max-w-[540px] text-neutral-500 text-xl leading-[1.3]">
       Niekedy je len treba, aby ju niekto sprevádzal, pomenoval to, čo sa deje, a pomohol nájsť nové riešenia.
     </p>
     <a href="#kontakt"
@@ -669,11 +798,184 @@
     <div class="px-4 md:px-8 lg:px-16 py-4 md:py-5 flex flex-col md:flex-row gap-4 md:gap-8 text-sm text-neutral-500">
       <p>© Rodinná poradňa od A po Z 2026. All Rights Reserved</p>
       <a href="#" class="hover:text-primary-500 transition-colors">Ochrana osobných údajov</a>
+      <button type="button" data-cookie-settings class="text-left hover:text-primary-500 transition-colors">Nastavenia cookies</button>
+      <a href="404.html" class="hover:text-primary-500 transition-colors">Error</a> <!-- DOČASNÉ: test chybovej stránky, pred spustením zmazať -->
       <p class="md:ml-auto">Design by Klára Záskalanová</p>
     </div>
   </div>
 </footer>
 <!-- PÄTIČKA END -->
+  <!-- COOKIES LIŠTA START -->
+  <style>
+    #cookie-banner { opacity: 0; translate: 0 24px; filter: blur(6px); transition: opacity 1.2s cubic-bezier(.16,1,.3,1), translate 1.4s cubic-bezier(.16,1,.3,1), filter 1.2s cubic-bezier(.16,1,.3,1); }
+    #cookie-banner.is-in { opacity: 1; translate: 0 0; filter: none; }
+    #cookie-banner.is-out { opacity: 0; translate: 0 16px; transition-duration: .5s; }
+    #cookie-banner [data-view]:not([hidden]) { animation: fade-up .5s cubic-bezier(.22,1,.36,1); }
+  </style>
+  <div id="cookie-banner" role="region" aria-label="Súhlas s cookies" class="hidden fixed z-40 inset-x-4 bottom-4 md:inset-x-auto md:left-8 md:bottom-8 lg:left-16 md:w-[480px]">
+    <div class="grain bg-yellow-50 text-primary-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03),0_12px_40px_rgba(61,34,23,0.14)]">
+
+      <!-- Krížik = pokračovať len s nevyhnutnými -->
+      <button type="button" data-cookie-reject title="Pokračovať len s nevyhnutnými" aria-label="Odmietnuť voliteľné cookies a zavrieť" class="absolute top-3 right-3 z-10 w-9 h-9 inline-flex items-center justify-center rounded-full text-neutral-500 opacity-50 hover:opacity-100 hover:bg-accent-500 transition">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+
+      <div class="max-h-[calc(100dvh-2rem)] md:max-h-[calc(100dvh-4rem)] overflow-y-auto p-6 md:p-8">
+
+        <!-- Hlavný pohľad -->
+        <div data-view="main">
+          <p class="font-script text-neutral-500 text-[20px] leading-6 lg:text-2xl md:-rotate-[3deg] md:origin-left">ešte jedna drobnosť</p>
+          <h2 class="mt-2 pr-8 text-[28px] leading-[1.1] tracking-[-0.02em] lg:text-[30px] lg:tracking-normal">Pár slov o cookies</h2>
+          <p class="mt-4 text-xl leading-[1.3]">
+            Aby web fungoval tak, ako má, používam súbory cookies. S vaším súhlasom mi pomôžu aj pochopiť, čo vás tu zaujíma – a vďaka tomu ho robiť lepším pre rodiny, ako je tá vaša.
+          </p>
+          <div class="mt-6 flex flex-wrap items-center gap-3">
+            <button type="button" data-cookie-accept class="grain inline-flex items-center gap-2 h-[46px] px-6 rounded-full bg-primary-500 text-secondary-500 italic text-base shadow-[2px_2px_6px_rgba(0,0,0,0.02)] hover:bg-accent-500 hover:text-primary-500 active:bg-accent-600 transition-colors">Povoliť všetky</button>
+            <button type="button" data-cookie-prefs class="inline-flex items-center gap-2 h-[48px] px-6 rounded-full border border-[#644E45] text-primary-500 italic text-base shadow-[2px_2px_6px_rgba(0,0,0,0.02)] hover:bg-accent-500 hover:border-accent-500 active:bg-accent-600 active:border-accent-600 transition-colors">Upraviť predvoľby</button>
+          </div>
+        </div>
+
+        <!-- Predvoľby -->
+        <div data-view="prefs" hidden>
+          <h2 class="pr-8 text-[28px] leading-[1.1] tracking-[-0.02em] lg:text-[30px] lg:tracking-normal">Vyberte si, čo povolíte</h2>
+          <p class="mt-4 text-xl leading-[1.3]">Svoj výber môžete kedykoľvek zmeniť v pätičke webu.</p>
+
+          <div class="mt-6 flex flex-col gap-6">
+            <div>
+              <div class="flex items-center justify-between gap-4">
+                <p class="font-bold text-xl leading-[1.3]">Nevyhnutné</p>
+                <span class="shrink-0 inline-flex items-center h-[30px] px-2.5 rounded-lg bg-tertiary-300 text-neutral-600 text-xl">Vždy povolené</span>
+              </div>
+              <p class="mt-2 text-xl leading-[1.3]">Bez nich by web nefungoval. Zapamätajú si napríklad aj to, ako ste sa rozhodli práve teraz.</p>
+            </div>
+
+            <div>
+              <div class="flex items-center justify-between gap-4">
+                <p id="cookie-functional-label" class="font-bold text-xl leading-[1.3]">Funkčné</p>
+                <button type="button" role="switch" aria-checked="false" data-cookie="functional" aria-labelledby="cookie-functional-label" class="group relative shrink-0 w-12 h-7 rounded-full border border-[#644E45] bg-secondary-500 aria-checked:bg-primary-500 aria-checked:border-primary-500 transition-colors duration-300">
+                  <span class="absolute top-1/2 left-[3px] -translate-y-1/2 w-5 h-5 rounded-full bg-neutral-500 group-aria-checked:translate-x-5 group-aria-checked:bg-secondary-500 transition duration-300 ease-[cubic-bezier(.22,1,.36,1)]"></span>
+                </button>
+              </div>
+              <p class="mt-2 text-xl leading-[1.3]">Zapamätajú si vaše nastavenia – napríklad jazyk či región –, aby ste ich nemuseli zadávať znova.</p>
+            </div>
+
+            <div>
+              <div class="flex items-center justify-between gap-4">
+                <p id="cookie-analytics-label" class="font-bold text-xl leading-[1.3]">Analytické</p>
+                <button type="button" role="switch" aria-checked="false" data-cookie="analytics" aria-labelledby="cookie-analytics-label" class="group relative shrink-0 w-12 h-7 rounded-full border border-[#644E45] bg-secondary-500 aria-checked:bg-primary-500 aria-checked:border-primary-500 transition-colors duration-300">
+                  <span class="absolute top-1/2 left-[3px] -translate-y-1/2 w-5 h-5 rounded-full bg-neutral-500 group-aria-checked:translate-x-5 group-aria-checked:bg-secondary-500 transition duration-300 ease-[cubic-bezier(.22,1,.36,1)]"></span>
+                </button>
+              </div>
+              <p class="mt-2 text-xl leading-[1.3]">Pomáhajú mi pochopiť, ako web používate – čo čítate a kde sa zastavíte. Všetko anonymne.</p>
+            </div>
+          </div>
+
+          <div class="mt-8 flex flex-wrap items-center gap-3">
+            <button type="button" data-cookie-save class="grain inline-flex items-center gap-2 h-[46px] px-6 rounded-full bg-primary-500 text-secondary-500 italic text-base shadow-[2px_2px_6px_rgba(0,0,0,0.02)] hover:bg-accent-500 hover:text-primary-500 active:bg-accent-600 transition-colors">Uložiť výber</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <script>
+    (() => {
+      const KEY = 'cookie-consent';
+      const root = document.getElementById('cookie-banner');
+      const views = root.querySelectorAll('[data-view]');
+      const toggle = name => root.querySelector(`[data-cookie="${name}"]`);
+      const read = () => { try { return JSON.parse(localStorage.getItem(KEY)); } catch (e) { return null; } };
+      // Súhlas je dostupný pre ďalšie skripty (napr. analytiku): window.cookieConsent + udalosť 'cookie-consent'
+      const apply = c => { window.cookieConsent = c; document.dispatchEvent(new CustomEvent('cookie-consent', { detail: c })); };
+      const show = name => views.forEach(v => v.hidden = v.dataset.view !== name);
+      const open = name => {
+        show(name);
+        root.classList.remove('hidden', 'is-out');
+        requestAnimationFrame(() => requestAnimationFrame(() => root.classList.add('is-in')));
+      };
+      const close = () => {
+        root.classList.remove('is-in');
+        root.classList.add('is-out');
+        setTimeout(() => { root.classList.add('hidden'); root.classList.remove('is-out'); }, 500);
+      };
+      const save = (functional, analytics) => {
+        const c = { necessary: true, functional, analytics, date: new Date().toISOString() };
+        try { localStorage.setItem(KEY, JSON.stringify(c)); } catch (e) {}
+        apply(c);
+        close();
+      };
+      root.querySelectorAll('[role="switch"]').forEach(t => t.onclick = () => t.setAttribute('aria-checked', t.getAttribute('aria-checked') !== 'true'));
+      root.querySelectorAll('[data-cookie-accept]').forEach(b => b.onclick = () => save(true, true));
+      root.querySelector('[data-cookie-reject]').onclick = () => save(false, false);
+      root.querySelector('[data-cookie-prefs]').onclick = () => show('prefs');
+      root.querySelector('[data-cookie-save]').onclick = () => save(toggle('functional').getAttribute('aria-checked') === 'true', toggle('analytics').getAttribute('aria-checked') === 'true');
+      // Odkaz „Nastavenia cookies“ v pätičke
+      document.querySelectorAll('[data-cookie-settings]').forEach(b => b.onclick = () => {
+        const c = read() || {};
+        toggle('functional').setAttribute('aria-checked', !!c.functional);
+        toggle('analytics').setAttribute('aria-checked', !!c.analytics);
+        open('prefs');
+      });
+      const saved = read();
+      // Lišta sa ukáže až po dobehnutí úvodnej animácie
+      // Na testovanie: adresa s ?cookies (napr. index.html?cookies) zobrazí lištu vždy
+      if (saved && !/[?&]cookies\b/.test(location.search)) apply(saved);
+      else setTimeout(() => open('main'), document.querySelector('#uvod, #prax') ? 2600 : 600);
+    })();
+  </script>
+  <!-- COOKIES LIŠTA END -->
+
+  <!-- ANIMÁCIE SKRIPT START -->
+  <script>
+    // Úvod: počká na font, potom text postupne dosadne
+    (() => {
+      const hero = [
+        ['#uvod img', 0], ['#uvod h1', 350], ['#uvod h1 + p', 700], ['#uvod h1 ~ a', 1000], ['#uvod h1 ~ .font-script', 1350], ['#uvod img + p', 1350],
+        ['#prax img', 0], ['#prax h1', 350], ['#prax div:has(> p + svg)', 750], ['#prax .font-script', 1350]
+      ];
+      hero.forEach(([s, d]) => document.querySelectorAll(s).forEach(el => el.style.setProperty('--hero-delay', d + 'ms')));
+      const html = document.documentElement;
+      const show = () => requestAnimationFrame(() => requestAnimationFrame(() => {
+        html.classList.add('hero-in');
+        setTimeout(() => html.classList.remove('hero-anim', 'hero-in'), 3800); // potom platia bežné hover prechody
+      }));
+      (document.fonts ? document.fonts.ready : Promise.resolve()).then(show, show);
+    })();
+
+    (() => {
+      const html = document.documentElement;
+      if (!html.classList.contains('reveal-anim')) return;
+      window.revealReady = true;
+      const set = new Set(document.querySelectorAll(revealSelectors.join(',')));
+      // Ak sa objavuje rodič, jeho vnútro sa už samostatne neanimuje
+      const items = [...set].filter(el => { for (let p = el.parentElement; p; p = p.parentElement) if (set.has(p)) { el.classList.add('reveal-done'); return false; } return true; });
+      // Čo je vidno hneď pri načítaní, nabehne až po úvode
+      let first = true;
+      const io = new IntersectionObserver(entries => {
+        const base = first && document.querySelector('#uvod, #prax') ? 900 : 0;
+        first = false;
+        let card = 0;
+        entries.filter(e => e.isIntersecting).forEach((e, i) => {
+          // Ružové karty: každá o 160 ms po predchádzajúcej (len tie, ktoré sa objavia naraz)
+          const delay = base + (e.target.classList.contains('reveal--card') ? 120 + card++ * 160 : Math.min(i, 5) * 90);
+          e.target.style.setProperty('--reveal-delay', delay + 'ms');
+          e.target.classList.add('is-visible');
+          // Po dobehnutí sa pomocné triedy odstránia (vrátia sa pôvodné hover prechody)
+          const done = () => { e.target.classList.add('reveal-done'); e.target.classList.remove('reveal', 'reveal--card', 'reveal--fade', 'is-visible'); e.target.style.removeProperty('--reveal-delay'); };
+          e.target.addEventListener('transitionend', ev => { if (ev.target === e.target && ev.propertyName === 'opacity') done(); });
+          setTimeout(done, delay + 2000); // poistka, keby transitionend neprišiel
+          io.unobserve(e.target);
+        });
+      }, { rootMargin: '0px 0px -8% 0px' });
+      items.forEach(el => {
+        el.classList.add('reveal');
+        if (el.tagName === 'IMG') el.classList.add('reveal--fade');
+        io.observe(el);
+      });
+      document.querySelectorAll('#sluzby details.reveal').forEach(el => el.classList.add('reveal--card'));
+    })();
+  </script>
+  <!-- ANIMÁCIE SKRIPT END -->
   <script>lucide.createIcons();</script>
 </body>
 </html>
