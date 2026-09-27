@@ -27,12 +27,12 @@ Referenčné snímky: `design/referencia-1440.jpg` (PC). Pre mobil/tablet platí
 | H3 v karte (Nenašli ste odpoveď) | `font-light text-[32px] leading-[1.2] tracking-[-0.02em] lg:text-[36px] lg:leading-[1.15]` |
 | Nadpis ružovej karty (Služby) | `text-[28px] leading-[1.1] tracking-[-0.02em] lg:text-[30px] lg:tracking-normal` |
 | Otázka v akordeóne | `text-xl leading-[1.3] md:text-2xl md:leading-[1.25] lg:text-[30px] lg:leading-[38px]` |
-| Odpoveď v akordeóne | `font-light text-xl leading-[1.3]` |
+| Odpoveď v akordeóne | `text-xl leading-[1.3]` |
 | Nadpis-štítok (Online, U vás doma…) | `inline-block bg-tertiary-300 rounded-sm px-1 text-[28px] leading-[31px] tracking-[-0.02em] lg:text-[30px] lg:leading-[38px] lg:tracking-normal` |
 | Štítok na Prax a vzdelanie | `inline-block bg-yellow-50 rounded-sm px-1 text-neutral-600 text-[28px] leading-[1.1] lg:text-[32px] lg:leading-[38px] tracking-[-0.02em]` |
 | Nadpis v kontaktnej karte | `mt-4 font-light text-[32px] leading-[1.2] tracking-[-0.02em] lg:font-normal lg:text-[33px] lg:tracking-normal` |
-| Bežný text (light) | `font-light text-xl leading-[1.3]` (20 px na všetkých zariadeniach) |
-| Text v rozbalenej karte Služieb | `font-light text-xl leading-[1.3] lg:leading-[1.4]` |
+| Bežný text (regular 400) | `text-xl leading-[1.3]` (20 px na všetkých zariadeniach) |
+| Text v rozbalenej karte Služieb | `text-xl leading-[1.3] lg:leading-[1.4]` |
 | Text na farebnej karte (regular) | `text-xl leading-[1.3]` |
 | Text v natočenej zelenej karte | `text-xl leading-[1.3] lg:text-[24px] lg:leading-[1.25]` |
 | Text pod štítkom (Prax a vzdelanie) | `text-2xl leading-[1.4]`, úvodná fráza `<em class="italic">` |
@@ -43,8 +43,10 @@ Referenčné snímky: `design/referencia-1440.jpg` (PC). Pre mobil/tablet platí
 | Text tlačidla | `italic text-base` |
 | „Viac informácií +“ | `font-bold text-base leading-none`, odsadenie `mt-4` |
 | Tučné slovo v texte | `<strong class="font-bold">` |
-| Ručný popisok | `font-script text-neutral-500 text-lg leading-6 lg:text-2xl` – na mobile vodorovne a na stred, natočenie len od tabletu/PC |
+| Ručný popisok | `font-script text-neutral-500 text-[20px] leading-6 lg:text-2xl` (vždy hnedá; mobil/tablet 20 px, PC 24 px) – na mobile vodorovne a na stred, natočenie len od tabletu/PC |
 | Malý text pätičky | `text-sm` |
+
+**Najnovšia Figma (27. 9. 2026):** `svghomepagev2-web, mobile, tablet.txt` a `praxavzdelanieSVGv2-web, mobile, tablet.txt` (PC, mobil aj tablet na jednom plátne; PC rámec domovskej stránky x=125 y=381, podstránky x=85 y=351) + CSS `csshomepagev2…` / `praxavzdelanieCSSv2…`. Tablet v nich nie je celý aktualizovaný – údaje (e-mail, formulár) platia podľa PC a mobilu.
 
 **Mobil a tablet (Figma: `svghomepageomobile.txt`, `svghomepagetablet.txt`, `praxavzdelaniemobilesvg.txt` = mobil aj tablet na jednom plátne, CSS v `css*mobile.txt` / `css*tablet.txt`):**
 hlavička 72 px, `px-4`; sekcie `py-12 px-4` (mobil), `py-16 px-8` (tablet). Na mobile a tablete nie je vlna nad zelenou sekciou. Na mobile nie sú natočené karty Nenašli ste odpoveď a Kde sa stretneme, záver je zarovnaný vľavo. V „O mne“ je na mobile fotka cez celú šírku medzi 1. a 2. odsekom. Tablet: hero, Služby a O mne sú v dvoch stĺpcoch. V návrhu pre tablet chýbajú Otázky – na webe ostávajú.
@@ -63,13 +65,14 @@ hlavička 72 px, `px-4`; sekcie `py-12 px-4` (mobil), `py-16 px-8` (tablet). Na 
 
 ## Stack a pravidlá
 
-- Stránky: `index.html` (homepage) a `prax-a-vzdelanie.html` (podstránka). Header, záver a pätička sú v oboch súboroch – pri zmene uprav oba. Čisté HTML5 + Tailwind CSS v3 cez CDN (`https://cdn.tailwindcss.com`) + ikony Lucide (`<i data-lucide="...">`, na konci stránky `lucide.createIcons()`).
+- Stránky: `index.html` (homepage), `prax-a-vzdelanie.html` (podstránka), `gdpr.html` (Ochrana osobných údajov – odkaz len v pätičke, nie v menu; sekcia `OCHRANA ÚDAJOV SEKCIA` `#ochrana-udajov`: vľavo ručný popisok + H1 + úvod, na PC sticky; vpravo žlté štítky ako na Prax a vzdelanie), `formular.html` (Kontaktný formulár – sekcia `FORMULÁR SEKCIA` `#formular`, rovnaké rozloženie ako gdpr; vedie naň tlačidlo „Dohodnúť konzultáciu cez formulár“ v kontakte, text tlačidla `text-lg`; odosiela sa cez SheetMonkey `https://api.sheetmonkey.io/form/mBUzDgAGU2bVKWG1h2M3xo` do Google Sheets na pozadí (fetch `no-cors`), zaškrtnuté formy sa spoja čiarkou do jedného stĺpca, po odoslaní sa ukáže žltá karta „Ďakujem, že ste napísali.“; **atribút `name` každého poľa sa musí presne zhodovať s hlavičkou stĺpca v tabuľke**: `Dátum`, `Meno`, `Kam vám mám odpísať?`, `Akú formu stretnutia preferujete?`, `Stručne popíšte, čo vás trápi`) a `404.html` (chybová stránka – Vercel ju zobrazí automaticky pri neexistujúcej adrese; odkazy v nej sú od koreňa `/`). V pätičke je **dočasný** odkaz „Error“ na test 404 – pred spustením webu ho zmazať. Header, záver a pätička sú v oboch súboroch – pri zmene uprav oba. Čisté HTML5 + Tailwind CSS v3 cez CDN (`https://cdn.tailwindcss.com`) + ikony Lucide (`<i data-lucide="...">`, na konci stránky `lucide.createIcons()`).
 - Žiadne frameworky (React, Vue, Next…), žiadny build krok.
 - Obrázky v priečinku `images/` (`hero.png`, `o-mne.jpg`, `favicon.svg`, `apple-touch-icon.png`, `og-image.png`). Nové obrázky pomenúvaj zmysluplne.
 - Každá sekcia je ohraničená komentármi `<!-- NÁZOV SEKCIA START -->` / `<!-- NÁZOV SEKCIA END -->`. Nové sekcie označuj rovnako.
 - Mobile-first: základné triedy = mobil, `md:` = tablet (≥768 px), `lg:` = PC (≥1024 px). Dizajn z Figmy je pre šírku 1440 px a platí pre `lg:`.
 - Stránka sa nesmie na mobile posúvať do strany (natočené karty sú v kontajneri s `overflow-hidden`).
 - Nasadenie: GitHub → Vercel (automaticky po pushnutí). Pred commitom/pushom sa opýtaj.
+- Adresa webu: `https://mwebbb.vercel.app` – je v Open Graph značkách (náhľad pri zdieľaní, `images/og-image.png` 1200×630). Pri zmene domény ju vymeň v oboch HTML súboroch.
 
 ## Farby (tailwind.config v `<head>`)
 
@@ -82,7 +85,7 @@ hlavička 72 px, `px-4`; sekcie `py-12 px-4` (mobil), `py-16 px-8` (tablet). Na 
 | `accent-500` | #F1D1E7 | ružové karty, otvorená otázka (ružová) |
 | `accent-300` | #F6E0EF | kliknutie (active) na odkazy v menu |
 | `accent-600` | #ECC0DE | hover ružových kariet, kliknutie (active) na tlačidlá |
-| `tertiary-300` | #DEE1B7 | svetlozelené štítky nadpisov, otvorená otázka (zelená) |
+| `tertiary-300` | #DEE1B7 | svetlozelené štítky nadpisov |
 | `tertiary-500` | #B8BA87 | zelená sekcia „Stretneme sa“ + vlna (spodný padding sekcie `lg:pb-[127px]`) |
 | `yellow-50` | #FDEDD3 | žlté štítky (chips), žltá karta „Nenašli ste odpoveď“ |
 | `yellow-500` | #F5AA33 | doplnková žltá (zatiaľ nepoužitá) |
@@ -100,12 +103,12 @@ Font je nastavený v `<style>` v `<head>` (`body { font-family: 'Crimson Pro' }`
 | H2 záver („Verím, že…“) | 80px, 300, 1.1, -0.03em | 48px / 40px |
 | H3 malé nadpisy | 36px, 300, 1.1, -0.03em | 32px |
 | Nadpisy kariet / otázok | 30px, regular 400, riadok 38px | karty 28px, otázky 24px / 20px |
-| Bežný text | 20px (`text-xl`), light 300, line-height 1.3 | 20px |
+| Bežný text | 20px (`text-xl`), regular 400, line-height 1.3 | 20px |
 | Menu | 16px, 400, medzera 34px | – |
 | Logo | 22.5px, italic, 400 | 20px |
 | Text tlačidiel | 16px, italic | 16px |
 | „Viac informácií +“ | 16px, bold 700 | 16px |
-| Ručné popisky | Vujahday Script 24px, `text-neutral-500`, mierne natočené (-9° až -11°) | 18–20px, na mobile nenatočené |
+| Ručné popisky | Vujahday Script 24px, `text-neutral-500`, mierne natočené (-9° až -11°) | 20px, na mobile nenatočené |
 
 Kurzíva v nadpisoch (`<em class="italic">`) je súčasť dizajnu (napr. „S čím *pomáham*“).
 
@@ -134,14 +137,16 @@ Hover všetkých tlačidiel = ružová `accent-500`, kliknutie = `accent-600`.
 
 **Zrnitá textúra (`.grain`):** Figma má na pozadiach, kartách a tlačidlách jemný šum. Replikuje ho trieda `.grain` definovaná v `<head>` (blok `ZRNITÁ TEXTÚRA`) – SVG feTurbulence ako `::after` prekrytie. Pridaj `grain` na každý prvok, ktorý má vo Figme noise efekt. Pri tvaroch v SVG (vlna) je rovnaký filter priamo v SVG.
 
+**Animácie:** blok `ANIMÁCIE` v `<head>` (CSS) a `ANIMÁCIE SKRIPT` na konci stránky (v oboch súboroch rovnaké). Prvky, ktoré sa pri scrollovaní jemne objavia, sú vybrané zoznamom `window.revealSelectors` v bloku `ANIMÁCIE` v `<head>` (skryjú sa už pred prvým vykreslením, aby neblikli) – nová sekcia sa pridá doplnením selektora, nie triedou v HTML. Posun používa CSS vlastnosť `translate` (nie `transform`), aby sa nebil s natočením kariet. Rešpektuje sa `prefers-reduced-motion`. Hlavička sa pri scrollovaní dole skryje celá, pri pohybe hore sa ukáže (`#site-header`, premenná `--header-h`).
+
 **Tiene z Figmy:** karty `shadow-[2px_2px_4px_rgba(0,0,0,0.03)]`, tlačidlá `shadow-[2px_2px_6px_rgba(0,0,0,0.02)]`.
 
 **Rozbaľovacie karty (Služby, Otázky):** `<details class="group ...">` + `<summary class="list-none [&::-webkit-details-marker]:hidden">`, ikony `plus` / `minus` s `group-open:hidden` / `hidden group-open:block`. Karty: `rounded-2xl`, výška zatvorenej 70px (`min-h-[70px]` alebo `py-4` + riadok 38px), rozostup 16px (Služby) / 24px (Otázky).
-Otázky: na mobile cez celú šírku (`-mx-4 md:mx-0 md:rounded-2xl`), `px-8`; zatvorená `bg-secondary-500`, otvorená `open:bg-accent-500` (ružová) alebo `open:bg-tertiary-300` (zelená).
+Otázky: na mobile cez celú šírku (`-mx-4 md:mx-0 md:rounded-2xl`), `px-8`; zatvorená `bg-secondary-500`, otvorená vždy `open:bg-accent-500` (ružová – zelenú pri otázkach nepoužívať).
 
 **„Viac informácií +“ (Stretneme sa):** tlačidlo `data-more` s `aria-expanded`, skrytý obsah je `previousElementSibling`; text a ikona sa prepínajú cez `group-aria-expanded:`. JS je na konci bloku sekcie.
 
-**Štítky:** nadpis-štítok `inline-block bg-tertiary-300 rounded-sm px-1 text-[28px] lg:text-[30px] leading-[38px]`; žlté štítky v kartách Služieb `inline-flex items-center h-[30px] px-2.5 rounded-lg bg-yellow-50 text-neutral-600 text-xl`.
+**Štítky:** nadpis-štítok `inline-block bg-tertiary-300 rounded-sm px-1 text-[28px] lg:text-[30px] leading-[38px]`; žlté štítky v kartách Služieb `inline-flex items-center min-h-[30px] py-px px-2.5 rounded-lg bg-yellow-50 text-neutral-600 text-xl` (min. výška, aby sa dlhý štítok mohol zalomiť na 2 riadky).
 
 **Natočené karty:** `rotate-[3.14deg]` (zelená sekcia, kontakt), `rotate-[0.6deg]` (žltá karta), na mobile menší uhol (`rotate-[2deg]`).
 
@@ -152,10 +157,12 @@ Otázky: na mobile cez celú šírku (`-mx-4 md:mx-0 md:rounded-2xl`), `px-8`; z
 3. `SLUŽBY SEKCIA` (`#sluzby`) – hnedé pozadie, 6 ružových rozbaľovacích kariet, blok „Spolupracujem“ (odkaz na bbpsycholog.sk).
 4. `O MNE SEKCIA` (`#o-mne`) – fotka `images/o-mne.jpg` (424×530), text, obrysové tlačidlo „Viac o mojich skúsenostiach“ → `prax-a-vzdelanie.html`.
 5. `STRETNEME SA SEKCIA` (`#ako-sa-stretneme`) – SVG vlna hore (sekcia má `bg-secondary-500`, aby nad vlnou nebola biela), 4 formy stretnutia, natočená krémová karta.
-6. `OTÁZKY SEKCIA` (`#otazky`) – 10 otázok, žltá karta „Nenašli ste odpoveď“.
-7. `KONTAKT SEKCIA` (`#kontakt`) – tmavé pozadie, e-mail, ružová natočená karta „Kde sa stretneme“.
+6. `OTÁZKY SEKCIA` (`#otazky`) – 10 otázok, žltá karta „Nenašli ste odpoveď“ s tlačidlom „Napíšte mi správu“ → `formular.html`.
+   Na formulár (`formular.html`) vedú: tlačidlo v úvode (hero), tlačidlo v natočenej karte v Stretneme sa, „Napíšte mi správu“ a tlačidlo v kontakte.
+7. `KONTAKT SEKCIA` (`#kontakt`) – tmavé pozadie, e-mail (podčiarknutý), „Kontaktný formulár“ + svetlé tlačidlo „Dohodnúť konzultáciu cez formulár“, ružová natočená karta „Kde sa stretneme“ (na PC zarovnaná hore, `lg:items-start`).
 8. `ZÁVER SEKCIA` – „Verím, že každá rodina…“ + tlačidlo.
-9. `PÄTIČKA` – logo, meno, sociálne siete, e-mail, spodný riadok © / Ochrana osobných údajov / Design by Klára Záskalanová.
+9. `PÄTIČKA` – logo, meno, Instagram (Facebook nie je), e-mail, spodný riadok © / Ochrana osobných údajov / Nastavenia cookies / Design by Klára Záskalanová.
+10. `COOKIES LIŠTA` (v oboch súboroch, pred `ANIMÁCIE SKRIPT`) – žltá karta vľavo dole, objaví sa po úvodnej animácii. Kategórie: nevyhnutné (vždy), funkčné, analytické (marketingové nie sú – web nemá reklamy). Súhlas je v `localStorage` pod `cookie-consent`; skripty tretích strán spúšťať až podľa `window.cookieConsent.analytics` / udalosti `cookie-consent`. Google Analytics (GA4, `G-PZQ82X76KK`): blok `Google tag (gtag.js)` hneď za `<head>` (za `<meta charset>`) na všetkých troch stránkach, s Consent Mode (bez súhlasu `analytics_storage: denied`). Vlastné udalosti sú v bloku `GOOGLE ANALYTICS UDALOSTI` (zobrazenie_sekcie, hlbka_scrollu, klik, klik_email, otvorenie_sluzby, otvorenie_otazky, viac_informacii, volba_cookies; parametre sekcia, text, ciel, nazov, percento, volba). Názvy sekcií sú v objekte `names` – pri novej sekcii ho doplň.
 
 ## Podstránka Prax a vzdelanie (`prax-a-vzdelanie.html`)
 
@@ -176,9 +183,8 @@ Používateľ posiela SVG export z Figmy (text je v ňom prevedený na krivky, f
 
 ## Treba doplniť (od používateľa)
 
-- Texty `TEXT DOPLNIŤ`: 5 kariet v Službách (okrem „Máme bábätko“), rozbalené texty „U vás doma“, „Na prechádzke“, „E-mailom“, 8 odpovedí v Otázkach.
-- Štítky `Štítok` v kartách Služieb.
-- Odkazy `href="#"`: Instagram, Facebook, Ochrana osobných údajov.
-- Overiť e-maily: v kontakte `zaskalanova@rodinna-poradna.sk`, v pätičke `rodinnaporadnaaz@gmail.com`.
-- Farby otvorených otázok: vo Figme sú otvorené len dve („Ako si dohodnúť návštevu?“ = zelená, „Ako presne funguje poradenstvo e-mailom?“ = ružová), ostatné sa zatiaľ striedajú.
+- `gdpr.html`: sídlo a IČO prevádzkovateľa (`TEXT DOPLNIŤ`).
+- Instagram: `https://www.instagram.com/rodinna_poradna_od_a_po_z/` (pätička, všetky stránky). Cookies lišta má na konci textu odkaz „Viac o ochrane údajov“ → `gdpr.html`.
+- Overiť, že hlavičky stĺpcov v Google Sheets presne sedia s názvami polí formulára (pozri `formular.html` vyššie).
+- E-mail je všade `kontakt@rodinna-poradna.sk` (kontakt, karta „Nenašli ste odpoveď“, pätička).
 - Text karty „Online“ je vo Figme krémový (pravdepodobne chyba) – v kóde je tmavý ako ostatné.

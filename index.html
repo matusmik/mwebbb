@@ -162,6 +162,8 @@
       '#kontakt h2', '#kontakt h2 ~ *', '#kontakt .bg-accent-500',
       '#prax .gap-16 > div',
       '#vzdelanie h2', '#vzdelanie h2 + p', '#vzdelanie .grid > div',
+      '#ochrana-udajov .font-script', '#ochrana-udajov h1', '#ochrana-udajov h1 ~ p', '#gdpr-obsah > div',
+      '#formular .font-script', '#formular h1', '#formular h1 ~ p', '#kontaktny-formular > *',
       'section:not([id]) h2', 'section:not([id]) h2 ~ *'
     ];
     // Úvod aj tieto prvky sa skryjú ešte pred prvým vykreslením (aby nebliklo); poistka po 4 s ukáže všetko
@@ -254,9 +256,9 @@
         Už 25 rokov som pri rodinách – od prvej myšlienky na bábätko až po dospievanie.
       </p>
 
-      <a href="#kontakt"
+      <a href="formular.html"
          class="grain mt-8 lg:mt-10 inline-flex items-center gap-2 h-[46px] px-6 rounded-full bg-primary-500 text-secondary-500 italic text-base shadow-[2px_2px_6px_rgba(0,0,0,0.02)] hover:bg-accent-500 hover:text-primary-500 active:bg-accent-600 transition-colors">
-        Napíšte mi
+        Objednať konzultáciu
         <svg width="13" height="8" viewBox="408 617 13 8" fill="currentColor" aria-hidden="true"><path d="M420.354 621.211C420.549 621.016 420.549 620.699 420.354 620.504L417.172 617.322C416.976 617.127 416.66 617.127 416.464 617.322C416.269 617.517 416.269 617.834 416.464 618.029L419.293 620.858L416.464 623.686C416.269 623.881 416.269 624.198 416.464 624.393C416.66 624.588 416.976 624.588 417.172 624.393L420.354 621.211ZM408 620.858V621.358H420V620.858V620.358H408V620.858Z"/></svg>
       </a>
 
@@ -304,13 +306,12 @@
           </summary>
           <div class="px-6 pb-6">
             <p class="text-xl leading-[1.3] lg:leading-[1.4]">
-              Dieťatko milujete a zároveň máte pocit, že ste za posledné mesiace zmizli? Že už neviete, kto ste, keď nie ste mama alebo ocko?
-              To sa hovorí ťažko – nahlas ešte ťažšie. Prídem za vami domov alebo sa spojíme online. Bez kočíka a bez cestovania.
+              Dieťatko milujete a zároveň máte pocit, že ste za posledné mesiace zmizli? Že už neviete, kto ste, keď nie ste mama alebo ocko? To sa hovorí ťažko – nahlas ešte ťažšie. Nemusíte riešiť logistiku s kočíkom ani sa nikam baliť. Prídem za vami domov alebo sa spojíme online.
             </p>
             <div class="mt-8 lg:mt-4 flex flex-wrap gap-2">
-              <span class="inline-flex items-center h-[30px] px-2.5 rounded-lg bg-yellow-50 text-neutral-600 text-xl">Som dobrá mama?</span>
-              <span class="inline-flex items-center h-[30px] px-2.5 rounded-lg bg-yellow-50 text-neutral-600 text-xl">Rodičovské vyhorenie</span>
-              <span class="inline-flex items-center h-[30px] px-2.5 rounded-lg bg-yellow-50 text-neutral-600 text-xl">Emócie po pôrode</span>
+              <span class="inline-flex items-center min-h-[30px] py-px px-2.5 rounded-lg bg-yellow-50 text-neutral-600 text-xl">Som dobrá mama?</span>
+              <span class="inline-flex items-center min-h-[30px] py-px px-2.5 rounded-lg bg-yellow-50 text-neutral-600 text-xl">Rodičovské vyhorenie</span>
+              <span class="inline-flex items-center min-h-[30px] py-px px-2.5 rounded-lg bg-yellow-50 text-neutral-600 text-xl">Emócie po pôrode</span>
             </div>
           </div>
         </details>
@@ -322,9 +323,13 @@
             <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 hidden group-open:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg>
           </summary>
           <div class="px-6 pb-6">
-            <p class="text-xl leading-[1.3] lg:leading-[1.4]">TEXT DOPLNIŤ</p>
+            <p class="text-xl leading-[1.3] lg:leading-[1.4]">
+              Ráno bolí bruško a v nedeľu večer sa zhorší nálada. Alebo zvažujete odklad a neviete sa rozhodnúť. Posúdim školskú zrelosť pred nástupom do prvej triedy a pomôžem s ťažkosťami v učení aj v triede. Aby škola nebola miesto, kam sa dieťa bojí ísť.
+            </p>
             <div class="mt-8 lg:mt-4 flex flex-wrap gap-2">
-              <span class="inline-flex items-center h-[30px] px-2.5 rounded-lg bg-yellow-50 text-neutral-600 text-xl">Štítok</span>
+              <span class="inline-flex items-center min-h-[30px] py-px px-2.5 rounded-lg bg-yellow-50 text-neutral-600 text-xl">Školská zrelosť</span>
+              <span class="inline-flex items-center min-h-[30px] py-px px-2.5 rounded-lg bg-yellow-50 text-neutral-600 text-xl">Adaptácia na školu</span>
+              <span class="inline-flex items-center min-h-[30px] py-px px-2.5 rounded-lg bg-yellow-50 text-neutral-600 text-xl">Ťažkosti v učení</span>
             </div>
           </div>
         </details>
@@ -336,9 +341,13 @@
             <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 hidden group-open:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg>
           </summary>
           <div class="px-6 pb-6">
-            <p class="text-xl leading-[1.3] lg:leading-[1.4]">TEXT DOPLNIŤ</p>
+            <p class="text-xl leading-[1.3] lg:leading-[1.4]">
+              Neviete, ako to dieťaťu povedať. Ani ako mu vysvetliť, že sa nič nepokazilo kvôli nemu – a že ho neprestane mať rád ani jeden z vás. Pomôžem dieťaťu spracovať vinu, strach aj hnev. A vám ukážem, ako s ním hovoriť a ako preňho zostať oporou, aj keď sami nemáte silu.
+            </p>
             <div class="mt-8 lg:mt-4 flex flex-wrap gap-2">
-              <span class="inline-flex items-center h-[30px] px-2.5 rounded-lg bg-yellow-50 text-neutral-600 text-xl">Štítok</span>
+              <span class="inline-flex items-center min-h-[30px] py-px px-2.5 rounded-lg bg-yellow-50 text-neutral-600 text-xl">Dieťa v rozvode</span>
+              <span class="inline-flex items-center min-h-[30px] py-px px-2.5 rounded-lg bg-yellow-50 text-neutral-600 text-xl">Striedavá starostlivosť</span>
+              <span class="inline-flex items-center min-h-[30px] py-px px-2.5 rounded-lg bg-yellow-50 text-neutral-600 text-xl">Príprava dieťaťa na rozvod</span>
             </div>
           </div>
         </details>
@@ -350,9 +359,13 @@
             <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 hidden group-open:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg>
           </summary>
           <div class="px-6 pb-6">
-            <p class="text-xl leading-[1.3] lg:leading-[1.4]">TEXT DOPLNIŤ</p>
+            <p class="text-xl leading-[1.3] lg:leading-[1.4]">
+              Nič dramatické sa nestalo, no hádate sa stále o tom istom. Za vzdorom aj zabuchnutými dverami je vždy nejaká potreba – dieťa ju len nevie pomenovať a vy ju cez ten hluk nepočujete. Pomôžem vám v ťažkom období upokojiť napäté situácie, nastaviť láskavé hranice a nájsť spoločnú reč.
+            </p>
             <div class="mt-8 lg:mt-4 flex flex-wrap gap-2">
-              <span class="inline-flex items-center h-[30px] px-2.5 rounded-lg bg-yellow-50 text-neutral-600 text-xl">Štítok</span>
+              <span class="inline-flex items-center min-h-[30px] py-px px-2.5 rounded-lg bg-yellow-50 text-neutral-600 text-xl">Obdobie vzdoru</span>
+              <span class="inline-flex items-center min-h-[30px] py-px px-2.5 rounded-lg bg-yellow-50 text-neutral-600 text-xl">Nastavovanie hraníc</span>
+              <span class="inline-flex items-center min-h-[30px] py-px px-2.5 rounded-lg bg-yellow-50 text-neutral-600 text-xl">Súrodenecké konflikty</span>
             </div>
           </div>
         </details>
@@ -364,9 +377,16 @@
             <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 hidden group-open:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg>
           </summary>
           <div class="px-6 pb-6">
-            <p class="text-xl leading-[1.3] lg:leading-[1.4]">TEXT DOPLNIŤ</p>
+            <p class="text-xl leading-[1.3] lg:leading-[1.4]">
+              <em class="italic">Odmieta zaspávať samo, bojí sa tieňov či odlúčenia a plače bez zjavnej príčiny.</em>
+            </p>
+            <p class="mt-4 text-xl leading-[1.3] lg:leading-[1.4]">
+              Detské strachy často nedávajú dospelú logiku, no pre dieťa sú úplne skutočné. Najradšej by ste tú ťažobu zobrali na seba. Nemusíte v tom tápať – ukážem vám, ako čítať signály detského prežívania, pomôcť mu bezpečne spracovať veľké emócie a vybudovať v ňom vnútornú istotu a odolnosť od útleho veku.
+            </p>
             <div class="mt-8 lg:mt-4 flex flex-wrap gap-2">
-              <span class="inline-flex items-center h-[30px] px-2.5 rounded-lg bg-yellow-50 text-neutral-600 text-xl">Štítok</span>
+              <span class="inline-flex items-center min-h-[30px] py-px px-2.5 rounded-lg bg-yellow-50 text-neutral-600 text-xl">Detské strachy a úzkosti</span>
+              <span class="inline-flex items-center min-h-[30px] py-px px-2.5 rounded-lg bg-yellow-50 text-neutral-600 text-xl">Emočná regulácia</span>
+              <span class="inline-flex items-center min-h-[30px] py-px px-2.5 rounded-lg bg-yellow-50 text-neutral-600 text-xl">Psychická odolnosť a sebavedomie dieťaťa</span>
             </div>
           </div>
         </details>
@@ -378,9 +398,12 @@
             <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 hidden group-open:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg>
           </summary>
           <div class="px-6 pb-6">
-            <p class="text-xl leading-[1.3] lg:leading-[1.4]">TEXT DOPLNIŤ</p>
+            <p class="text-xl leading-[1.3] lg:leading-[1.4]">
+              Ešte pred rokom ste vedeli všetko. Teraz sú dvere zatvorené a odpovede jednoslovné. Aj keď to tak nevyzerá, vaše dieťa vás aj teraz veľmi potrebuje. Pomôžem vám porozumieť zmenám, ktorými dieťa prechádza, reagovať na ne s nadhľadom a budovať medzi vami vzťah založený na dôvere a rešpekte, ktorý vydrží aj po puberte.
+            </p>
             <div class="mt-8 lg:mt-4 flex flex-wrap gap-2">
-              <span class="inline-flex items-center h-[30px] px-2.5 rounded-lg bg-yellow-50 text-neutral-600 text-xl">Štítok</span>
+              <span class="inline-flex items-center min-h-[30px] py-px px-2.5 rounded-lg bg-yellow-50 text-neutral-600 text-xl">Psychológia dospievania</span>
+              <span class="inline-flex items-center min-h-[30px] py-px px-2.5 rounded-lg bg-yellow-50 text-neutral-600 text-xl">Komunikácia s tínedžerom</span>
             </div>
           </div>
         </details>
@@ -506,7 +529,12 @@
             Prídem za vami do <strong class="font-bold">Banskej Bystrice a okolia</strong> – všade, kam to mám do 30 minút. A vy nemusíte organizovať presun rodiny, ani cestu s kočíkom.
           </p>
           <div class="hidden mt-4 space-y-4 text-xl leading-[1.3]">
-            <p>TEXT DOPLNIŤ</p>
+            <p>Niekedy je najlepším riešením osobný rozhovor tam, kde sa cítite najprirodzenejšie – v pohodlí a bezpečí vášho domova. Táto forma je ideálna pre rodiny s menšími deťmi, pre riešenie bežných domácich situácií alebo pre tých, ktorí preferujú osobný kontakt bez nutnosti cestovať.</p>
+            <p><em class="italic">Ako prebieha návšteva?</em></p>
+            <p><strong class="font-bold">Flexibilný čas:</strong> Stretnutie spoločne naplánujeme tak, aby dokonale zapadlo do denného režimu vašej rodiny a vyhovovalo vašim časovým možnostiam.</p>
+            <p><strong class="font-bold">Dĺžka sedenia:</strong> Štandardné stretnutie trvá 90 minút, čo poskytuje dostatok času a priestoru ísť do hĺbky bez zbytočného zhonu.</p>
+            <p><strong class="font-bold">Cena stretnutia:</strong> 90 € za 90-minútovú konzultáciu. V prípade individuálnych potrieb vieme dĺžku aj cenu po vzájomnej dohode vopred upraviť.</p>
+            <p><strong class="font-bold">Doprava:</strong> V rámci Banskej Bystrice a do 30 km je doprava zabezpečená bez komplikácií. Ak sa nachádzate viac ako 30 km od Banskej Bystrice, na primeranom poplatku za dochádzku sa vopred férovo dohodneme.</p>
           </div>
           <button type="button" data-more aria-expanded="false" class="group mt-4 inline-flex items-center gap-1.5 font-bold text-base leading-none hover:text-neutral-500 transition-colors">
             <span class="group-aria-expanded:hidden">Viac informácií</span><span class="hidden group-aria-expanded:inline">Menej informácií</span>
@@ -521,7 +549,10 @@
             Niektoré veci sa povedia ľahšie, keď sa ide vedľa seba a nemusíte sa pozerať do očí.
           </p>
           <div class="hidden mt-4 space-y-4 text-xl leading-[1.3]">
-            <p>TEXT DOPLNIŤ</p>
+            <p>Niekedy je ľahšie hovoriť o náročných témach, keď nesedíte tvárou v tvár v uzavretej miestnosti. Konzultácia počas chôdze v prírode alebo v pokojnom parku spája výhody odborného rozhovoru s prirodzeným účinkom pohybu na čerstvom vzduchu.</p>
+            <p><em class="italic">Ako to funguje?</em></p>
+            <p><strong class="font-bold">Rovnaké podmienky ako pri online konzultácii:</strong> stretnutie trvá 60 minút a cena je 60 €. Dlhší čas je možný po vzájomnej dohode.</p>
+            <p><strong class="font-bold">Lokalita:</strong> Vyberieme príjemnú a tichú trasu v Banskej Bystrici a blízkom okolí, kde budeme mať dostatok súkromia na nerušený rozhovor.</p>
           </div>
           <button type="button" data-more aria-expanded="false" class="group mt-4 inline-flex items-center gap-1.5 font-bold text-base leading-none hover:text-neutral-500 transition-colors">
             <span class="group-aria-expanded:hidden">Viac informácií</span><span class="hidden group-aria-expanded:inline">Menej informácií</span>
@@ -536,7 +567,10 @@
             Keď to potrebujete napísať skôr, než to poviete nahlas. Alebo keď na rozhovor zatiaľ nemáte silu.
           </p>
           <div class="hidden mt-4 space-y-4 text-xl leading-[1.3]">
-            <p>TEXT DOPLNIŤ</p>
+            <p>V e-maile podrobne opíšte svoju situáciu, otázky, pocity či konkrétny problém, s ktorým si v rodine neviete rady. Môžete písať kedykoľvek – večer po uspatí detí, cez víkend alebo postupne po častiach.</p>
+            <p>Po prijatí vašej správy pripravím pre vás komplexnú písomnú odpoveď. Získate nový pohľad na dynamiku vo vašej rodine, praktické odporúčania a konkrétne kroky, ktoré môžete hneď vyskúšať.</p>
+            <p><strong class="font-bold">Cena za e-mailovú konzultáciu:</strong> 50 €</p>
+            <p><strong class="font-bold">Doba odpovede:</strong> Podrobnú spätnú väzbu obvykle odosielam do 2 až 3 pracovných dní od doručenia vášho e-mailu (a potvrdenia platby).</p>
           </div>
           <button type="button" data-more aria-expanded="false" class="group mt-4 inline-flex items-center gap-1.5 font-bold text-base leading-none hover:text-neutral-500 transition-colors">
             <span class="group-aria-expanded:hidden">Viac informácií</span><span class="hidden group-aria-expanded:inline">Menej informácií</span>
@@ -553,7 +587,7 @@
           <p class="text-xl leading-[1.3] lg:text-[24px] lg:leading-[1.25]">
             Rozprávať sa môžeme <em class="italic">len vy a ja, v páre, s dieťaťom aj s celou rodinou</em> – podľa toho, čo vám dáva zmysel. Ak neviete, napíšte mi a vyberieme to spolu.
           </p>
-          <a href="#kontakt"
+          <a href="formular.html"
              class="shrink-0 lg:mt-9 inline-flex items-center gap-2 h-[48px] px-6 rounded-full border border-[#644E45] text-primary-500 italic text-base shadow-[2px_2px_6px_rgba(0,0,0,0.02)] hover:bg-accent-500 hover:border-accent-500 active:bg-accent-600 active:border-accent-600 transition-colors">
             Napíšte mi
             <svg width="13" height="8" viewBox="408 617 13 8" fill="currentColor" aria-hidden="true"><path d="M420.354 621.211C420.549 621.016 420.549 620.699 420.354 620.504L417.172 617.322C416.976 617.127 416.66 617.127 416.464 617.322C416.269 617.517 416.269 617.834 416.464 618.029L419.293 620.858L416.464 623.686C416.269 623.881 416.269 624.198 416.464 624.393C416.66 624.588 416.976 624.588 417.172 624.393L420.354 621.211ZM408 620.858V621.358H420V620.858V620.358H408V620.858Z"/></svg>
@@ -597,11 +631,16 @@
             <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 hidden group-open:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg>
           </summary>
           <div class="px-8 pb-6 lg:pb-4 space-y-6 text-xl leading-[1.3]">
-              <p>TEXT DOPLNIŤ</p>
+              <p>Poradenstvo nespočíva v rozdávaní univerzálnych rád. Mojou úlohou nie je hovoriť vám, ako presne máte žiť, ale:</p>
+              <p><strong class="font-bold">Sprevádzať vás pri uvedomení si potrieb:</strong> Pomôcť vám zorientovať sa v tom, čo vy a vaša rodina potrebujete, aby ste lepšie zvládali aktuálnu životnú situáciu.</p>
+              <p><strong class="font-bold">Objaviť vaše vlastné zdroje:</strong> Uvedomiť si silné stránky a nástroje, ktoré už máte k dispozícii, no v kríze na ne možno zabúdate.</p>
+              <p><strong class="font-bold">Pomenovať prekážky:</strong> Jasne zadefinovať ťažkosti, obmedzenia a problémy, ktoré vám stoja v ceste.</p>
+              <p><strong class="font-bold">Nájsť motiváciu k riešeniu:</strong> Preskúmať to, čo vás vnútorne poháňa zmeny urobiť a prekonať výzvy.</p>
+              <p>Mojím cieľom je pomôcť vám využiť váš vlastný potenciál, podporiť vašu samostatnosť, inšpirovať vás a naučiť praktické spôsoby, ako krízy zvládať.</p>
           </div>
         </details>
 
-        <details class="group grain -mx-4 md:mx-0 md:rounded-2xl bg-secondary-500 open:bg-tertiary-300 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
+        <details class="group grain -mx-4 md:mx-0 md:rounded-2xl bg-secondary-500 open:bg-accent-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
           <summary class="flex items-center justify-between gap-6 px-8 py-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
             <span class="text-xl leading-[1.3] md:text-2xl md:leading-[1.25] lg:text-[30px] lg:leading-[38px]">Ako si dohodnúť návštevu?</span>
             <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 group-open:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5v14"/></svg>
@@ -619,13 +658,13 @@
             <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 hidden group-open:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg>
           </summary>
           <div class="px-8 pb-6 lg:pb-4 space-y-6 text-xl leading-[1.3]">
-              <p>TEXT DOPLNIŤ</p>
+              <p>Táto forma je <strong class="font-bold">najvýhodnejším riešením pre mamičky na materskej dovolenke a čerstvé mamičky krátko po pôrode</strong>. V období, keď je starostlivosť o bábätko fyzicky i emočne vyčerpávajúca a dieťatko nie je možné nechať samé ani na hodinu, nemusíte riešiť náročné balenie, presuny ani stráženie. Poradenstvo prebehne v bezpečí vášho domova, priamo pri bábätku a v tempe, ktoré rešpektuje potreby vás oboch.</p>
           </div>
         </details>
 
         <details class="group grain -mx-4 md:mx-0 md:rounded-2xl bg-secondary-500 open:bg-accent-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
           <summary class="flex items-center justify-between gap-6 px-8 py-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
-            <span class="text-xl leading-[1.3] md:text-2xl md:leading-[1.25] lg:text-[30px] lg:leading-[38px]">Ako presne funguje poradenstvo e-mailom?</span>
+            <span class="text-xl leading-[1.3] md:text-2xl md:leading-[1.25] lg:text-[30px] lg:leading-[38px]">Aké výhody má poradenstvo e-mailom?</span>
             <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 group-open:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5v14"/></svg>
             <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 hidden group-open:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg>
           </summary>
@@ -642,7 +681,12 @@
             <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 hidden group-open:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg>
           </summary>
           <div class="px-8 pb-6 lg:pb-4 space-y-6 text-xl leading-[1.3]">
-              <p>TEXT DOPLNIŤ</p>
+              <p>Niekedy je ľahšie hovoriť o náročných témach vtedy, keď nesedíte tvárou v tvár v uzavretej miestnosti. Konzultácia počas chôdze v prírode alebo v pokojnom parku spája výhody odborného rozhovoru s prirodzeným účinkom pohybu na čerstvom vzduchu.</p>
+              <p><strong class="font-bold">Menší tlak, ľahšie otvorenie sa:</strong> Pohyb bok po boku uľahčuje zdieľanie citlivých tém bez pocitu napätia z neustáleho očného kontaktu.</p>
+              <p><strong class="font-bold">Čistá hlava vďaka prírode:</strong> Chôdza pomáha odbúravať stres, uvoľňuje nahromadené emócie a prináša nový nadhľad na riešené situácie.</p>
+              <p><strong class="font-bold">Nové myšlienky:</strong> Fyzický pohyb často podporí mentálnu flexibilitu a uľahčuje hľadanie nových riešení.</p>
+              <p><em class="italic">Pre koho je táto forma vhodná?</em></p>
+              <p>Pre každého, kto preferuje osobný kontakt, no necíti sa dobre v klasickej poradenskej miestnosti, pre toho, kto chce mať so sebou malé dieťa v kočíku a nemusí tak rozmýšľať, či je v poriadku, alebo pre každého, kto preferuje neformálne stretnutia pri chôdzi.</p>
           </div>
         </details>
 
@@ -653,7 +697,11 @@
             <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 hidden group-open:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg>
           </summary>
           <div class="px-8 pb-6 lg:pb-4 space-y-6 text-xl leading-[1.3]">
-              <p>TEXT DOPLNIŤ</p>
+              <p><strong class="font-bold">Áno, určite.</strong> Poradenstvo pre deti a mladých ľudí poskytuje bezpečný a dôverný priestor, kde môžu slobodne vyjadriť svoje pocity, obavy a otázky bez strachu, že niekoho zrania alebo sklamú. Konzultácia pre dieťa je mimoriadne nápomocná najmä v týchto situáciách:</p>
+              <p><strong class="font-bold">Rozvod alebo rozchod rodičov:</strong> Deti často prežívajú vnútorný konflikt lojality, smútok, neistotu z budúcich zmien alebo neopodstatnený pocit viny za rozpad rodiny. Spoločne hľadáme cestu, ako tieto zmeny prijať a zvládnuť.</p>
+              <p><strong class="font-bold">Tínedžerský vek a dospievanie:</strong> Obdobie hľadania vlastnej identity, tlaku zo školy, rovesníckych vzťahov či nepochopenia doma. Rozhovor s neutrálnym dospelým pomáha dospievajúcim utriediť si myšlienky a nájsť vlastnú stabilitu.</p>
+              <p><strong class="font-bold">Emočné ťažkosti:</strong> Úzkosti, častý hnev, uzavretosť, strachy, nízke sebavedomie či výkyvy nálad, s ktorými si dieťa samo nevie dať rady.</p>
+              <p>Rozhovor s dieťaťom vždy prebieha citlivo, s rešpektom k jeho veku a tempu. Pri práci s deťmi a dospievajúcimi zároveň v primeranej miere spolupracujem s rodičmi, aby sme spoločne vytvorili stabilné a podporujúce zázemie pre celú rodinu.</p>
           </div>
         </details>
 
@@ -664,18 +712,26 @@
             <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 hidden group-open:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg>
           </summary>
           <div class="px-8 pb-6 lg:pb-4 space-y-6 text-xl leading-[1.3]">
-              <p>TEXT DOPLNIŤ</p>
+              <p><strong class="font-bold">Nie, rodinné poradenstvo nie je psychoterapia.</strong></p>
+              <p>Hoci sa oba prístupy venujú podpore človeka a vzťahov, majú odlišné zameranie. Nie každý klient potrebuje dlhodobú psychoterapiu a nie každý odborník v pomáhajúcej profesii je psychoterapeut. V mnohých životných situáciách ľudia a rodiny oveľa viac vyťažia z kvalitných poradenských intervencií bez potreby absolvovať psychoterapiu.</p>
+              <p>Cieľom rodinného poradenstva nie je analyzovať minulosť celé roky, ale sprevádzať vás prítomnosťou a pomôcť vám nájsť funkčné riešenia, ktoré prinesú pokoj a stabilitu do vášho rodinného života.</p>
           </div>
         </details>
 
-        <details class="group grain -mx-4 md:mx-0 md:rounded-2xl bg-secondary-500 open:bg-tertiary-300 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
+        <details class="group grain -mx-4 md:mx-0 md:rounded-2xl bg-secondary-500 open:bg-accent-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
           <summary class="flex items-center justify-between gap-6 px-8 py-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
             <span class="text-xl leading-[1.3] md:text-2xl md:leading-[1.25] lg:text-[30px] lg:leading-[38px]">Poskytujete posudky pre súd v rozvodovom konaní?</span>
             <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 group-open:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5v14"/></svg>
             <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 hidden group-open:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg>
           </summary>
           <div class="px-8 pb-6 lg:pb-4 space-y-6 text-xl leading-[1.3]">
-              <p>TEXT DOPLNIŤ</p>
+              <p><strong class="font-bold">Nie, súdnoznalecké posudky ani správy pre účely súdneho konania nevypracúvam.</strong> Moja úloha nie je hodnotiť rodičov pre súd ani rozhodovať o tom, kto je „lepší“ rodič. Mojím poslaním je stáť pri vás a vašich deťoch ako nezávislá a bezpečná opora v tomto náročnom období.</p>
+              <p><strong class="font-bold">V čom vám počas rozchodu či rozvodu pomôžem:</strong></p>
+              <p><strong class="font-bold">Ochrana psychickej pohody detí:</strong> Zameriavam sa na to, aby deti celú situáciu zvládli čo najlepšie, necítili zodpovednosť za rozpad vzťahu a zbavili sa pocitov viny či strachu.</p>
+              <p><strong class="font-bold">Zdravá rodičovská komunikácia:</strong> Pomáham rodičom oddeliť partnerské nezhody od rodičovských rolí a nastaviť vecnú, rešpektujúcu komunikáciu bez vzájomných útokov.</p>
+              <p><strong class="font-bold">Nastavenie starostlivosti v záujme dieťaťa:</strong> Poskytujem poradenstvo pri hľadaní najvhodnejšieho modelu fungovania – či už ide o striedavú starostlivosť alebo iný režim – vždy s ohľadom na vek, potreby a citové prežívanie dieťaťa.</p>
+              <p><strong class="font-bold">Prevencia zranení:</strong> Hľadáme konkrétne spôsoby, ako predísť tomu, aby sa deti stali nástrojom v boji medzi dospelými.</p>
+              <p>Cieľom nie je vyhrať spor na súde, ale zabezpečiť, aby vaše deti mali dvoch fungujúcich rodičov a bezpečný domov aj po rozchode.</p>
           </div>
         </details>
 
@@ -686,18 +742,18 @@
             <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 hidden group-open:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg>
           </summary>
           <div class="px-8 pb-6 lg:pb-4 space-y-6 text-xl leading-[1.3]">
-              <p>TEXT DOPLNIŤ</p>
+              <p>Áno, ale s citom. V správnom čase a vhodným spôsobom vám ponúknem konkrétne informácie, nápady či odporúčania. Dobrá rada však funguje len vtedy, ak vychádza z vášho jedinečného kontextu a sami cítite, že je pre vás realizovateľná.</p>
           </div>
         </details>
 
-        <details class="group grain -mx-4 md:mx-0 md:rounded-2xl bg-secondary-500 open:bg-tertiary-300 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
+        <details class="group grain -mx-4 md:mx-0 md:rounded-2xl bg-secondary-500 open:bg-accent-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
           <summary class="flex items-center justify-between gap-6 px-8 py-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
             <span class="text-xl leading-[1.3] md:text-2xl md:leading-[1.25] lg:text-[30px] lg:leading-[38px]">Nahrádza poradenstvo psychologickú alebo zdravotnú starostlivosť?</span>
             <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 group-open:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5v14"/></svg>
             <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 hidden group-open:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg>
           </summary>
           <div class="px-8 pb-6 lg:pb-4 space-y-6 text-xl leading-[1.3]">
-              <p>TEXT DOPLNIŤ</p>
+              <p>Nie. Rodinné poradenstvo nenahrádza psychologickú, psychiatrickú, lekársku ani krízovú starostlivosť. Pri bezprostrednom ohrození kontaktujte tiesňovú linku alebo príslušného odborníka.</p>
           </div>
         </details>
 
@@ -712,7 +768,7 @@
         <p class="mt-5 lg:mt-4 max-w-[450px] text-xl leading-[1.3]">
           Napíšte mi priamo na e-mail. Rada s vami preberiem akékoľvek nejasnosti a pomôžem vám vybrať optimálnu formu konzultácie.
         </p>
-        <a href="mailto:zaskalanova@rodinna-poradna.sk"
+        <a href="formular.html"
            class="grain mt-5 lg:mt-10 inline-flex items-center gap-2 h-[46px] px-6 rounded-full bg-primary-500 text-secondary-500 italic text-base shadow-[2px_2px_6px_rgba(0,0,0,0.02)] hover:bg-accent-500 hover:text-primary-500 active:bg-accent-600 transition-colors">
           Napíšte mi správu
           <svg width="13" height="8" viewBox="408 617 13 8" fill="currentColor" aria-hidden="true"><path d="M420.354 621.211C420.549 621.016 420.549 620.699 420.354 620.504L417.172 617.322C416.976 617.127 416.66 617.127 416.464 617.322C416.269 617.517 416.269 617.834 416.464 618.029L419.293 620.858L416.464 623.686C416.269 623.881 416.269 624.198 416.464 624.393C416.66 624.588 416.976 624.588 417.172 624.393L420.354 621.211ZM408 620.858V621.358H420V620.858V620.358H408V620.858Z"/></svg>
@@ -725,8 +781,8 @@
 <!-- OTÁZKY SEKCIA END -->
  <!-- KONTAKT SEKCIA START -->
 <section id="kontakt" class="grain bg-primary-500 text-secondary-500 overflow-hidden">
-  <div class="max-w-[1120px] mx-auto px-4 md:px-8 lg:px-0 py-12 lg:pt-[88px] lg:pb-[101px]">
-    <div class="grid lg:grid-cols-[1fr_535px] items-center gap-12 lg:gap-0 lg:pr-[11px]">
+  <div class="max-w-[1120px] mx-auto px-4 md:px-8 lg:px-0 py-12 lg:pt-[88px] lg:pb-[88px]">
+    <div class="grid lg:grid-cols-[1fr_535px] items-center lg:items-start gap-12 lg:gap-0 lg:pr-[11px]">
 
       <!-- Ľavá strana -->
       <div>
@@ -738,10 +794,18 @@
         </p>
 
         <p class="mt-8 lg:mt-[88px] text-xl">E-mail</p>
-        <a href="mailto:zaskalanova@rodinna-poradna.sk" class="mt-4 inline-block font-light text-2xl leading-[1.4] md:text-[28px] md:leading-[1.1] lg:text-[30px] lg:leading-[1.2] break-all underline underline-offset-4 lg:no-underline hover:text-accent-600 transition-colors">
-          zaskalanova@rodinna-poradna.sk
+        <a href="mailto:kontakt@rodinna-poradna.sk" class="mt-4 inline-block font-light text-2xl leading-[1.4] md:text-[28px] md:leading-[1.1] lg:text-[30px] lg:leading-[1.2] break-all underline underline-offset-4 hover:text-accent-600 transition-colors">
+          kontakt@rodinna-poradna.sk
         </a>
-        <p class="mt-4 lg:mt-5 max-w-[424px] lg:max-w-[360px] text-xl leading-[1.3]">
+
+        <p class="mt-8 lg:mt-11 text-xl">Kontaktný formulár</p>
+        <a href="formular.html"
+           class="grain mt-6 lg:mt-8 inline-flex items-center gap-2 h-[46px] px-6 rounded-full bg-secondary-500 text-primary-500 italic text-lg shadow-[2px_2px_6px_rgba(0,0,0,0.02)] hover:bg-accent-500 active:bg-accent-600 transition-colors">
+          Dohodnúť konzultáciu cez formulár
+          <svg width="13" height="8" viewBox="408 617 13 8" fill="currentColor" aria-hidden="true"><path d="M420.354 621.211C420.549 621.016 420.549 620.699 420.354 620.504L417.172 617.322C416.976 617.127 416.66 617.127 416.464 617.322C416.269 617.517 416.269 617.834 416.464 618.029L419.293 620.858L416.464 623.686C416.269 623.881 416.269 624.198 416.464 624.393C416.66 624.588 416.976 624.588 417.172 624.393L420.354 621.211ZM408 620.858V621.358H420V620.858V620.358H408V620.858Z"/></svg>
+        </a>
+
+        <p class="mt-8 lg:mt-10 max-w-[424px] lg:max-w-[360px] text-xl leading-[1.3]">
           Napíšte kedykoľvek. Odpoviem vám rýchlo a dohodneme sa na termíne aj forme.
         </p>
       </div>
@@ -764,7 +828,7 @@
 <section class="bg-secondary-500 text-primary-500">
   <div class="max-w-[900px] mx-auto px-4 md:px-8 py-12 md:py-[144px] lg:pt-[159px] lg:pb-[145px] flex flex-col items-start text-left md:items-center md:text-center">
     <h2 class="font-light text-[40px] leading-[1.15] md:text-[48px] md:leading-none md:tracking-[-0.02em] lg:text-[80px] lg:leading-[1.1] lg:tracking-[-0.03em]">
-      Verím, že <em class="italic">každá rodina</em> v sebe má potenciál zvládať ťažké situácie
+      Verím, že <em class="italic">každá rodina</em> má v&nbsp;sebe potenciál zvládať ťažké situácie
     </h2>
     <p class="mt-4 md:mt-8 lg:mt-[31px] max-w-[540px] text-neutral-500 text-xl leading-[1.3]">
       Niekedy je len treba, aby ju niekto sprevádzal, pomenoval to, čo sa deje, a pomohol nájsť nové riešenia.
@@ -789,16 +853,15 @@
 
     <div class="flex flex-col items-start gap-4 lg:gap-[22px] text-xl text-neutral-500">
       <p class="text-base opacity-60">Moje sociálne siete</p>
-      <a href="#" target="_blank" rel="noopener" class="hover:text-primary-500 transition">Instagram</a>
-      <a href="#" target="_blank" rel="noopener" class="hover:text-primary-500 transition">Facebook</a>
-      <a href="mailto:rodinnaporadnaaz@gmail.com" class="underline underline-offset-2 hover:text-accent-600 transition-colors">rodinnaporadnaaz@gmail.com</a>
+      <a href="https://www.instagram.com/rodinna_poradna_od_a_po_z/" target="_blank" rel="noopener" class="hover:text-primary-500 transition">Instagram</a>
+      <a href="mailto:kontakt@rodinna-poradna.sk" class="underline underline-offset-2 hover:text-accent-600 transition-colors">kontakt@rodinna-poradna.sk</a>
     </div>
   </div>
 
   <div class="border-t border-neutral-500">
     <div class="px-4 md:px-8 lg:px-16 py-4 md:py-5 flex flex-col md:flex-row gap-4 md:gap-8 text-sm text-neutral-500">
       <p>© Rodinná poradňa od A po Z 2026. All Rights Reserved</p>
-      <a href="#" class="hover:text-primary-500 transition-colors">Ochrana osobných údajov</a>
+      <a href="gdpr.html" class="hover:text-primary-500 transition-colors">Ochrana osobných údajov</a>
       <button type="button" data-cookie-settings class="text-left hover:text-primary-500 transition-colors">Nastavenia cookies</button>
       <a href="404.html" class="hover:text-primary-500 transition-colors">Error</a> <!-- DOČASNÉ: test chybovej stránky, pred spustením zmazať -->
       <p class="md:ml-auto">Design by Klára Záskalanová</p>
@@ -831,7 +894,7 @@
           <p class="font-script text-neutral-500 text-[20px] leading-6 lg:text-2xl md:-rotate-[3deg] md:origin-left">ešte jedna drobnosť</p>
           <h2 class="mt-2 pr-8 text-[28px] leading-[1.1] tracking-[-0.02em] lg:text-[30px] lg:tracking-normal">Pár slov o cookies</h2>
           <p class="mt-4 text-xl leading-[1.3]">
-            Aby web fungoval tak, ako má, používam súbory cookies. S vaším súhlasom mi pomôžu aj pochopiť, čo vás tu zaujíma – a vďaka tomu ho robiť lepším pre rodiny, ako je tá vaša.
+            Aby web fungoval tak, ako má, používam súbory cookies. S vaším súhlasom mi pomôžu aj pochopiť, čo vás tu zaujíma – a vďaka tomu ho robiť lepším pre rodiny, ako je tá vaša. <a href="gdpr.html" class="underline underline-offset-2 hover:text-neutral-500 transition-colors">Viac o ochrane údajov</a>
           </p>
           <div class="mt-6 flex flex-wrap items-center gap-3">
             <button type="button" data-cookie-accept class="grain inline-flex items-center gap-2 h-[46px] px-6 rounded-full bg-primary-500 text-secondary-500 italic text-base shadow-[2px_2px_6px_rgba(0,0,0,0.02)] hover:bg-accent-500 hover:text-primary-500 active:bg-accent-600 transition-colors">Povoliť všetky</button>
@@ -860,7 +923,7 @@
                   <span class="absolute top-1/2 left-[3px] -translate-y-1/2 w-5 h-5 rounded-full bg-neutral-500 group-aria-checked:translate-x-5 group-aria-checked:bg-secondary-500 transition duration-300 ease-[cubic-bezier(.22,1,.36,1)]"></span>
                 </button>
               </div>
-              <p class="mt-2 text-xl leading-[1.3]">Zapamätajú si vaše nastavenia – napríklad jazyk či región –, aby ste ich nemuseli zadávať znova.</p>
+              <p class="mt-2 text-xl leading-[1.3]">Umožnia doplnky, ktoré vám uľahčia návštevu – napríklad vložený kontaktný formulár – a zapamätajú si, čo ste si už raz nastavili.</p>
             </div>
 
             <div>
@@ -965,7 +1028,7 @@
     // Vlastné udalosti s názvami sekcií webu (v Google Analytics: Prehľady → Zapojenie → Udalosti)
     (() => {
       const track = (name, params) => gtag('event', name, params);
-      const names = { uvod: 'Úvod', sluzby: 'Služby', 'o-mne': 'O mne', 'ako-sa-stretneme': 'Ako sa stretneme', otazky: 'Otázky', kontakt: 'Kontakt', prax: 'Prax', vzdelanie: 'Vzdelanie' };
+      const names = { uvod: 'Úvod', sluzby: 'Služby', 'o-mne': 'O mne', 'ako-sa-stretneme': 'Ako sa stretneme', otazky: 'Otázky', kontakt: 'Kontakt', prax: 'Prax', vzdelanie: 'Vzdelanie', 'ochrana-udajov': 'Ochrana osobných údajov', formular: 'Formulár' };
       const sectionOf = el => {
         if (el.closest('#cookie-banner')) return 'Cookies lišta';
         if (el.closest('header')) return 'Hlavička';
