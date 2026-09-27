@@ -3,6 +3,36 @@
 <html lang="sk">
 <head>
   <meta charset="UTF-8">
+  <!-- Google tag (gtag.js) START -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    // Consent Mode: bez súhlasu s analytickými cookies Google neukladá cookies (súhlas z lišty cookies)
+    let savedConsent = null;
+    try { savedConsent = JSON.parse(localStorage.getItem('cookie-consent')); } catch (e) {}
+    gtag('consent', 'default', {
+      analytics_storage: savedConsent && savedConsent.analytics ? 'granted' : 'denied',
+      ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied',
+      wait_for_update: 500
+    });
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PZQ82X76KK"></script>
+  <script>
+    gtag('js', new Date());
+    gtag('config', 'G-PZQ82X76KK');
+    // Zmena voľby v lište cookies
+    document.addEventListener('cookie-consent', e => {
+      gtag('consent', 'update', { analytics_storage: e.detail.analytics ? 'granted' : 'denied' });
+      if (!e.detail.analytics) {
+        // Súhlas odvolaný: zmazať cookies Google Analytics
+        document.cookie.split(';').map(c => c.split('=')[0].trim()).filter(n => n.startsWith('_ga')).forEach(n => {
+          [location.hostname, '.' + location.hostname].forEach(d => document.cookie = `${n}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=${d}`);
+          document.cookie = `${n}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
+        });
+      }
+    });
+  </script>
+  <!-- Google tag (gtag.js) END -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Stránka sa nenašla – Rodinná poradňa od A po Z</title>
   <meta name="robots" content="noindex">
