@@ -1119,11 +1119,14 @@
       const cta = document.getElementById('floating-cta');
       const cookie = document.getElementById('cookie-banner');
       const footer = document.querySelector('footer');
+      const start = document.getElementById('o-mne');
       // Keď je niektorý z týchto prvkov na obrazovke, tlačidlo sa schová
       const blockers = [...document.querySelectorAll('a[href="formular.html"]:not(#floating-cta), #kontakt'), footer, footer.previousElementSibling].filter(Boolean);
       const visible = el => { const r = el.getBoundingClientRect(); return r.height > 0 && r.bottom > 0 && r.top < innerHeight; };
       const update = () => {
-        const on = scrollY > innerHeight * 0.6 && !blockers.some(visible) && cookie.classList.contains('hidden');
+        // Na úvodnej stránke až od sekcie „Niečo málo o mne“, inde po odscrollovaní 60 % obrazovky
+        const past = start ? start.getBoundingClientRect().top < innerHeight * 0.5 : scrollY > innerHeight * 0.6;
+        const on = past && !blockers.some(visible) && cookie.classList.contains('hidden');
         cta.classList.toggle('opacity-0', !on);
         cta.classList.toggle('translate-y-4', !on);
         cta.classList.toggle('pointer-events-none', !on);
