@@ -33,6 +33,35 @@
     });
   </script>
   <!-- Google tag (gtag.js) END -->
+  <!-- MICROSOFT CLARITY START -->
+  <script>
+    // Microsoft Clarity (heatmapy a nahrávky návštev) – načíta sa len so súhlasom s analytickými cookies
+    (() => {
+      let loaded = false;
+      const load = () => {
+        if (loaded) return;
+        loaded = true;
+        (function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "ypulxy8fex");
+        clarity('consent');
+      };
+      let saved = null;
+      try { saved = JSON.parse(localStorage.getItem('cookie-consent')); } catch (e) {}
+      if (saved && saved.analytics) load();
+      // Zmena voľby v lište cookies
+      document.addEventListener('cookie-consent', e => {
+        if (e.detail.analytics) return load();
+        // Súhlas odvolaný: Clarity prestane zbierať a zmažú sa jeho cookies
+        if (loaded) clarity('consent', false);
+        ['_clck', '_clsk'].forEach(n => ['', location.hostname, '.' + location.hostname].forEach(d =>
+          document.cookie = `${n}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/` + (d ? `; domain=${d}` : '')));
+      });
+    })();
+  </script>
+  <!-- MICROSOFT CLARITY END -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ochrana osobných údajov – Rodinná poradňa od A po Z</title>
   <meta name="description" content="Ako Rodinná poradňa od A po Z narába s vašimi osobnými údajmi – aké údaje zbiera, prečo, ako dlho ich uchováva a aké máte práva.">
@@ -307,7 +336,7 @@
       <div>
         <h2 class="inline-block bg-yellow-50 rounded-sm px-1 text-neutral-600 text-[28px] leading-[1.1] lg:text-[32px] lg:leading-[38px] tracking-[-0.02em]">Cookies a návštevnosť</h2>
         <div class="mt-4 space-y-4 text-xl leading-[1.3]">
-          <p>Web používa nevyhnutné cookies, bez ktorých by nefungoval. Funkčné a analytické (Google Analytics) sa spustia len vtedy, ak s nimi súhlasíte. Analytika mi ukazuje štatistiky o tom, ako sa web používa – bez vášho mena či e-mailu.</p>
+          <p>Web používa nevyhnutné cookies, bez ktorých by nefungoval. Funkčné a analytické (Google Analytics a Microsoft Clarity) sa spustia len vtedy, ak s nimi súhlasíte. Analytika mi ukazuje štatistiky o tom, ako sa web používa – bez vášho mena či e-mailu. Microsoft Clarity navyše zaznamenáva, ako sa po stránke pohybujete (kliknutia, posúvanie), a to anonymne – čo píšete do formulára, v týchto záznamoch nie je vidieť.</p>
           <p>Svoj výber môžete kedykoľvek zmeniť v <button type="button" data-cookie-settings class="underline underline-offset-2 hover:text-neutral-500 transition-colors">nastaveniach cookies</button>.</p>
         </div>
       </div>
