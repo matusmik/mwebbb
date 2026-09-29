@@ -72,6 +72,7 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
+      future: { hoverOnlyWhenSupported: true }, // hover len pri myši/touchpade – na mobile sa ťuknutím „neprilepí“
       theme: {
         extend: {
           colors: {
@@ -155,7 +156,7 @@
   <script>
     // Prvky, ktoré sa objavia pri scrollovaní (jediný zoznam – používa ho aj skript na konci stránky)
     window.revealSelectors = [
-      '#sluzby h2', '#sluzby h2 + p', '#sluzby details', '#sluzby a[href="#kontakt"]', '#sluzby h3', '#sluzby h3 + p',
+      '#sluzby h2', '#sluzby h2 + p', '#sluzby details', '#sluzby a[href="formular.html"]', '#sluzby h3', '#sluzby h3 + p',
       '#o-mne .font-script', '#o-mne h2', '#o-mne h2 + p', '#o-mne img', '#o-mne .space-y-6', '#o-mne .space-y-6 + a',
       '#ako-sa-stretneme h2', '#ako-sa-stretneme h2 + p', '#ako-sa-stretneme .grid > div', '#ako-sa-stretneme [class*="rotate-"]',
       '#otazky .text-center > *', '#otazky details', '#otazky .bg-yellow-50',
@@ -163,7 +164,6 @@
       '#prax .gap-16 > div',
       '#vzdelanie h2', '#vzdelanie h2 + p', '#vzdelanie .grid > div',
       '#ochrana-udajov .font-script', '#ochrana-udajov h1', '#ochrana-udajov h1 ~ p', '#gdpr-obsah > div',
-      '#formular .font-script', '#formular h1', '#formular h1 ~ p', '#kontaktny-formular > *',
       'section:not([id]) h2', 'section:not([id]) h2 ~ *'
     ];
     // Úvod aj tieto prvky sa skryjú ešte pred prvým vykreslením (aby nebliklo); poistka po 4 s ukáže všetko

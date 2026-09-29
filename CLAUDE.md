@@ -129,6 +129,7 @@ Kurzíva v nadpisoch (`<em class="italic">`) je súčasť dizajnu (napr. „S č
 Svetlé: `grain … bg-secondary-500 text-primary-500 … hover:bg-accent-500 active:bg-accent-600 transition-colors`.
 Obrysové: `inline-flex items-center gap-2 h-[48px] px-6 rounded-full border border-[#644E45] text-primary-500 italic text-base shadow-[2px_2px_6px_rgba(0,0,0,0.02)] hover:bg-accent-500 hover:border-accent-500 active:bg-accent-600 active:border-accent-600 transition-colors`.
 Hover všetkých tlačidiel = ružová `accent-500`, kliknutie = `accent-600`.
+Hover platí len na zariadeniach s myšou – `future: { hoverOnlyWhenSupported: true }` v tailwind.config (vo všetkých súboroch), aby na mobile po ťuknutí neostala „prilepená“ farba.
 
 **Šípka v tlačidlách** (presne z Figmy, používaj vždy túto, nie Lucide):
 ```html
@@ -158,7 +159,7 @@ Otázky: na mobile cez celú šírku (`-mx-4 md:mx-0 md:rounded-2xl`), `px-8`; z
 4. `O MNE SEKCIA` (`#o-mne`) – fotka `images/o-mne.jpg` (424×530), text, obrysové tlačidlo „Viac o mojich skúsenostiach“ → `prax-a-vzdelanie.html`.
 5. `STRETNEME SA SEKCIA` (`#ako-sa-stretneme`) – SVG vlna hore (sekcia má `bg-secondary-500`, aby nad vlnou nebola biela), 4 formy stretnutia, natočená krémová karta.
 6. `OTÁZKY SEKCIA` (`#otazky`) – 10 otázok, žltá karta „Nenašli ste odpoveď“ s tlačidlom „Napíšte mi správu“ → `formular.html`.
-   Na formulár (`formular.html`) vedú: tlačidlo v úvode (hero), tlačidlo v natočenej karte v Stretneme sa, „Napíšte mi správu“ a tlačidlo v kontakte.
+   Na formulár (`formular.html`) vedú: obe tlačidlá „Objednať konzultáciu“ (hero, Služby) a tlačidlo v kontakte. Všetky tlačidlá „Napíšte mi…“ (natočená karta v Stretneme sa, „Napíšte mi správu“, záver, gdpr) sú `mailto:kontakt@rodinna-poradna.sk`.
 7. `KONTAKT SEKCIA` (`#kontakt`) – tmavé pozadie, e-mail (podčiarknutý), „Kontaktný formulár“ + svetlé tlačidlo „Dohodnúť konzultáciu cez formulár“, ružová natočená karta „Kde sa stretneme“ (na PC zarovnaná hore, `lg:items-start`).
 8. `ZÁVER SEKCIA` – „Verím, že každá rodina…“ + tlačidlo.
 9. `PÄTIČKA` – logo, meno, Instagram (Facebook nie je), e-mail, spodný riadok © / Ochrana osobných údajov / Nastavenia cookies / Design by Klára Záskalanová.
