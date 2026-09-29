@@ -268,7 +268,12 @@
   document.getElementById('menu-open').onclick = () => { menu.classList.remove('hidden'); menu.classList.add('flex'); };
   const closeMenu = () => { menu.classList.add('hidden'); menu.classList.remove('flex'); };
   document.getElementById('menu-close').onclick = closeMenu;
-  document.querySelectorAll('.menu-link').forEach(a => a.onclick = closeMenu);
+  // Odkaz v mobilnom menu: skok rovno na miesto, bez plynulého posúvania
+  document.querySelectorAll('.menu-link').forEach(a => a.onclick = () => {
+    document.documentElement.style.scrollBehavior = 'auto';
+    setTimeout(() => { document.documentElement.style.scrollBehavior = ''; }, 100);
+    closeMenu();
+  });
 
   // Pri scrollovaní dole sa celá hlavička skryje, pri pohybe hore sa znovu ukáže
   const header = document.getElementById('site-header');
