@@ -190,6 +190,9 @@
     #mobile-menu.flex nav a:nth-child(5) { animation-delay: 200ms; }
     @keyframes fade-in { from { opacity: 0; } }
     @keyframes fade-up { from { opacity: 0; translate: 0 12px; } }
+    /* Šípka v tlačidlách sa pri hoveri jemne posunie */
+    a.rounded-full > svg:last-child, button.rounded-full > svg:last-child { transition: translate .3s cubic-bezier(.22,1,.36,1); }
+    a.rounded-full:hover > svg:last-child, button.rounded-full:hover > svg:last-child { translate: 3px 0; }
     /* Kto má v systéme vypnuté animácie, nič sa nehýbe */
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
@@ -201,7 +204,7 @@
     // Prvky, ktoré sa objavia pri scrollovaní (jediný zoznam – používa ho aj skript na konci stránky)
     window.revealSelectors = [
       '#sluzby h2', '#sluzby h2 + p', '#sluzby details', '#sluzby a[href="formular.html"]', '#sluzby h3', '#sluzby h3 + p',
-      '#o-mne .font-script', '#o-mne h2', '#o-mne h2 + p', '#o-mne img', '#o-mne .space-y-6', '#o-mne .space-y-6 + a',
+      '#o-mne .font-script', '#o-mne h2', '#o-mne h2 + p', '#o-mne img', '#o-mne .space-y-6', '#o-mne dl > div', '#o-mne dl + a',
       '#ako-sa-stretneme h2', '#ako-sa-stretneme h2 + p', '#ako-sa-stretneme .grid > div', '#ako-sa-stretneme [class*="rotate-"]',
       '#otazky .text-center > *', '#otazky details', '#otazky .bg-yellow-50',
       '#kontakt h2', '#kontakt h2 ~ *', '#kontakt .bg-accent-500',
@@ -300,9 +303,9 @@
         Napíšte mi
       </h1>
       <p class="mt-6 max-w-[424px] text-xl leading-[1.3]">
-        Nemusíte vedieť, ako to celé pomenovať. Stačí pár viet o tom, čo sa u vás deje. Po odoslaní si správu prečítam a ozvem sa vám e-mailom. Spolu sa dohodneme, kedy a ako sa stretneme.
+        Nemusíte vedieť, ako to celé pomenovať. Stačí pár viet o tom, čo sa u vás deje. Po odoslaní si správu prečítam a do dvoch dní sa vám ozvem e-mailom. Spolu sa dohodneme, kedy a ako sa stretneme.
       </p>
-      <p class="mt-6 max-w-[424px] text-xl leading-[1.3] text-neutral-500">Odoslaním sa k ničomu nezaväzujete.</p>
+      <p class="mt-6 max-w-[424px] text-xl leading-[1.3] text-neutral-500">Odoslaním sa k ničomu nezaväzujete – prvá odpoveď je nezáväzná a zadarmo.</p>
     </div>
 
     <!-- Formulár (odpovede idú cez SheetMonkey do Google Sheets; názvy polí = hlavičky stĺpcov v tabuľke) -->
@@ -391,6 +394,7 @@
             <span data-label>Odoslať správu</span>
             <svg width="13" height="8" viewBox="408 617 13 8" fill="currentColor" aria-hidden="true"><path d="M420.354 621.211C420.549 621.016 420.549 620.699 420.354 620.504L417.172 617.322C416.976 617.127 416.66 617.127 416.464 617.322C416.269 617.517 416.269 617.834 416.464 618.029L419.293 620.858L416.464 623.686C416.269 623.881 416.269 624.198 416.464 624.393C416.66 624.588 416.976 624.588 417.172 624.393L420.354 621.211ZM408 620.858V621.358H420V620.858V620.358H408V620.858Z"/></svg>
           </button>
+          <p class="mt-4 text-xl leading-[1.3] text-neutral-500">Správu čítam len ja a je dôverná.</p>
           <p data-error hidden role="alert" class="mt-4 text-xl leading-[1.3] text-neutral-500">Správu sa nepodarilo odoslať. Skúste to, prosím, ešte raz, alebo mi napíšte priamo na <a href="mailto:kontakt@rodinna-poradna.sk" class="underline underline-offset-2 hover:text-primary-500 transition-colors">kontakt@rodinna-poradna.sk</a>.</p>
         </div>
       </form>
@@ -400,7 +404,7 @@
         <p class="font-script text-neutral-500 text-[20px] leading-6 lg:text-2xl">odoslané</p>
         <h2 class="mt-2 font-light text-[32px] leading-[1.2] tracking-[-0.02em] lg:text-[36px] lg:leading-[1.15]">Ďakujem, že ste napísali.</h2>
         <p class="mt-4 text-xl leading-[1.3]">
-          Správu mám a ozvem sa vám e-mailom. Ak ste si na niečo spomenuli až teraz, napíšte mi na <a href="mailto:kontakt@rodinna-poradna.sk" class="underline underline-offset-2 hover:text-neutral-500 transition-colors">kontakt@rodinna-poradna.sk</a>.
+          Správu mám a do dvoch dní sa vám ozvem e-mailom. Ak ste si na niečo spomenuli až teraz, napíšte mi na <a href="mailto:kontakt@rodinna-poradna.sk" class="underline underline-offset-2 hover:text-neutral-500 transition-colors">kontakt@rodinna-poradna.sk</a>.
         </p>
       </div>
     </div>
@@ -416,6 +420,11 @@
     const btn = form.querySelector('button[type="submit"]');
     const error = form.querySelector('[data-error]');
 
+    // Príchod z ružovej karty v Službách (formular.html?tema=…) – téma sa predvyplní do správy
+    const tema = new URLSearchParams(location.search).get('tema');
+    const temaPrefix = tema ? 'Téma: ' + tema.slice(0, 80) + '\n\n' : '';
+    if (tema) form.querySelector('#f-sprava').value = temaPrefix;
+
     // Vlastné hlášky pod políčkami (ružový štítok) namiesto bublín prehliadača.
     // Bez JavaScriptu ostáva kontrola prehliadača (atribúty required).
     form.noValidate = true;
@@ -426,7 +435,7 @@
     const rules = [
       [email, () => !email.value.trim() ? 'Napíšte, prosím, e-mail, na ktorý vám mám odpísať.'
                   : !emailOk(email.value.trim()) ? 'Tento e-mail nevyzerá celkom správne. Skontrolujte, prosím, či v ňom nechýba @ alebo koncovka (napríklad .sk).' : ''],
-      [sprava, () => sprava.value.trim() ? '' : 'Napíšte mi, prosím, aspoň pár viet.'],
+      [sprava, () => sprava.value.trim() && sprava.value.trim() !== temaPrefix.trim() ? '' : 'Napíšte mi, prosím, aspoň pár viet.'],
       [consent, () => consent.checked ? '' : 'Bez súhlasu so spracovaním osobných údajov vám, žiaľ, nemôžem odpísať.']
     ];
     const show = (el, msg) => {
@@ -744,7 +753,7 @@
     // Úvod: počká na font, potom text postupne dosadne
     (() => {
       const hero = [
-        ['#uvod img', 0], ['#uvod h1', 350], ['#uvod h1 + p', 700], ['#uvod h1 ~ a', 1000], ['#uvod h1 ~ .font-script', 1350], ['#uvod img + p', 1350],
+        ['#uvod img', 0], ['#uvod h1', 350], ['#uvod h1 + p', 700], ['#uvod h1 ~ a', 1000], ['#uvod .hero-note', 1150], ['#uvod h1 ~ .font-script', 1350], ['#uvod img + p', 1350],
         ['#prax img', 0], ['#prax h1', 350], ['#prax div:has(> p + svg)', 750], ['#prax .font-script', 1350]
       ];
       hero.forEach(([s, d]) => document.querySelectorAll(s).forEach(el => el.style.setProperty('--hero-delay', d + 'ms')));

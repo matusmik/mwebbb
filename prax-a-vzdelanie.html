@@ -175,6 +175,9 @@
     #mobile-menu.flex nav a:nth-child(5) { animation-delay: 200ms; }
     @keyframes fade-in { from { opacity: 0; } }
     @keyframes fade-up { from { opacity: 0; translate: 0 12px; } }
+    /* Šípka v tlačidlách sa pri hoveri jemne posunie */
+    a.rounded-full > svg:last-child, button.rounded-full > svg:last-child { transition: translate .3s cubic-bezier(.22,1,.36,1); }
+    a.rounded-full:hover > svg:last-child, button.rounded-full:hover > svg:last-child { translate: 3px 0; }
     /* Kto má v systéme vypnuté animácie, nič sa nehýbe */
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
@@ -186,7 +189,7 @@
     // Prvky, ktoré sa objavia pri scrollovaní (jediný zoznam – používa ho aj skript na konci stránky)
     window.revealSelectors = [
       '#sluzby h2', '#sluzby h2 + p', '#sluzby details', '#sluzby a[href="formular.html"]', '#sluzby h3', '#sluzby h3 + p',
-      '#o-mne .font-script', '#o-mne h2', '#o-mne h2 + p', '#o-mne img', '#o-mne .space-y-6', '#o-mne .space-y-6 + a',
+      '#o-mne .font-script', '#o-mne h2', '#o-mne h2 + p', '#o-mne img', '#o-mne .space-y-6', '#o-mne dl > div', '#o-mne dl + a',
       '#ako-sa-stretneme h2', '#ako-sa-stretneme h2 + p', '#ako-sa-stretneme .grid > div', '#ako-sa-stretneme [class*="rotate-"]',
       '#otazky .text-center > *', '#otazky details', '#otazky .bg-yellow-50',
       '#kontakt h2', '#kontakt h2 ~ *', '#kontakt .bg-accent-500',
@@ -276,11 +279,13 @@
 
 <!-- PRAX SEKCIA START -->
 <section id="prax" class="bg-secondary-500 text-primary-500">
+  <!-- Na PC: medzery nad prvým textom sa na nižších obrazovkách (13" notebook) zmenšia, aby bolo prvé miesto vidno hneď
+       bez scrollovania. Od výšky okna ~950 px platia presné hodnoty z Figmy (296 px, 366 px, 88 px). -->
   <div class="max-w-[1338px] mx-auto pt-8 md:pt-12 lg:pt-0 pb-12 md:pb-16 lg:pb-[122px] md:pl-8 lg:px-8
-              grid md:grid-cols-[1fr_320px] md:grid-rows-[1fr_1fr_auto] md:gap-x-8 lg:grid-cols-[1fr_minmax(0,535px)] lg:grid-rows-[296px_366px_auto] lg:gap-x-[96px]">
+              grid md:grid-cols-[1fr_320px] md:grid-rows-[1fr_1fr_auto] md:gap-x-8 lg:grid-cols-[1fr_minmax(0,535px)] lg:grid-rows-[clamp(112px,calc((100svh_-_202px)*0.395),296px)_clamp(96px,calc((100svh_-_202px)*0.488),366px)_auto] lg:gap-x-[96px]">
 
-    <!-- Nadpis -->
-    <h1 class="px-4 md:px-0 md:col-start-1 md:row-start-1 md:self-end lg:self-auto lg:pt-[208px] text-left lg:text-center text-primary-500 font-light text-[40px] leading-[1.15] md:text-[48px] md:leading-none md:tracking-[-0.02em] lg:text-[80px] lg:leading-[1.1] lg:tracking-[-0.03em]">
+    <!-- Nadpis (na PC sedí na spodku prvého riadku) -->
+    <h1 class="px-4 md:px-0 md:col-start-1 md:row-start-1 md:self-end text-left lg:text-center text-primary-500 font-light text-[40px] leading-[1.15] md:text-[48px] md:leading-none md:tracking-[-0.02em] lg:text-[80px] lg:leading-[1.1] lg:tracking-[-0.03em]">
       Prax a vzdelanie
     </h1>
 
@@ -301,7 +306,7 @@
     </div>
 
     <!-- Kde som pracovala -->
-    <div class="px-4 md:pl-0 md:pr-8 lg:px-0 mt-6 md:mt-16 lg:mt-0 md:col-span-2 lg:col-span-1 lg:col-start-1 lg:row-start-3 lg:pt-[88px] flex lg:justify-end">
+    <div class="px-4 md:pl-0 md:pr-8 lg:px-0 mt-6 md:mt-16 lg:mt-0 md:col-span-2 lg:col-span-1 lg:col-start-1 lg:row-start-3 lg:pt-[clamp(32px,calc((100svh_-_202px)*0.117),88px)] flex lg:justify-end">
       <div class="w-full lg:max-w-[535px] flex flex-col gap-16 md:gap-12 lg:gap-[160px]">
 
         <div>
@@ -396,7 +401,7 @@
     <p class="mt-4 md:mt-8 lg:mt-[31px] max-w-[540px] text-neutral-500 text-xl leading-[1.3]">
       Niekedy je len treba, aby ju niekto sprevádzal, pomenoval to, čo sa deje, a pomohol nájsť nové riešenia.
     </p>
-    <a href="mailto:kontakt@rodinna-poradna.sk"
+    <a href="formular.html"
        class="grain mt-8 md:mt-10 inline-flex items-center gap-2 h-[46px] px-6 rounded-full bg-primary-500 text-secondary-500 italic text-base shadow-[2px_2px_6px_rgba(0,0,0,0.02)] hover:bg-accent-500 hover:text-primary-500 active:bg-accent-600 transition-colors">
       Napíšte mi
       <svg width="13" height="8" viewBox="408 617 13 8" fill="currentColor" aria-hidden="true"><path d="M420.354 621.211C420.549 621.016 420.549 620.699 420.354 620.504L417.172 617.322C416.976 617.127 416.66 617.127 416.464 617.322C416.269 617.517 416.269 617.834 416.464 618.029L419.293 620.858L416.464 623.686C416.269 623.881 416.269 624.198 416.464 624.393C416.66 624.588 416.976 624.588 417.172 624.393L420.354 621.211ZM408 620.858V621.358H420V620.858V620.358H408V620.858Z"/></svg>
@@ -663,7 +668,7 @@
     // Úvod: počká na font, potom text postupne dosadne
     (() => {
       const hero = [
-        ['#uvod img', 0], ['#uvod h1', 350], ['#uvod h1 + p', 700], ['#uvod h1 ~ a', 1000], ['#uvod h1 ~ .font-script', 1350], ['#uvod img + p', 1350],
+        ['#uvod img', 0], ['#uvod h1', 350], ['#uvod h1 + p', 700], ['#uvod h1 ~ a', 1000], ['#uvod .hero-note', 1150], ['#uvod h1 ~ .font-script', 1350], ['#uvod img + p', 1350],
         ['#prax img', 0], ['#prax h1', 350], ['#prax div:has(> p + svg)', 750], ['#prax .font-script', 1350]
       ];
       hero.forEach(([s, d]) => document.querySelectorAll(s).forEach(el => el.style.setProperty('--hero-delay', d + 'ms')));

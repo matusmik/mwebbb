@@ -155,11 +155,12 @@ Otázky: na mobile cez celú šírku (`-mx-4 md:mx-0 md:rounded-2xl`), `px-8`; z
 
 1. `HEADER` – logo, menu (O mne → `#o-mne`, Služby, Ako sa stretneme, Prax a vzdelanie → `prax-a-vzdelanie.html`, Kontakt), mobilné menu.
 2. `HERO SEKCIA` (`#uvod`) – nadpis vľavo, fotka `images/hero.jpg` vpravo (716×794 na PC), popisok „Online a v okolí Banskej Bystrice“.
-3. `SLUŽBY SEKCIA` (`#sluzby`) – hnedé pozadie, 6 ružových rozbaľovacích kariet, blok „Spolupracujem“ (odkaz na bbpsycholog.sk).
-4. `O MNE SEKCIA` (`#o-mne`) – fotka `images/o-mne.jpg` (424×530), text, obrysové tlačidlo „Viac o mojich skúsenostiach“ → `prax-a-vzdelanie.html`.
+   Pod tlačidlom je na mobile/tablete veta `.hero-note` „Nezáväzne – prvá odpoveď je zadarmo.“ (na PC skrytá – kolidovala by s ručným popiskom).
+3. `SLUŽBY SEKCIA` (`#sluzby`) – hnedé pozadie, 6 ružových rozbaľovacích kariet, blok „Spolupracujem“ (odkaz na bbpsycholog.sk). Tlačidlo „Napíšte mi“ v kartách pridáva skript na konci sekcie (`.card-cta`, odkaz `formular.html?tema=<názov karty>` – téma sa vo formulári predvyplní do správy): na PC po ~1 s nahradí mínus v hlavičke karty (`.card-icons`), na mobile/tablete je dole v karte.
+4. `O MNE SEKCIA` (`#o-mne`) – fotka `images/o-mne.jpg` (424×530), text, skúsenosti v číslach (`<dl>` 2×2: číslo = štýl H3, popis `text-neutral-500 text-xl leading-[1.3]`; čísla `data-count` pri zobrazení dobehnú od nuly), obrysové tlačidlo „Viac o mojich skúsenostiach“ → `prax-a-vzdelanie.html`.
 5. `STRETNEME SA SEKCIA` (`#ako-sa-stretneme`) – SVG vlna hore (sekcia má `bg-secondary-500`, aby nad vlnou nebola biela), 4 formy stretnutia, natočená krémová karta.
-6. `OTÁZKY SEKCIA` (`#otazky`) – 10 otázok, žltá karta „Nenašli ste odpoveď“ s tlačidlom „Napíšte mi správu“ → `formular.html`.
-   Na formulár (`formular.html`) vedú: obe tlačidlá „Objednať konzultáciu“ (hero, Služby) a tlačidlo v kontakte. Všetky tlačidlá „Napíšte mi…“ (natočená karta v Stretneme sa, „Napíšte mi správu“, záver, gdpr) sú `mailto:kontakt@rodinna-poradna.sk`.
+6. `OTÁZKY SEKCIA` (`#otazky`) – 11 otázok (prvá „Ako to prebieha?“ – 4 kroky), žltá karta „Nenašli ste odpoveď“ s tlačidlom „Napíšte mi správu“ → `formular.html`.
+   Na formulár (`formular.html`) vedú **všetky kontaktné tlačidlá**: „Objednať konzultáciu“ (hero, Služby), tlačidlo v kontakte aj všetky „Napíšte mi…“ (natočená karta v Stretneme sa, „Napíšte mi správu“, záver na všetkých stránkach, gdpr). E-mail `mailto:kontakt@rodinna-poradna.sk` ostáva len ako textový odkaz (kontakt, pätička, gdpr text).
 7. `KONTAKT SEKCIA` (`#kontakt`) – tmavé pozadie, e-mail (podčiarknutý), „Kontaktný formulár“ + svetlé tlačidlo „Dohodnúť konzultáciu cez formulár“, ružová natočená karta „Kde sa stretneme“ (na PC zarovnaná hore, `lg:items-start`).
 8. `ZÁVER SEKCIA` – „Verím, že každá rodina…“ + tlačidlo.
 9. `PÄTIČKA` – logo, meno, Instagram (Facebook nie je), e-mail, pás krízových kontaktov (112, Nezábudka, Linka detskej istoty, linka pre obete násilia, IPčko – v pätičke všetkých stránok), spodný riadok © / Ochrana osobných údajov / Nastavenia cookies / Design by Klára Záskalanová.
@@ -168,7 +169,7 @@ Otázky: na mobile cez celú šírku (`-mx-4 md:mx-0 md:rounded-2xl`), `px-8`; z
 ## Podstránka Prax a vzdelanie (`prax-a-vzdelanie.html`)
 
 V menu má „Prax a vzdelanie“ aktívny stav `bg-accent-300`, ostatné odkazy vedú na `index.html#…`.
-1. `PRAX SEKCIA` (`#prax`) – H1 „Prax a vzdelanie“, „Pracovala som ako“ + šípka, fotka `images/praxavzdelaniefoto.png` (424×530) s popiskom „stále spoznávam, ako deti vnímajú svet“, 3 štítky (ružový `bg-accent-600` + 2 žlté `bg-yellow-50`, 32px), pod nimi text 24px/1.4 (regular), kurzívou len úvodná fráza. Šípka je ručne kreslená `<path>` priamo z Figmy. Predloha: `praxavzdelaniesvg.txt`. Kontajner `max-w-[1338px]` (obsah x=83–1357), pravý stĺpec 535px.
+1. `PRAX SEKCIA` (`#prax`) – H1 „Prax a vzdelanie“, „Pracovala som ako“ + šípka, fotka `images/praxavzdelaniefoto.png` (424×530) s popiskom „stále spoznávam, ako deti vnímajú svet“, 3 štítky (ružový `bg-accent-600` + 2 žlté `bg-yellow-50`, 32px), pod nimi text 24px/1.4 (regular), kurzívou len úvodná fráza. Šípka je ručne kreslená `<path>` priamo z Figmy. Predloha: `praxavzdelaniesvg.txt`. Kontajner `max-w-[1338px]` (obsah x=83–1357), pravý stĺpec 535px. Na PC sú výšky riadkov (296 / 366 px) a odsadenie prvého štítku (88 px) cez `clamp(…100svh…)` – na nižších oknách (13" notebook) sa zmenšia, aby bol prvý text vidno bez scrollovania; od výšky okna ~950 px platí presne Figma.
 2. `VZDELANIE SEKCIA` (`#vzdelanie`) – hnedé pozadie, `lg:px-16`, 5 položiek v 3 stĺpcoch (424px, medzera 88px/16px).
 3. `ZÁVER SEKCIA` a `PÄTIČKA` – rovnaké ako na homepage.
 
@@ -187,5 +188,7 @@ Používateľ posiela SVG export z Figmy (text je v ňom prevedený na krivky, f
 - `gdpr.html`: sídlo a IČO prevádzkovateľa (`TEXT DOPLNIŤ`).
 - Instagram: `https://www.instagram.com/rodinna_poradna_od_a_po_z/` (pätička, všetky stránky). Cookies lišta má na konci textu odkaz „Viac o ochrane údajov“ → `gdpr.html`.
 - Overiť, že hlavičky stĺpcov v Google Sheets presne sedia s názvami polí formulára (pozri `formular.html` vyššie).
-- E-mail je všade `kontakt@rodinna-poradna.sk` (kontakt, karta „Nenašli ste odpoveď“, pätička).
+- E-mail je všade `kontakt@rodinna-poradna.sk` (kontakt, pätička, gdpr).
+- Sľuby na webe (držať všade rovnako): **prvá odpoveď je nezáväzná a zadarmo**, **odpoveď do dvoch dní**, vo formulári **„Správu čítam len ja a je dôverná.“** Sú v: Služby (úvod), úvod na mobile, otázka „Ako to prebieha?“, karta „Nenašli ste odpoveď“, kontakt, formulár.
+- Prepínanie kariet (Služby, Otázky, „Viac informácií“): stará karta sa zatvára súčasne s otváraním novej (`.swap-close`, 0,8 s) a funkcia `openOnly` počas toho každú snímku drží novú kartu na obrazovke a prípadne ju pokojne dovezie pod hlavičku.
 - Text karty „Online“ je vo Figme krémový (pravdepodobne chyba) – v kóde je tmavý ako ostatné.

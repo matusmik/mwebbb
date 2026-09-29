@@ -175,6 +175,9 @@
     #mobile-menu.flex nav a:nth-child(5) { animation-delay: 200ms; }
     @keyframes fade-in { from { opacity: 0; } }
     @keyframes fade-up { from { opacity: 0; translate: 0 12px; } }
+    /* Šípka v tlačidlách sa pri hoveri jemne posunie */
+    a.rounded-full > svg:last-child, button.rounded-full > svg:last-child { transition: translate .3s cubic-bezier(.22,1,.36,1); }
+    a.rounded-full:hover > svg:last-child, button.rounded-full:hover > svg:last-child { translate: 3px 0; }
     /* Kto má v systéme vypnuté animácie, nič sa nehýbe */
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
@@ -186,7 +189,7 @@
     // Prvky, ktoré sa objavia pri scrollovaní (jediný zoznam – používa ho aj skript na konci stránky)
     window.revealSelectors = [
       '#sluzby h2', '#sluzby h2 + p', '#sluzby details', '#sluzby a[href="formular.html"]', '#sluzby h3', '#sluzby h3 + p',
-      '#o-mne .font-script', '#o-mne h2', '#o-mne h2 + p', '#o-mne img', '#o-mne .space-y-6', '#o-mne .space-y-6 + a',
+      '#o-mne .font-script', '#o-mne h2', '#o-mne h2 + p', '#o-mne img', '#o-mne .space-y-6', '#o-mne dl > div', '#o-mne dl + a',
       '#ako-sa-stretneme h2', '#ako-sa-stretneme h2 + p', '#ako-sa-stretneme .grid > div', '#ako-sa-stretneme [class*="rotate-"]',
       '#otazky .text-center > *', '#otazky details', '#otazky .bg-yellow-50',
       '#kontakt h2', '#kontakt h2 ~ *', '#kontakt .bg-accent-500',
@@ -361,7 +364,7 @@
           <p>Stačí mi napísať na <a href="mailto:kontakt@rodinna-poradna.sk" class="underline underline-offset-2 hover:text-neutral-500 transition-colors">kontakt@rodinna-poradna.sk</a>. Odpoviem vám najneskôr do jedného mesiaca.</p>
           <p>Ak by ste mali pocit, že s vašimi údajmi nenarábam správne, môžete podať sťažnosť na Úrad na ochranu osobných údajov SR, Hraničná 12, 820&nbsp;07 Bratislava (<a href="https://dataprotection.gov.sk" target="_blank" rel="noopener" class="underline underline-offset-2 hover:text-neutral-500 transition-colors">dataprotection.gov.sk</a>).</p>
         </div>
-        <a href="mailto:kontakt@rodinna-poradna.sk"
+        <a href="formular.html"
            class="grain mt-8 lg:mt-10 inline-flex items-center gap-2 h-[46px] px-6 rounded-full bg-primary-500 text-secondary-500 italic text-base shadow-[2px_2px_6px_rgba(0,0,0,0.02)] hover:bg-accent-500 hover:text-primary-500 active:bg-accent-600 transition-colors">
           Napíšte mi
           <svg width="13" height="8" viewBox="408 617 13 8" fill="currentColor" aria-hidden="true"><path d="M420.354 621.211C420.549 621.016 420.549 620.699 420.354 620.504L417.172 617.322C416.976 617.127 416.66 617.127 416.464 617.322C416.269 617.517 416.269 617.834 416.464 618.029L419.293 620.858L416.464 623.686C416.269 623.881 416.269 624.198 416.464 624.393C416.66 624.588 416.976 624.588 417.172 624.393L420.354 621.211ZM408 620.858V621.358H420V620.858V620.358H408V620.858Z"/></svg>
@@ -632,7 +635,7 @@
     // Úvod: počká na font, potom text postupne dosadne
     (() => {
       const hero = [
-        ['#uvod img', 0], ['#uvod h1', 350], ['#uvod h1 + p', 700], ['#uvod h1 ~ a', 1000], ['#uvod h1 ~ .font-script', 1350], ['#uvod img + p', 1350],
+        ['#uvod img', 0], ['#uvod h1', 350], ['#uvod h1 + p', 700], ['#uvod h1 ~ a', 1000], ['#uvod .hero-note', 1150], ['#uvod h1 ~ .font-script', 1350], ['#uvod img + p', 1350],
         ['#prax img', 0], ['#prax h1', 350], ['#prax div:has(> p + svg)', 750], ['#prax .font-script', 1350]
       ];
       hero.forEach(([s, d]) => document.querySelectorAll(s).forEach(el => el.style.setProperty('--hero-delay', d + 'ms')));
