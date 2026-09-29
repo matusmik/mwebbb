@@ -497,6 +497,18 @@
     </div>
   </div>
 
+  <!-- Krízové kontakty (nonstop a zadarmo) -->
+  <div class="border-t border-neutral-500">
+    <div class="px-4 md:px-8 lg:px-16 py-6 md:py-5 flex flex-col md:flex-row md:flex-wrap gap-2 md:gap-x-8 md:gap-y-2 text-base text-neutral-500">
+      <p class="opacity-60">Ak ste v akútnej kríze, nečakajte na konzultáciu:</p>
+      <a href="tel:112" class="hover:text-primary-500 transition-colors">Tiesňová linka <strong class="font-bold">112</strong></a>
+      <a href="tel:0800800566" class="hover:text-primary-500 transition-colors">Linka dôvery Nezábudka <strong class="font-bold">0800 800 566</strong></a>
+      <a href="tel:116111" class="hover:text-primary-500 transition-colors">Linka detskej istoty <strong class="font-bold">116 111</strong></a>
+      <a href="tel:0800212212" class="hover:text-primary-500 transition-colors">Linka pre obete násilia <strong class="font-bold">0800 212 212</strong></a>
+      <a href="https://ipcko.sk" target="_blank" rel="noopener" class="underline underline-offset-2 hover:text-primary-500 transition-colors">IPčko – online chat</a>
+    </div>
+  </div>
+
   <div class="border-t border-neutral-500">
     <div class="px-4 md:px-8 lg:px-16 py-4 md:py-5 flex flex-col md:flex-row gap-4 md:gap-8 text-sm text-neutral-500">
       <p>© Rodinná poradňa od A po Z 2026. All Rights Reserved</p>
@@ -670,6 +682,7 @@
       const names = { uvod: 'Úvod', sluzby: 'Služby', 'o-mne': 'O mne', 'ako-sa-stretneme': 'Ako sa stretneme', otazky: 'Otázky', kontakt: 'Kontakt', prax: 'Prax', vzdelanie: 'Vzdelanie', 'ochrana-udajov': 'Ochrana osobných údajov', formular: 'Formulár' };
       const sectionOf = el => {
         if (el.closest('#cookie-banner')) return 'Cookies lišta';
+        if (el.closest('#floating-cta')) return 'Plávajúce tlačidlo';
         if (el.closest('header')) return 'Hlavička';
         if (el.closest('footer')) return 'Pätička';
         const s = el.closest('section');
