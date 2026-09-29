@@ -255,9 +255,13 @@
   const closeMenu = () => { menu.classList.add('hidden'); menu.classList.remove('flex'); };
   document.getElementById('menu-close').onclick = closeMenu;
   // Odkaz v mobilnom menu: skok rovno na miesto, bez plynulého posúvania
+  // Hlavička po skoku ostane zobrazená (sekcie majú scroll-mt, takže nadpis je hneď pod ňou)
+  let menuJump = !!location.hash; // aj pri príchode z podstránky na index.html#…
   document.querySelectorAll('.menu-link').forEach(a => a.onclick = () => {
     document.documentElement.style.scrollBehavior = 'auto';
     setTimeout(() => { document.documentElement.style.scrollBehavior = ''; }, 100);
+    menuJump = true;
+    setTimeout(() => { menuJump = false; }, 300);
     closeMenu();
   });
 
@@ -266,6 +270,7 @@
   let lastY = window.scrollY;
   window.addEventListener('scroll', () => {
     const y = window.scrollY;
+    if (menuJump) { menuJump = false; lastY = y; return; }
     if (Math.abs(y - lastY) < 5) return;
     const hide = y > lastY && y > 82 && menu.classList.contains('hidden');
     header.classList.toggle('-translate-y-full', hide);
@@ -315,7 +320,7 @@
 </section>
 <!-- HERO SEKCIA END -->
  <!-- SLUŽBY SEKCIA START -->
-<section id="sluzby" class="grain bg-neutral-500 text-secondary-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
+<section id="sluzby" class="scroll-mt-[72px] lg:scroll-mt-0 grain bg-neutral-500 text-secondary-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
   <div class="max-w-[1090px] mx-auto px-4 md:px-8 lg:px-0 py-12 md:py-16 lg:py-[88px]">
 
     <div class="grid gap-y-8 md:grid-cols-[343px_321px] md:grid-rows-[auto_1fr] md:justify-between md:gap-x-10 lg:grid-cols-[1fr_535px] lg:gap-x-0 lg:gap-y-10">
@@ -509,7 +514,7 @@
 </section>
 <!-- O MNE SEKCIA END -->
  <!-- STRETNEME SA SEKCIA START -->
-<section id="ako-sa-stretneme" class="relative bg-secondary-500 text-primary-500">
+<section id="ako-sa-stretneme" class="scroll-mt-[72px] lg:scroll-mt-0 relative bg-secondary-500 text-primary-500">
 
   <!-- Vlna (len na PC) -->
   <svg class="hidden lg:block w-full h-[136px]" viewBox="0 0 1440 136" preserveAspectRatio="none" aria-hidden="true">
@@ -858,7 +863,7 @@
 </section>
 <!-- OTÁZKY SEKCIA END -->
  <!-- KONTAKT SEKCIA START -->
-<section id="kontakt" class="grain bg-primary-500 text-secondary-500 overflow-hidden">
+<section id="kontakt" class="scroll-mt-[72px] lg:scroll-mt-0 grain bg-primary-500 text-secondary-500 overflow-hidden">
   <div class="max-w-[1120px] mx-auto px-4 md:px-8 lg:px-0 py-12 lg:pt-[88px] lg:pb-[88px]">
     <div class="grid lg:grid-cols-[1fr_535px] items-center lg:items-start gap-12 lg:gap-0 lg:pr-[11px]">
 
