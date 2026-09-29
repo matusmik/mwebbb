@@ -687,7 +687,6 @@
       const names = { uvod: 'Úvod', sluzby: 'Služby', 'o-mne': 'O mne', 'ako-sa-stretneme': 'Ako sa stretneme', otazky: 'Otázky', kontakt: 'Kontakt', prax: 'Prax', vzdelanie: 'Vzdelanie', 'ochrana-udajov': 'Ochrana osobných údajov', formular: 'Formulár' };
       const sectionOf = el => {
         if (el.closest('#cookie-banner')) return 'Cookies lišta';
-        if (el.closest('#floating-cta')) return 'Plávajúce tlačidlo';
         if (el.closest('header')) return 'Hlavička';
         if (el.closest('footer')) return 'Pätička';
         const s = el.closest('section');

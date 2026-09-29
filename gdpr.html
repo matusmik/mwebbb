@@ -566,39 +566,6 @@
     })();
   </script>
   <!-- COOKIES LIŠTA END -->
-  <!-- PLÁVAJÚCE TLAČIDLO START -->
-  <!-- Len mobil a tablet: ukáže sa po odscrollovaní z úvodu, skryje sa, keď je na obrazovke iné tlačidlo na formulár, kontakt, záver alebo cookies lišta -->
-  <a id="floating-cta" href="formular.html" aria-hidden="true" tabindex="-1"
-     class="grain lg:hidden fixed z-30 right-4 bottom-4 md:right-8 md:bottom-8 inline-flex items-center gap-2 h-[46px] px-6 rounded-full bg-primary-500 text-secondary-500 italic text-base shadow-[2px_2px_6px_rgba(0,0,0,0.02),0_8px_24px_rgba(61,34,23,0.18)] hover:bg-accent-500 hover:text-primary-500 active:bg-accent-600 opacity-0 translate-y-4 pointer-events-none transition duration-500 ease-[cubic-bezier(.22,1,.36,1)]">
-    Objednať konzultáciu
-    <svg width="13" height="8" viewBox="408 617 13 8" fill="currentColor" aria-hidden="true"><path d="M420.354 621.211C420.549 621.016 420.549 620.699 420.354 620.504L417.172 617.322C416.976 617.127 416.66 617.127 416.464 617.322C416.269 617.517 416.269 617.834 416.464 618.029L419.293 620.858L416.464 623.686C416.269 623.881 416.269 624.198 416.464 624.393C416.66 624.588 416.976 624.588 417.172 624.393L420.354 621.211ZM408 620.858V621.358H420V620.858V620.358H408V620.858Z"/></svg>
-  </a>
-  <script>
-    (() => {
-      const cta = document.getElementById('floating-cta');
-      const cookie = document.getElementById('cookie-banner');
-      const footer = document.querySelector('footer');
-      const start = document.getElementById('o-mne');
-      // Keď je niektorý z týchto prvkov na obrazovke, tlačidlo sa schová
-      const blockers = [...document.querySelectorAll('a[href="formular.html"]:not(#floating-cta), #kontakt'), footer, footer.previousElementSibling].filter(Boolean);
-      const visible = el => { const r = el.getBoundingClientRect(); return r.height > 0 && r.bottom > 0 && r.top < innerHeight; };
-      const update = () => {
-        // Na úvodnej stránke až od sekcie „Niečo málo o mne“, inde po odscrollovaní 60 % obrazovky
-        const past = start ? start.getBoundingClientRect().top < innerHeight * 0.5 : scrollY > innerHeight * 0.6;
-        const on = past && !blockers.some(visible) && cookie.classList.contains('hidden');
-        cta.classList.toggle('opacity-0', !on);
-        cta.classList.toggle('translate-y-4', !on);
-        cta.classList.toggle('pointer-events-none', !on);
-        cta.setAttribute('aria-hidden', !on);
-        cta.tabIndex = on ? 0 : -1;
-      };
-      new MutationObserver(update).observe(cookie, { attributes: true, attributeFilter: ['class'] });
-      addEventListener('scroll', update, { passive: true });
-      addEventListener('resize', update);
-      update();
-    })();
-  </script>
-  <!-- PLÁVAJÚCE TLAČIDLO END -->
 
   <!-- GOOGLE ANALYTICS UDALOSTI START -->
   <script>
@@ -608,7 +575,6 @@
       const names = { uvod: 'Úvod', sluzby: 'Služby', 'o-mne': 'O mne', 'ako-sa-stretneme': 'Ako sa stretneme', otazky: 'Otázky', kontakt: 'Kontakt', prax: 'Prax', vzdelanie: 'Vzdelanie', 'ochrana-udajov': 'Ochrana osobných údajov', formular: 'Formulár' };
       const sectionOf = el => {
         if (el.closest('#cookie-banner')) return 'Cookies lišta';
-        if (el.closest('#floating-cta')) return 'Plávajúce tlačidlo';
         if (el.closest('header')) return 'Hlavička';
         if (el.closest('footer')) return 'Pätička';
         const s = el.closest('section');
