@@ -121,7 +121,7 @@
     div:has(+ [data-more][aria-expanded="true"]) { animation: fade-up .5s cubic-bezier(.22,1,.36,1); }
     /* Ružové karty v Službách – pomalšia, plynulá kaskáda */
     .reveal-anim .reveal.reveal--card { /* bez posunu – medzery medzi kartami ostávajú stále rovnaké */
-      translate: none; filter: blur(3px);
+      translate: none;
       transition-property: opacity, filter, background-color;
       transition-duration: 1.6s, 1.4s, .15s;
       transition-timing-function: cubic-bezier(.33,1,.68,1), cubic-bezier(.33,1,.68,1), cubic-bezier(.4,0,.2,1);
@@ -130,7 +130,7 @@
     .reveal-anim .reveal.reveal--card.is-visible { filter: none; }
     /* Úvod stránky – skrytý už pred prvým vykreslením, potom jemne dosadne */
     .hero-anim :is(#uvod h1, #uvod h1 ~ *, #uvod img + p, #prax h1, #prax .font-script, #prax div:has(> p + svg)) {
-      opacity: 0; translate: 0 28px; filter: blur(6px);
+      opacity: 0; translate: 0 28px;
       transition: opacity 1.6s cubic-bezier(.16,1,.3,1), translate 2s cubic-bezier(.16,1,.3,1), filter 1.6s cubic-bezier(.16,1,.3,1);
       transition-delay: var(--hero-delay, 0ms);
     }
@@ -298,7 +298,7 @@
       <!-- Rozbaľovacie karty -->
       <div class="md:col-start-2 md:row-start-1 md:row-span-2 flex flex-col gap-3 lg:gap-4">
 
-        <details class="group grain rounded-2xl bg-accent-500 text-neutral-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)] hover:bg-accent-600 open:hover:bg-accent-500 transition-colors">
+        <details name="sluzby" class="group grain rounded-2xl bg-accent-500 text-neutral-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)] hover:bg-accent-600 open:hover:bg-accent-500 transition-colors">
           <summary class="flex items-center justify-between gap-4 min-h-[63px] lg:min-h-[70px] px-6 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
             <span class="text-[28px] leading-[1.1] tracking-[-0.02em] lg:text-[30px] lg:tracking-normal">Máme bábätko</span>
             <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 group-open:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5v14"/></svg>
@@ -316,7 +316,7 @@
           </div>
         </details>
 
-        <details class="group grain rounded-2xl bg-accent-500 text-neutral-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)] hover:bg-accent-600 open:hover:bg-accent-500 transition-colors">
+        <details name="sluzby" class="group grain rounded-2xl bg-accent-500 text-neutral-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)] hover:bg-accent-600 open:hover:bg-accent-500 transition-colors">
           <summary class="flex items-center justify-between gap-4 min-h-[63px] lg:min-h-[70px] px-6 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
             <span class="text-[28px] leading-[1.1] tracking-[-0.02em] lg:text-[30px] lg:tracking-normal">Škola nám robí starosti</span>
             <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 group-open:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5v14"/></svg>
@@ -334,7 +334,7 @@
           </div>
         </details>
 
-        <details class="group grain rounded-2xl bg-accent-500 text-neutral-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)] hover:bg-accent-600 open:hover:bg-accent-500 transition-colors">
+        <details name="sluzby" class="group grain rounded-2xl bg-accent-500 text-neutral-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)] hover:bg-accent-600 open:hover:bg-accent-500 transition-colors">
           <summary class="flex items-center justify-between gap-4 min-h-[63px] lg:min-h-[70px] px-6 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
             <span class="text-[28px] leading-[1.1] tracking-[-0.02em] lg:text-[30px] lg:tracking-normal">Rozvádzame sa</span>
             <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 group-open:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5v14"/></svg>
@@ -352,7 +352,7 @@
           </div>
         </details>
 
-        <details class="group grain rounded-2xl bg-accent-500 text-neutral-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)] hover:bg-accent-600 open:hover:bg-accent-500 transition-colors">
+        <details name="sluzby" class="group grain rounded-2xl bg-accent-500 text-neutral-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)] hover:bg-accent-600 open:hover:bg-accent-500 transition-colors">
           <summary class="flex items-center justify-between gap-4 min-h-[63px] lg:min-h-[70px] px-6 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
             <span class="text-[28px] leading-[1.1] tracking-[-0.02em] lg:text-[30px] lg:tracking-normal">Doma je stále dusno</span>
             <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 group-open:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5v14"/></svg>
@@ -370,7 +370,7 @@
           </div>
         </details>
 
-        <details class="group grain rounded-2xl bg-accent-500 text-neutral-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)] hover:bg-accent-600 open:hover:bg-accent-500 transition-colors">
+        <details name="sluzby" class="group grain rounded-2xl bg-accent-500 text-neutral-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)] hover:bg-accent-600 open:hover:bg-accent-500 transition-colors">
           <summary class="flex items-center justify-between gap-4 min-h-[63px] lg:min-h-[70px] px-6 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
             <span class="text-[28px] leading-[1.1] tracking-[-0.02em] lg:text-[30px] lg:tracking-normal">Naše dieťa sa trápi</span>
             <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 group-open:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5v14"/></svg>
@@ -391,7 +391,7 @@
           </div>
         </details>
 
-        <details class="group grain rounded-2xl bg-accent-500 text-neutral-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)] hover:bg-accent-600 open:hover:bg-accent-500 transition-colors">
+        <details name="sluzby" class="group grain rounded-2xl bg-accent-500 text-neutral-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)] hover:bg-accent-600 open:hover:bg-accent-500 transition-colors">
           <summary class="flex items-center justify-between gap-4 min-h-[63px] lg:min-h-[70px] px-6 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
             <span class="text-[28px] leading-[1.1] tracking-[-0.02em] lg:text-[30px] lg:tracking-normal">Dospieva nám</span>
             <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 group-open:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5v14"/></svg>
@@ -599,11 +599,32 @@
   </div>
 </section>
 <script>
-  document.querySelectorAll('[data-more]').forEach(btn => btn.onclick = () => {
+  // Po otvorení sa stránka posunie na začiatok otvoreného bloku (pod hlavičku).
+  // Ak sa zároveň zatvoril iný blok, počká sa, kým sa zbalí (.45 s), aby sedela výsledná poloha.
+  const scrollToTop = (el, wait) => setTimeout(() => {
+    const offset = document.getElementById('site-header').offsetHeight + 16;
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: el.getBoundingClientRect().top + scrollY - offset, behavior: reduce ? 'auto' : 'smooth' });
+  }, wait ? 470 : 0);
+
+  // Naraz je otvorené len jedno „Viac informácií“ – otvorenie zatvorí ostatné
+  const more = document.querySelectorAll('[data-more]');
+  more.forEach(btn => btn.onclick = () => {
     const open = btn.getAttribute('aria-expanded') === 'true';
+    let closed = false;
+    if (!open) more.forEach(b => { if (b !== btn && b.getAttribute('aria-expanded') === 'true') { b.setAttribute('aria-expanded', false); b.previousElementSibling.classList.add('hidden'); closed = true; } });
     btn.setAttribute('aria-expanded', !open);
     btn.previousElementSibling.classList.toggle('hidden', open);
+    if (!open) scrollToTop(btn.parentElement, false); // zbalenie „Viac informácií“ je okamžité, netreba čakať
   });
+  // Karty Služieb a Otázky: otvorenie jednej zatvorí ostatné v tej istej skupine (atribút name;
+  // toto je poistka pre staršie prehliadače, ktoré ho nepoznajú)
+  document.addEventListener('toggle', e => {
+    const d = e.target;
+    if (!d.matches?.('details[name]') || !d.open) return;
+    document.querySelectorAll(`details[name="${d.getAttribute('name')}"][open]`).forEach(o => { if (o !== d) o.open = false; });
+    scrollToTop(d, true);
+  }, true);
 </script>
 <!-- STRETNEME SA SEKCIA END -->
  <!-- OTÁZKY SEKCIA START -->
@@ -624,7 +645,7 @@
     <!-- Otázky -->
     <div class="mt-12 lg:mt-[90px] flex flex-col gap-5 md:gap-4 lg:gap-6">
 
-        <details class="group grain -mx-4 md:mx-0 md:rounded-2xl bg-secondary-500 open:bg-accent-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
+        <details name="otazky" class="group grain -mx-4 md:mx-0 md:rounded-2xl bg-secondary-500 open:bg-accent-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
           <summary class="flex items-center justify-between gap-6 px-8 py-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
             <span class="text-xl leading-[1.3] md:text-2xl md:leading-[1.25] lg:text-[30px] lg:leading-[38px]">Čo je to rodinné poradenstvo?</span>
             <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 group-open:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5v14"/></svg>
@@ -640,7 +661,7 @@
           </div>
         </details>
 
-        <details class="group grain -mx-4 md:mx-0 md:rounded-2xl bg-secondary-500 open:bg-accent-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
+        <details name="otazky" class="group grain -mx-4 md:mx-0 md:rounded-2xl bg-secondary-500 open:bg-accent-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
           <summary class="flex items-center justify-between gap-6 px-8 py-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
             <span class="text-xl leading-[1.3] md:text-2xl md:leading-[1.25] lg:text-[30px] lg:leading-[38px]">Ako si dohodnúť návštevu?</span>
             <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 group-open:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5v14"/></svg>
@@ -651,7 +672,7 @@
           </div>
         </details>
 
-        <details class="group grain -mx-4 md:mx-0 md:rounded-2xl bg-secondary-500 open:bg-accent-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
+        <details name="otazky" class="group grain -mx-4 md:mx-0 md:rounded-2xl bg-secondary-500 open:bg-accent-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
           <summary class="flex items-center justify-between gap-6 px-8 py-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
             <span class="text-xl leading-[1.3] md:text-2xl md:leading-[1.25] lg:text-[30px] lg:leading-[38px]">Prečo a ako si vybrať poradenstvo doma?</span>
             <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 group-open:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5v14"/></svg>
@@ -662,7 +683,7 @@
           </div>
         </details>
 
-        <details class="group grain -mx-4 md:mx-0 md:rounded-2xl bg-secondary-500 open:bg-accent-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
+        <details name="otazky" class="group grain -mx-4 md:mx-0 md:rounded-2xl bg-secondary-500 open:bg-accent-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
           <summary class="flex items-center justify-between gap-6 px-8 py-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
             <span class="text-xl leading-[1.3] md:text-2xl md:leading-[1.25] lg:text-[30px] lg:leading-[38px]">Aké výhody má poradenstvo e-mailom?</span>
             <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 group-open:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5v14"/></svg>
@@ -674,7 +695,7 @@
           </div>
         </details>
 
-        <details class="group grain -mx-4 md:mx-0 md:rounded-2xl bg-secondary-500 open:bg-accent-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
+        <details name="otazky" class="group grain -mx-4 md:mx-0 md:rounded-2xl bg-secondary-500 open:bg-accent-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
           <summary class="flex items-center justify-between gap-6 px-8 py-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
             <span class="text-xl leading-[1.3] md:text-2xl md:leading-[1.25] lg:text-[30px] lg:leading-[38px]">Prečo si vybrať konzultáciu na prechádzke (Walk &amp; Talk)?</span>
             <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 group-open:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5v14"/></svg>
@@ -690,7 +711,7 @@
           </div>
         </details>
 
-        <details class="group grain -mx-4 md:mx-0 md:rounded-2xl bg-secondary-500 open:bg-accent-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
+        <details name="otazky" class="group grain -mx-4 md:mx-0 md:rounded-2xl bg-secondary-500 open:bg-accent-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
           <summary class="flex items-center justify-between gap-6 px-8 py-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
             <span class="text-xl leading-[1.3] md:text-2xl md:leading-[1.25] lg:text-[30px] lg:leading-[38px]">Môžem dohodnúť konzultáciu aj pre dieťa?</span>
             <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 group-open:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5v14"/></svg>
@@ -705,7 +726,7 @@
           </div>
         </details>
 
-        <details class="group grain -mx-4 md:mx-0 md:rounded-2xl bg-secondary-500 open:bg-accent-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
+        <details name="otazky" class="group grain -mx-4 md:mx-0 md:rounded-2xl bg-secondary-500 open:bg-accent-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
           <summary class="flex items-center justify-between gap-6 px-8 py-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
             <span class="text-xl leading-[1.3] md:text-2xl md:leading-[1.25] lg:text-[30px] lg:leading-[38px]">Je rodinné poradenstvo psychoterapia?</span>
             <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 group-open:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5v14"/></svg>
@@ -718,7 +739,7 @@
           </div>
         </details>
 
-        <details class="group grain -mx-4 md:mx-0 md:rounded-2xl bg-secondary-500 open:bg-accent-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
+        <details name="otazky" class="group grain -mx-4 md:mx-0 md:rounded-2xl bg-secondary-500 open:bg-accent-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
           <summary class="flex items-center justify-between gap-6 px-8 py-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
             <span class="text-xl leading-[1.3] md:text-2xl md:leading-[1.25] lg:text-[30px] lg:leading-[38px]">Poskytujete posudky pre súd v rozvodovom konaní?</span>
             <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 group-open:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5v14"/></svg>
@@ -735,7 +756,7 @@
           </div>
         </details>
 
-        <details class="group grain -mx-4 md:mx-0 md:rounded-2xl bg-secondary-500 open:bg-accent-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
+        <details name="otazky" class="group grain -mx-4 md:mx-0 md:rounded-2xl bg-secondary-500 open:bg-accent-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
           <summary class="flex items-center justify-between gap-6 px-8 py-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
             <span class="text-xl leading-[1.3] md:text-2xl md:leading-[1.25] lg:text-[30px] lg:leading-[38px]">Ponúkate pri poradenstve aj konkrétne odporúčania?</span>
             <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 group-open:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5v14"/></svg>
@@ -746,7 +767,7 @@
           </div>
         </details>
 
-        <details class="group grain -mx-4 md:mx-0 md:rounded-2xl bg-secondary-500 open:bg-accent-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
+        <details name="otazky" class="group grain -mx-4 md:mx-0 md:rounded-2xl bg-secondary-500 open:bg-accent-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
           <summary class="flex items-center justify-between gap-6 px-8 py-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
             <span class="text-xl leading-[1.3] md:text-2xl md:leading-[1.25] lg:text-[30px] lg:leading-[38px]">Nahrádza poradenstvo psychologickú alebo zdravotnú starostlivosť?</span>
             <svg class="w-5 h-5 lg:w-6 lg:h-6 shrink-0 group-open:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5v14"/></svg>
@@ -871,7 +892,7 @@
 <!-- PÄTIČKA END -->
   <!-- COOKIES LIŠTA START -->
   <style>
-    #cookie-banner { opacity: 0; translate: 0 24px; filter: blur(6px); transition: opacity 1.2s cubic-bezier(.16,1,.3,1), translate 1.4s cubic-bezier(.16,1,.3,1), filter 1.2s cubic-bezier(.16,1,.3,1); }
+    #cookie-banner { opacity: 0; translate: 0 24px; transition: opacity 1.2s cubic-bezier(.16,1,.3,1), translate 1.4s cubic-bezier(.16,1,.3,1), filter 1.2s cubic-bezier(.16,1,.3,1); }
     #cookie-banner.is-in { opacity: 1; translate: 0 0; filter: none; }
     #cookie-banner.is-out { opacity: 0; translate: 0 16px; transition-duration: .5s; }
     #cookie-banner [data-view]:not([hidden]) { animation: fade-up .5s cubic-bezier(.22,1,.36,1); }
@@ -911,7 +932,7 @@
             <div>
               <div class="flex items-center justify-between gap-4">
                 <p class="font-bold text-xl leading-[1.3]">Nevyhnutné</p>
-                <span class="shrink-0 inline-flex items-center h-[30px] px-2.5 rounded-lg bg-tertiary-300 text-neutral-600 text-xl">Vždy povolené</span>
+                <span class="shrink-0 inline-flex items-center h-[22px] px-1.5 rounded-md bg-tertiary-300 text-neutral-600 text-sm">Vždy povolené</span>
               </div>
               <p class="mt-2 text-xl leading-[1.3]">Bez nich by web nefungoval. Zapamätajú si napríklad aj to, ako ste sa rozhodli práve teraz.</p>
             </div>
