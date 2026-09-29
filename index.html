@@ -606,14 +606,21 @@
   // 3. potom sa plynulo posunie na jeho začiatok (pod hlavičku).
   const html = document.documentElement;
   const jumpBy = dy => { html.style.scrollBehavior = 'auto'; window.scrollBy(0, dy); html.style.scrollBehavior = ''; };
+  let anchorTimer;
   const openOnly = (el, change) => {
+    // Vypne „ukotvenie scrollu“ prehliadača (Chrome/Android): pri zbalení karty pod čítaným miestom
+    // by stránku sám vyhodil hore a až potom by ju skript vrátil. Polohu tu vyrovnávame sami.
+    html.style.overflowAnchor = 'none';
+    clearTimeout(anchorTimer);
+    anchorTimer = setTimeout(() => { html.style.overflowAnchor = ''; }, 1200);
     const before = el.getBoundingClientRect().top;
     change();
     const shift = el.getBoundingClientRect().top - before;
     if (shift) jumpBy(shift);
     const offset = document.getElementById('site-header').offsetHeight + 16;
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    requestAnimationFrame(() => window.scrollTo({ top: el.getBoundingClientRect().top + scrollY - offset, behavior: reduce ? 'auto' : 'smooth' }));
+    const top = el.getBoundingClientRect().top + scrollY - offset;
+    requestAnimationFrame(() => window.scrollTo({ top, behavior: reduce ? 'auto' : 'smooth' }));
   };
 
   // „Viac informácií“
