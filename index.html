@@ -87,6 +87,53 @@
   <meta name="twitter:image" content="https://mwebbb.vercel.app/images/og-image.png">
   <!-- IKONKA A NÁHĽAD PRI ZDIEĽANÍ END -->
 
+  <!-- ŠTRUKTÚROVANÉ ÚDAJE START (neviditeľné – popis poradne pre Google; pri zmene domény vymeň adresy) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "@id": "https://mwebbb.vercel.app/#poradna",
+    "name": "Rodinná poradňa od A po Z",
+    "description": "Sprevádzam rodiny náročnými obdobiami – od prvej myšlienky na bábätko až po dospievanie. Rodinné poradenstvo, psychológia a koučing online a v okolí Banskej Bystrice.",
+    "url": "https://mwebbb.vercel.app/",
+    "image": "https://mwebbb.vercel.app/images/og-image.png",
+    "logo": "https://mwebbb.vercel.app/images/apple-touch-icon.png",
+    "email": "kontakt@rodinna-poradna.sk",
+    "inLanguage": "sk",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Banská Bystrica",
+      "addressCountry": "SK"
+    },
+    "areaServed": [
+      { "@type": "City", "name": "Banská Bystrica" },
+      { "@type": "Country", "name": "Slovensko" }
+    ],
+    "sameAs": ["https://www.instagram.com/rodinna_poradna_od_a_po_z/"],
+    "founder": {
+      "@type": "Person",
+      "name": "Adriana Záskalanová",
+      "honorificPrefix": "Mgr.",
+      "jobTitle": "Rodinná poradkyňa, psychologička a koučka",
+      "url": "https://mwebbb.vercel.app/prax-a-vzdelanie.html"
+    },
+    "knowsAbout": ["rodinné poradenstvo", "psychológia", "koučing", "rodičovstvo", "rozvod", "výchova detí", "dospievanie"],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "S čím pomáham",
+      "itemListElement": [
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Máme bábätko" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Škola nám robí starosti" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Rozvádzame sa" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Doma je stále dusno" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Naše dieťa sa trápi" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Dospieva nám" } }
+      ]
+    }
+  }
+  </script>
+  <!-- ŠTRUKTÚROVANÉ ÚDAJE END -->
+
   <!-- FONT START -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -353,7 +400,7 @@
 
   <!-- Fotka -->
   <div class="mt-6 md:mt-0 lg:h-full">
-    <img src="images/hero.png" alt="Adriana Záskalanová" class="w-full aspect-[716/794] md:aspect-auto md:h-[372px] lg:h-full object-cover">
+    <img src="images/hero.jpg" fetchpriority="high" alt="Adriana Záskalanová" class="w-full aspect-[716/794] md:aspect-auto md:h-[372px] lg:h-full object-cover">
     <p class="hidden md:block lg:hidden mt-4 font-script text-neutral-500 text-[20px] leading-[1.2] -rotate-[3.12deg] origin-left" aria-hidden="true">
       Online a v okolí Banskej Bystrice
     </p>
@@ -556,7 +603,7 @@
 
       <!-- Fotka (na mobile medzi odsekmi, cez celú šírku) -->
       <div class="-mx-4 mt-6 md:mx-0 md:mt-2 lg:mt-0 md:col-start-1 md:row-start-2 md:row-span-3 lg:row-start-1 lg:row-span-4 lg:self-center lg:pl-px">
-        <img src="images/o-mne.jpg" alt="Adriana Záskalanová" class="w-full aspect-[424/530] md:w-[280px] md:h-[360px] md:aspect-auto lg:w-[424px] lg:h-[530px] object-cover">
+        <img src="images/o-mne.jpg" loading="lazy" alt="Adriana Záskalanová" class="w-full aspect-[424/530] md:w-[280px] md:h-[360px] md:aspect-auto lg:w-[424px] lg:h-[530px] object-cover">
       </div>
 
       <div class="mt-6 md:col-start-2 lg:row-start-4">

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mwebbb.vercel.app/sitemap.xml

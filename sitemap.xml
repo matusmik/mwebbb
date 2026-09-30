@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Mapa stránok pre Google. Pri novej stránke ju sem doplň, pri zmene domény vymeň adresy. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://mwebbb.vercel.app/</loc>
+    <lastmod>2026-09-30</lastmod>
+  </url>
+  <url>
+    <loc>https://mwebbb.vercel.app/prax-a-vzdelanie.html</loc>
+    <lastmod>2026-09-30</lastmod>
+  </url>
+  <url>
+    <loc>https://mwebbb.vercel.app/formular.html</loc>
+    <lastmod>2026-09-30</lastmod>
+  </url>
+  <url>
+    <loc>https://mwebbb.vercel.app/gdpr.html</loc>
+    <lastmod>2026-09-30</lastmod>
+  </url>
+</urlset>

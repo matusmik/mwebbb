@@ -1,3 +1,5 @@
 # Podklady z Figmy (neposielajú sa na web)
 *.txt
+# …okrem robots.txt, ten na web patrí
+!robots.txt
 design/
