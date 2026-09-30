@@ -465,8 +465,8 @@
         wrong[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
         return;
       }
-      // Robot (vyplnená pasca alebo odoslanie do 3 s od načítania) – tvárime sa, že je odoslané, ale nič sa neposiela
-      const isBot = form.querySelector('#f-web').value || performance.now() < 3000;
+      // Robot (vyplnená pasca alebo odoslanie do 2 s od načítania) – tvárime sa, že je odoslané, ale nič sa neposiela
+      const isBot = form.querySelector('#f-web').value || performance.now() < 2000;
       const data = new URLSearchParams();
       const joined = {};
       form.querySelectorAll('input[name], textarea[name]').forEach(el => {
