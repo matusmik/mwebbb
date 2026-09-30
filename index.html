@@ -180,6 +180,8 @@
     /* ikona mínus sa pri otvorení jemne pretočí */
     details[open] > summary > svg:last-child { animation: icon-turn .5s cubic-bezier(.22,1,.36,1); }
     @keyframes bubble-in { from { opacity: 0; translate: 0 14px; filter: blur(4px); } }
+    /* na mobile/tablete bez rozmazania – telefón ho počas posúvania nestíha plynulo prekresľovať */
+    @media (max-width: 1023px) { @keyframes bubble-in { from { opacity: 0; translate: 0 14px; } } }
     @keyframes chip-in { from { opacity: 0; scale: .85; translate: 0 6px; } }
     @keyframes icon-turn { from { rotate: -90deg; opacity: .3; } }
     /* Ružové karty v Službách – pomalšia, plynulá kaskáda */
@@ -305,6 +307,7 @@
   window.addEventListener('scroll', () => {
     const y = window.scrollY;
     if (menuJump) { menuJump = false; lastY = y; return; }
+    if (window.autoScroll) { lastY = y; return; } // posun pri otváraní karty – hlavička ostáva, ako je
     if (Math.abs(y - lastY) < 5) return;
     const hide = y > lastY && y > 82 && menu.classList.contains('hidden');
     header.classList.toggle('-translate-y-full', hide);
@@ -744,31 +747,47 @@
   const html = document.documentElement;
   const reduceMotion = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
   const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  // Zatváranie starého bloku trvá 800 ms s rovnakou krivkou (cubic-bezier(.65,0,.35,1) = ease vyššie)
+  const SWAP = 800;
   let follow, followStop;
-  const openOnly = (el, change) => {
+  // finalShift vráti top = kde bude blok (pri terajšom scrolle), keď sa všetko dotvorí; animated = staré bloky sa zatvárajú plynulo
+  // Poloha sa počíta vopred a stránka sa posúva len podľa času – nič sa počas animácie nemeria ani nedorovnáva,
+  // preto na konci nič nedoskakuje
+  const openOnly = (el, change, finalShift) => {
     if (followStop) followStop();
     // Vypne „ukotvenie scrollu“ prehliadača – polohu počas animácie riadi skript
     html.style.overflowAnchor = 'none';
     html.style.scrollBehavior = 'auto';
+    window.autoScroll = true; // hlavička sa počas toho neskrýva ani neukazuje
     const header = document.getElementById('site-header').offsetHeight;
     const y0 = el.getBoundingClientRect().top;
+    const s0 = scrollY;
     change();
+    const { top, animated } = finalShift();
+    const shift = y0 - top;
+    const still = reduceMotion();
     // Ak je začiatok bloku pohodlne vidno (horná polovica obrazovky), ostane tam, kde je
     const target = y0 >= header && y0 <= innerHeight * 0.5 ? y0 : header + 40;
-    const dist = target - y0;
-    const dur = reduceMotion() ? 0 : Math.max(950, Math.min(1400, 650 + Math.abs(dist) * 0.6));
+    // Scroll = vyrovnanie zatvárajúcich sa blokov nad ním (-shift, v rytme ich animácie) + pokojný presun k cieľu (move)
+    const move = y0 - target;
+    const dur = still ? 0 : Math.max(SWAP, Math.min(1400, 650 + Math.abs(move) * 0.6));
+    const closeDur = still || !animated ? 0 : SWAP;
+    const place = p => window.scrollTo(0, s0 - shift * (closeDur ? ease(Math.min(1, p / closeDur)) : 1) + move * (dur ? ease(Math.min(1, p / dur)) : 1));
     const ctrl = new AbortController();
-    followStop = () => { cancelAnimationFrame(follow); ctrl.abort(); html.style.scrollBehavior = ''; html.style.overflowAnchor = ''; followStop = null; };
+    followStop = () => { cancelAnimationFrame(follow); ctrl.abort(); html.style.scrollBehavior = ''; html.style.overflowAnchor = ''; window.autoScroll = false; followStop = null; };
     // Keď človek sám scrolluje, skript ho nechá tak
     ['wheel', 'touchstart', 'keydown'].forEach(ev => addEventListener(ev, followStop, { passive: true, signal: ctrl.signal }));
-    const t0 = performance.now();
+    if (!dur) { place(0); followStop(); return; }
+    // Hneď teraz (ešte pred vykreslením) – ak sa staré bloky zatvoria bez animácie, dorovná sa to naraz
+    place(0);
+    let t0;
     const step = now => {
-      const p = dur ? Math.min(1, (now - t0) / dur) : 1;
-      const off = el.getBoundingClientRect().top - (y0 + dist * ease(p));
-      if (Math.abs(off) > .5) window.scrollBy(0, off);
-      p < 1 ? follow = requestAnimationFrame(step) : followStop();
+      t0 ??= now; // animácie výšky štartujú v tej istej snímke
+      const p = now - t0;
+      place(p);
+      p < dur ? follow = requestAnimationFrame(step) : followStop();
     };
-    step(t0);
+    follow = requestAnimationFrame(step);
   };
 
   // „Viac informácií“ – výška sa plynulo rozbalí / zbalí, text sa postupne vynorí
@@ -797,6 +816,13 @@
       } });
       btn.setAttribute('aria-expanded', true);
       slide(btn.previousElementSibling, true);
+    }, () => {
+      // Konečnú polohu zistí tak, že animácie na okamih pretočí na koniec (pred vykreslením, nič nevidno)
+      const anims = [...more].flatMap(b => b.previousElementSibling.getAnimations());
+      anims.forEach(a => a.currentTime = a.effect.getComputedTiming().endTime - .01); // tesne pred koniec, aby sa nespustil onfinish
+      const top = btn.parentElement.getBoundingClientRect().top;
+      anims.forEach(a => a.currentTime = 0);
+      return { top, animated: anims.length > 0 };
     });
   });
 
@@ -807,10 +833,13 @@
     e.preventDefault();
     const d = summary.parentElement;
     const others = [...document.querySelectorAll(`details[data-group="${d.dataset.group}"][open]`)];
+    // Karty sú pod sebou – posun = obsah otvorenej karty nad touto (po zatvorení ostane len hlavička)
+    const top = d.getBoundingClientRect().top - others.filter(o => o.compareDocumentPosition(d) & Node.DOCUMENT_POSITION_FOLLOWING)
+      .reduce((s, o) => s + o.offsetHeight - o.querySelector('summary').offsetHeight, 0);
     openOnly(d, () => {
       others.forEach(o => { o.classList.add('swap-close'); o.open = false; });
       d.open = true;
-    });
+    }, () => ({ top, animated: CSS.supports('interpolate-size', 'allow-keywords') }));
     setTimeout(() => others.forEach(o => o.classList.remove('swap-close')), 900);
   });
 </script>
