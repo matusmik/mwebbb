@@ -62,7 +62,8 @@
     })();
   </script>
   <!-- MICROSOFT CLARITY END -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#F0E9D5">
   <title>Rodinná poradňa od A po Z</title>
   <meta name="description" content="Sprevádzam rodiny náročnými obdobiami. Mgr. Adriana Záskalanová – rodinná poradkyňa, psychologička a koučka. Online a v okolí Banskej Bystrice.">
 
@@ -175,6 +176,37 @@
     }
   </style>
   <!-- ZRNITÁ TEXTÚRA END -->
+  <!-- FOCUS START -->
+  <!-- Viditeľný rámik pri ovládaní klávesnicou (Tab); myš ani dotyk ho nezobrazia. Tmavá čiara s krémovým lemom je vidieť na každom pozadí. -->
+  <style>
+    :is(a, button, summary, [tabindex]:not([tabindex="-1"])):focus-visible { outline: 2px solid #3D2217; outline-offset: 2px; box-shadow: 0 0 0 6px #F0E9D5; }
+  </style>
+  <!-- FOCUS END -->
+
+  <!-- APPLE DOLADENIE START -->
+  <!-- Prelínanie pri prechode medzi stránkami, bezpečné okraje iPhonu (výrez, spodná lišta) a vyšší kontrast pre toho, kto si ho zapne v systéme. Bežne sa vzhľad nemení. -->
+  <style>
+    @media (prefers-reduced-motion: no-preference) {
+      @view-transition { navigation: auto; }
+    }
+    /* Stránka siaha až po okraj displeja (viewport-fit=cover) – obsah a prilepené prvky sa vyhnú výrezu a spodnej lište; na bežnom displeji je to 0 */
+    body { padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right); }
+    #mobile-menu { padding: 0 env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left); }
+    #cookie-banner { bottom: max(1rem, env(safe-area-inset-bottom)); left: max(1rem, env(safe-area-inset-left)); right: max(1rem, env(safe-area-inset-right)); }
+    @media (min-width: 768px) { #cookie-banner { bottom: max(2rem, env(safe-area-inset-bottom)); left: max(2rem, env(safe-area-inset-left)); right: auto; } }
+    @media (min-width: 1024px) { #cookie-banner { left: max(4rem, env(safe-area-inset-left)); } }
+    /* Systémové „Zvýšiť kontrast“ */
+    /* Označený text vo farbách webu (ružová, tmavé písmo – čitateľné na svetlom aj tmavom pozadí) */
+    ::selection { background: #F1D1E7; color: #3D2217; }
+    @media (prefers-contrast: more) {
+      input, textarea { border-color: #644E45 !important; }
+      ::placeholder { color: #764B2A !important; }
+      .opacity-70 { opacity: 1 !important; }
+      #otazky details, #formular-dakujem, .bg-yellow-50.grain { outline: 1px solid #644E45; outline-offset: -1px; }
+      :is(a, button, summary, [tabindex]:not([tabindex="-1"])):focus-visible { outline-width: 3px; }
+    }
+  </style>
+  <!-- APPLE DOLADENIE END -->
   <!-- ANIMÁCIE START -->
   <style>
     html { scroll-behavior: smooth; }
@@ -184,46 +216,46 @@
     .reveal-anim .reveal {
       opacity: 0; translate: 0 24px;
       transition-property: opacity, translate, color, background-color, border-color;
-      transition-duration: .9s, .9s, .15s, .15s, .15s;
+      transition-duration: .6s, .6s, .15s, .15s, .15s;
       transition-timing-function: cubic-bezier(.22,1,.36,1), cubic-bezier(.22,1,.36,1), cubic-bezier(.4,0,.2,1), cubic-bezier(.4,0,.2,1), cubic-bezier(.4,0,.2,1);
       transition-delay: var(--reveal-delay, 0ms), var(--reveal-delay, 0ms), 0s, 0s, 0s;
     }
-    .reveal-anim .reveal.reveal--fade { translate: none; transition-duration: 1.2s, 1.2s, .15s, .15s, .15s; }
+    .reveal-anim .reveal.reveal--fade { translate: none; transition-duration: .8s, .8s, .15s, .15s, .15s; }
     .reveal-anim .reveal.is-visible { opacity: 1; translate: 0 0; }
     /* Plynulé rozbalenie kariet a otázok */
     details { transition: background-color .45s ease; }
     /* zatváranie – mäkké, obsah pri tom jemne zosvetlie */
-    details::details-content { block-size: 0; opacity: 0; overflow: clip; transition: block-size .5s cubic-bezier(.4,0,.2,1), opacity .35s ease, content-visibility .5s allow-discrete; }
+    details::details-content { block-size: 0; opacity: 0; overflow: clip; transition: block-size .4s cubic-bezier(.4,0,.2,1), opacity .3s ease, content-visibility .4s allow-discrete; }
     /* otváranie – pomalšie, na konci jemne dobehne */
-    details[open]::details-content { block-size: auto; opacity: 1; transition: block-size .8s cubic-bezier(.25,1,.5,1), opacity .2s ease, content-visibility .8s allow-discrete; }
+    details[open]::details-content { block-size: auto; opacity: 1; transition: block-size .55s cubic-bezier(.25,1,.5,1), opacity .2s ease, content-visibility .55s allow-discrete; }
     /* stará karta sa pri otvorení novej zatvára pomaly a súčasne s ňou (stránku drží na mieste skript) */
-    details.swap-close::details-content { transition: block-size .8s cubic-bezier(.65,0,.35,1), opacity .5s ease, content-visibility .8s allow-discrete; }
+    details.swap-close::details-content { transition: block-size .55s cubic-bezier(.65,0,.35,1), opacity .35s ease, content-visibility .55s allow-discrete; }
     /* Ružové karty: po chvíli sa mínus zmení na tlačidlo „Napíšte mi“ (na PC v hlavičke karty, inde dole v karte) */
     .card-icons > * { grid-area: 1 / 1; }
     .card-cta { visibility: hidden; opacity: 0; }
-    details[open] .card-icons > .card-cta { animation: cta-in .7s cubic-bezier(.22,1,.36,1) 1.1s forwards; }
+    details[open] .card-icons > .card-cta { animation: cta-in .5s cubic-bezier(.22,1,.36,1) .75s forwards; }
     details[open] .card-icons > svg:last-of-type { animation: icon-turn .5s cubic-bezier(.22,1,.36,1); }
     @media (min-width: 1024px) {
-      details[open] .card-icons > svg:last-of-type { animation: icon-turn .5s cubic-bezier(.22,1,.36,1), icon-out .4s ease 1s forwards; pointer-events: none; }
+      details[open] .card-icons > svg:last-of-type { animation: icon-turn .5s cubic-bezier(.22,1,.36,1), icon-out .35s ease .65s forwards; pointer-events: none; }
     }
     details[open] > div > .card-cta { visibility: visible; opacity: 1; }
     @keyframes cta-in { from { visibility: visible; opacity: 0; scale: .9; translate: 8px 0; } to { visibility: visible; opacity: 1; scale: 1; translate: 0 0; } }
     @keyframes icon-out { to { opacity: 0; rotate: 90deg; scale: .6; } }
     /* Šípka v tlačidlách sa pri hoveri jemne posunie */
     a.rounded-full > svg:last-child, button.rounded-full > svg:last-child { transition: translate .3s cubic-bezier(.22,1,.36,1); }
-    a.rounded-full:hover > svg:last-child, button.rounded-full:hover > svg:last-child { translate: 3px 0; }
+    a.rounded-full:hover > svg:last-child, button.rounded-full:not([data-cookie-reject]):hover > svg:last-child { translate: 3px 0; }
     /* Obsah otvorenej karty a „Viac informácií“ sa postupne vynorí (odsek po odseku, štítky po jednom) */
     :is(details[open] > summary + div, .more-open) > *,
-    details[open] .flex-wrap > span { animation: bubble-in .8s cubic-bezier(.22,1,.36,1) backwards; animation-delay: 120ms; }
-    :is(details[open] > summary + div, .more-open) > :nth-child(2) { animation-delay: 190ms; }
-    :is(details[open] > summary + div, .more-open) > :nth-child(3) { animation-delay: 260ms; }
-    :is(details[open] > summary + div, .more-open) > :nth-child(4) { animation-delay: 330ms; }
-    :is(details[open] > summary + div, .more-open) > :nth-child(5) { animation-delay: 400ms; }
-    :is(details[open] > summary + div, .more-open) > :nth-child(n+6) { animation-delay: 470ms; }
-    details[open] .flex-wrap > span { animation-name: chip-in; animation-delay: 300ms; }
-    details[open] .flex-wrap > span:nth-child(2) { animation-delay: 370ms; }
-    details[open] .flex-wrap > span:nth-child(3) { animation-delay: 440ms; }
-    details[open] .flex-wrap > span:nth-child(n+4) { animation-delay: 510ms; }
+    details[open] .flex-wrap > span { animation: bubble-in .6s cubic-bezier(.22,1,.36,1) backwards; animation-delay: 80ms; }
+    :is(details[open] > summary + div, .more-open) > :nth-child(2) { animation-delay: 130ms; }
+    :is(details[open] > summary + div, .more-open) > :nth-child(3) { animation-delay: 180ms; }
+    :is(details[open] > summary + div, .more-open) > :nth-child(4) { animation-delay: 230ms; }
+    :is(details[open] > summary + div, .more-open) > :nth-child(5) { animation-delay: 280ms; }
+    :is(details[open] > summary + div, .more-open) > :nth-child(n+6) { animation-delay: 330ms; }
+    details[open] .flex-wrap > span { animation-name: chip-in; animation-delay: 200ms; }
+    details[open] .flex-wrap > span:nth-child(2) { animation-delay: 250ms; }
+    details[open] .flex-wrap > span:nth-child(3) { animation-delay: 300ms; }
+    details[open] .flex-wrap > span:nth-child(n+4) { animation-delay: 350ms; }
     /* ikona mínus sa pri otvorení jemne pretočí */
     details[open] > summary > svg:last-child { animation: icon-turn .5s cubic-bezier(.22,1,.36,1); }
     @keyframes bubble-in { from { opacity: 0; translate: 0 14px; filter: blur(4px); } }
@@ -235,7 +267,7 @@
     .reveal-anim .reveal.reveal--card { /* bez posunu – medzery medzi kartami ostávajú stále rovnaké */
       translate: none;
       transition-property: opacity, filter, background-color;
-      transition-duration: 1.6s, 1.4s, .15s;
+      transition-duration: 1s, .9s, .15s;
       transition-timing-function: cubic-bezier(.33,1,.68,1), cubic-bezier(.33,1,.68,1), cubic-bezier(.4,0,.2,1);
       transition-delay: var(--reveal-delay, 0ms), var(--reveal-delay, 0ms), 0s;
     }
@@ -243,10 +275,10 @@
     /* Úvod stránky – skrytý už pred prvým vykreslením, potom jemne dosadne */
     .hero-anim :is(#uvod h1, #uvod h1 ~ *, #uvod img + p, #prax h1, #prax .font-script, #prax div:has(> p + svg)) {
       opacity: 0; translate: 0 28px;
-      transition: opacity 1.6s cubic-bezier(.16,1,.3,1), translate 2s cubic-bezier(.16,1,.3,1), filter 1.6s cubic-bezier(.16,1,.3,1);
+      transition: opacity 1s cubic-bezier(.16,1,.3,1), translate 1.2s cubic-bezier(.16,1,.3,1), filter 1s cubic-bezier(.16,1,.3,1);
       transition-delay: var(--hero-delay, 0ms);
     }
-    .hero-anim :is(#uvod img, #prax img) { opacity: 0; transition: opacity .8s cubic-bezier(.16,1,.3,1); transition-delay: var(--hero-delay, 0ms); }
+    .hero-anim :is(#uvod img, #prax img) { opacity: 0; transition: opacity .6s cubic-bezier(.16,1,.3,1); transition-delay: var(--hero-delay, 0ms); }
     .hero-in :is(#uvod h1, #uvod h1 ~ *, #uvod img, #uvod img + p, #prax h1, #prax img, #prax .font-script, #prax div:has(> p + svg)) { opacity: 1; translate: 0 0; filter: none; }
     /* Mobilné menu */
     #mobile-menu.flex { animation: fade-in .3s ease-out; }
@@ -309,16 +341,16 @@
     </nav>
 
     <!-- Hamburger pre mobil a tablet -->
-    <button id="menu-open" class="lg:hidden w-10 h-10 inline-flex items-center justify-center text-primary-500" aria-label="Otvoriť menu">
+    <button id="menu-open" aria-expanded="false" aria-controls="mobile-menu" class="relative before:absolute before:-inset-0.5 before:content-[''] lg:hidden w-10 h-10 inline-flex items-center justify-center text-primary-500" aria-label="Otvoriť menu">
       <i data-lucide="menu" class="w-7 h-7 stroke-[1.25]"></i>
     </button>
   </div>
 
   <!-- Mobilné menu (celá obrazovka) -->
-  <div id="mobile-menu" class="fixed inset-0 bg-secondary-500 hidden flex-col lg:hidden">
+  <div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menu" class="fixed inset-0 bg-secondary-500 hidden flex-col lg:hidden">
     <div class="h-[72px] px-4 flex items-center justify-between">
       <span class="italic text-xl text-primary-500">Rodinná poradňa od A po Z</span>
-      <button id="menu-close" class="w-10 h-10 inline-flex items-center justify-center text-primary-500" aria-label="Zavrieť menu">
+      <button id="menu-close" class="relative before:absolute before:-inset-0.5 before:content-[''] w-10 h-10 inline-flex items-center justify-center text-primary-500" aria-label="Zavrieť menu">
         <i data-lucide="x" class="w-7 h-7 stroke-[1.25]"></i>
       </button>
     </div>
@@ -334,9 +366,21 @@
 
 <script>
   const menu = document.getElementById('mobile-menu');
-  document.getElementById('menu-open').onclick = () => { menu.classList.remove('hidden'); menu.classList.add('flex'); };
-  const closeMenu = () => { menu.classList.add('hidden'); menu.classList.remove('flex'); };
-  document.getElementById('menu-close').onclick = closeMenu;
+  // Po otvorení skočí kurzor klávesnice do menu, Escape menu zavrie a kurzor sa vráti na hamburger; Tab ostáva v menu
+  const menuOpen = document.getElementById('menu-open');
+  const menuClose = document.getElementById('menu-close');
+  menuOpen.onclick = () => { menu.classList.remove('hidden'); menu.classList.add('flex'); menuOpen.setAttribute('aria-expanded', 'true'); menuClose.focus(); };
+  const closeMenu = () => { menu.classList.add('hidden'); menu.classList.remove('flex'); menuOpen.setAttribute('aria-expanded', 'false'); };
+  menuClose.onclick = () => { closeMenu(); menuOpen.focus(); };
+  document.addEventListener('keydown', e => {
+    if (menu.classList.contains('hidden')) return;
+    if (e.key === 'Escape') { closeMenu(); menuOpen.focus(); }
+    if (e.key === 'Tab') {
+      const items = menu.querySelectorAll('button, a'), first = items[0], last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
   // Odkaz v mobilnom menu: skok rovno na miesto, bez plynulého posúvania
   // Hlavička po skoku ostane zobrazená (sekcie majú scroll-mt, takže nadpis je hneď pod ňou)
   let menuJump = !!location.hash; // aj pri príchode z podstránky na index.html#…
@@ -649,7 +693,7 @@
     const io = new IntersectionObserver(entries => entries.forEach(entry => {
       if (!entry.isIntersecting) return;
       io.unobserve(entry.target);
-      const el = entry.target, end = +el.dataset.count, t0 = performance.now(), dur = 1600;
+      const el = entry.target, end = +el.dataset.count, t0 = performance.now(), dur = 1000;
       const step = now => {
         const p = Math.min(1, (now - t0) / dur);
         el.textContent = Math.round(end * (1 - Math.pow(1 - p, 4)));
@@ -794,8 +838,8 @@
   const html = document.documentElement;
   const reduceMotion = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
   const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-  // Zatváranie starého bloku trvá 800 ms s rovnakou krivkou (cubic-bezier(.65,0,.35,1) = ease vyššie)
-  const SWAP = 800;
+  // Zatváranie starého bloku trvá 550 ms s rovnakou krivkou (cubic-bezier(.65,0,.35,1) = ease vyššie)
+  const SWAP = 550;
   let follow, followStop;
   // finalShift vráti top = kde bude blok (pri terajšom scrolle), keď sa všetko dotvorí; animated = staré bloky sa zatvárajú plynulo
   // Poloha sa počíta vopred a stránka sa posúva len podľa času – nič sa počas animácie nemeria ani nedorovnáva,
@@ -817,7 +861,7 @@
     const target = y0 >= header && y0 <= innerHeight * 0.5 ? y0 : header + 40;
     // Scroll = vyrovnanie zatvárajúcich sa blokov nad ním (-shift, v rytme ich animácie) + pokojný presun k cieľu (move)
     const move = y0 - target;
-    const dur = still ? 0 : Math.max(SWAP, Math.min(1400, 650 + Math.abs(move) * 0.6));
+    const dur = still ? 0 : Math.max(SWAP, Math.min(1000, 450 + Math.abs(move) * 0.5));
     const closeDur = still || !animated ? 0 : SWAP;
     const place = p => window.scrollTo(0, s0 - shift * (closeDur ? ease(Math.min(1, p / closeDur)) : 1) + move * (dur ? ease(Math.min(1, p / dur)) : 1));
     const ctrl = new AbortController();
@@ -849,8 +893,8 @@
     if (show) { void box.offsetWidth; box.classList.add('more-open'); }
     box.style.overflow = 'hidden';
     const anim = box.animate(show ? [none, full] : [full, none], show
-      ? { duration: 800, easing: 'cubic-bezier(.25,1,.5,1)' }
-      : { duration: swap ? 800 : 500, easing: swap ? 'cubic-bezier(.65,0,.35,1)' : 'cubic-bezier(.4,0,.2,1)' });
+      ? { duration: 550, easing: 'cubic-bezier(.25,1,.5,1)' }
+      : { duration: swap ? SWAP : 400, easing: swap ? 'cubic-bezier(.65,0,.35,1)' : 'cubic-bezier(.4,0,.2,1)' });
     anim.onfinish = () => { box.style.overflow = ''; if (!show) box.classList.add('hidden'); };
   };
   more.forEach(btn => btn.onclick = () => {
@@ -887,7 +931,7 @@
       others.forEach(o => { o.classList.add('swap-close'); o.open = false; });
       d.open = true;
     }, () => ({ top, animated: CSS.supports('interpolate-size', 'allow-keywords') }));
-    setTimeout(() => others.forEach(o => o.classList.remove('swap-close')), 900);
+    setTimeout(() => others.forEach(o => o.classList.remove('swap-close')), 650);
   });
 </script>
 <!-- STRETNEME SA SEKCIA END -->
@@ -973,6 +1017,8 @@
           </div>
         </details>
 
+        <!-- Ďalšie otázky – skryje ich skript nižšie, ukážu sa po kliknutí na „Zobraziť ďalšie otázky“ -->
+        <div id="otazky-dalsie" class="flex flex-col gap-5 md:gap-4 lg:gap-6">
         <details data-group="otazky" class="group grain -mx-4 md:mx-0 md:rounded-2xl bg-secondary-500 open:bg-accent-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03)]">
           <summary class="flex items-center justify-between gap-6 px-8 py-4 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
             <span class="text-xl leading-[1.3] md:text-2xl md:leading-[1.25] lg:text-[30px] lg:leading-[38px]">Prečo si vybrať konzultáciu na prechádzke (Walk &amp; Talk)?</span>
@@ -1055,7 +1101,17 @@
               <p>Nie. Rodinné poradenstvo nenahrádza psychologickú, psychiatrickú, lekársku ani krízovú starostlivosť. Pri bezprostrednom ohrození kontaktujte tiesňovú linku alebo príslušného odborníka.</p>
           </div>
         </details>
+        </div>
 
+    </div>
+
+    <!-- Tlačidlo „Zobraziť ďalšie otázky“ (ukáže ho skript; bez JavaScriptu je vidno všetky otázky) -->
+    <div id="otazky-viac" class="hidden mt-8 lg:mt-10 justify-center">
+      <button type="button" aria-expanded="false" aria-controls="otazky-dalsie"
+              class="inline-flex items-center gap-2 h-[48px] px-6 rounded-full border border-[#644E45] text-primary-500 italic text-base shadow-[2px_2px_6px_rgba(0,0,0,0.02)] hover:bg-accent-500 hover:border-accent-500 active:bg-accent-600 active:border-accent-600 transition-colors">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M12 5v14"/></svg>
+        <span>Zobraziť ďalšie otázky <span data-count></span></span>
+      </button>
     </div>
 
     <!-- Karta: Nenašli ste odpoveď (natočená od tabletu) -->
@@ -1077,6 +1133,24 @@
 
   </div>
 </section>
+<script>
+  // Otázky: na začiatku je vidno prvých 5, ďalšie sa ukážu po kliknutí (objavia sa rovnakou animáciou ako zvyšok stránky)
+  (() => {
+    const rest = document.getElementById('otazky-dalsie');
+    const box = document.getElementById('otazky-viac');
+    const btn = box.querySelector('button');
+    box.querySelector('[data-count]').textContent = '(' + rest.querySelectorAll('details').length + ')';
+    rest.classList.add('hidden');
+    box.classList.replace('hidden', 'flex');
+    btn.onclick = () => {
+      rest.classList.remove('hidden');
+      btn.setAttribute('aria-expanded', 'true');
+      box.classList.replace('flex', 'hidden');
+      // kurzor klávesnice skočí na prvú novú otázku (tlačidlo zmizlo)
+      rest.querySelector('summary').focus({ preventScroll: true });
+    };
+  })();
+</script>
 <!-- OTÁZKY SEKCIA END -->
  <!-- KONTAKT SEKCIA START -->
 <section id="kontakt" class="scroll-mt-[72px] lg:scroll-mt-0 grain bg-primary-500 text-secondary-500 overflow-hidden">
@@ -1151,7 +1225,7 @@
     </div>
 
     <div class="flex flex-col items-start gap-4 lg:gap-[22px] text-xl text-neutral-500">
-      <p class="text-base opacity-60">Moje sociálne siete</p>
+      <p class="text-base">Moje sociálne siete</p>
       <a href="https://www.instagram.com/rodinna_poradna_od_a_po_z/" target="_blank" rel="noopener" class="hover:text-primary-500 transition">Instagram</a>
       <a href="mailto:kontakt@rodinna-poradna.sk" class="underline underline-offset-2 hover:text-accent-600 transition-colors">kontakt@rodinna-poradna.sk</a>
     </div>
@@ -1160,12 +1234,12 @@
   <!-- Krízové kontakty (nonstop a zadarmo) -->
   <div class="border-t border-neutral-500">
     <div class="px-4 md:px-8 lg:px-16 py-6 md:py-5 flex flex-col md:flex-row md:flex-wrap gap-2 md:gap-x-8 md:gap-y-2 text-base text-neutral-500">
-      <p class="opacity-60">Ak ste v akútnej kríze, nečakajte na konzultáciu:</p>
-      <a href="tel:112" class="hover:text-primary-500 transition-colors">Tiesňová linka <strong class="font-bold">112</strong></a>
-      <a href="tel:0800800566" class="hover:text-primary-500 transition-colors">Linka dôvery Nezábudka <strong class="font-bold">0800 800 566</strong></a>
-      <a href="tel:116111" class="hover:text-primary-500 transition-colors">Linka detskej istoty <strong class="font-bold">116 111</strong></a>
-      <a href="tel:0800212212" class="hover:text-primary-500 transition-colors">Linka pre obete násilia <strong class="font-bold">0800 212 212</strong></a>
-      <a href="https://ipcko.sk" target="_blank" rel="noopener" class="underline underline-offset-2 hover:text-primary-500 transition-colors">IPčko – online chat</a>
+      <p>Ak ste v akútnej kríze, nečakajte na konzultáciu:</p>
+      <a href="tel:112" class="relative before:absolute before:-inset-1 before:content-[''] hover:text-primary-500 transition-colors">Tiesňová linka <strong class="font-bold">112</strong></a>
+      <a href="tel:0800800566" class="relative before:absolute before:-inset-1 before:content-[''] hover:text-primary-500 transition-colors">Linka dôvery Nezábudka <strong class="font-bold">0800 800 566</strong></a>
+      <a href="tel:116111" class="relative before:absolute before:-inset-1 before:content-[''] hover:text-primary-500 transition-colors">Linka detskej istoty <strong class="font-bold">116 111</strong></a>
+      <a href="tel:0800212212" class="relative before:absolute before:-inset-1 before:content-[''] hover:text-primary-500 transition-colors">Linka pre obete násilia <strong class="font-bold">0800 212 212</strong></a>
+      <a href="https://ipcko.sk" target="_blank" rel="noopener" class="relative before:absolute before:-inset-1 before:content-[''] underline underline-offset-2 hover:text-primary-500 transition-colors">IPčko – online chat</a>
     </div>
   </div>
 
@@ -1182,7 +1256,7 @@
 <!-- PÄTIČKA END -->
   <!-- COOKIES LIŠTA START -->
   <style>
-    #cookie-banner { opacity: 0; translate: 0 24px; transition: opacity 1.2s cubic-bezier(.16,1,.3,1), translate 1.4s cubic-bezier(.16,1,.3,1), filter 1.2s cubic-bezier(.16,1,.3,1); }
+    #cookie-banner { opacity: 0; translate: 0 24px; transition: opacity .8s cubic-bezier(.16,1,.3,1), translate .9s cubic-bezier(.16,1,.3,1), filter .8s cubic-bezier(.16,1,.3,1); }
     #cookie-banner.is-in { opacity: 1; translate: 0 0; filter: none; }
     #cookie-banner.is-out { opacity: 0; translate: 0 16px; transition-duration: .5s; }
     #cookie-banner [data-view]:not([hidden]) { animation: fade-up .5s cubic-bezier(.22,1,.36,1); }
@@ -1193,7 +1267,7 @@
     <div class="grain bg-yellow-50 text-primary-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03),0_12px_40px_rgba(61,34,23,0.14)]">
 
       <!-- Krížik = pokračovať len s nevyhnutnými -->
-      <button type="button" data-cookie-reject title="Pokračovať len s nevyhnutnými" aria-label="Odmietnuť voliteľné cookies a zavrieť" class="absolute top-3 right-3 z-10 w-9 h-9 inline-flex items-center justify-center rounded-full text-neutral-500 opacity-50 hover:opacity-100 hover:bg-accent-500 transition">
+      <button type="button" data-cookie-reject title="Pokračovať len s nevyhnutnými" aria-label="Odmietnuť voliteľné cookies a zavrieť" class="absolute top-3 right-3 z-10 w-9 h-9 before:absolute before:-inset-1 before:content-[''] inline-flex items-center justify-center rounded-full text-neutral-500 opacity-70 hover:opacity-100 hover:bg-accent-500 transition">
         <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
       </button>
 
@@ -1329,7 +1403,7 @@
       // Lišta sa ukáže až po dobehnutí úvodnej animácie
       // Na testovanie: adresa s ?cookies (napr. index.html?cookies) zobrazí lištu vždy
       if (saved && !/[?&]cookies\b/.test(location.search)) apply(saved);
-      else setTimeout(() => open('main'), document.querySelector('#uvod, #prax') ? 2600 : 600);
+      else setTimeout(() => open('main'), document.querySelector('#uvod, #prax') ? 1800 : 600);
     })();
   </script>
   <!-- COOKIES LIŠTA END -->
@@ -1399,14 +1473,14 @@
     // Úvod: počká na font, potom text postupne dosadne
     (() => {
       const hero = [
-        ['#uvod img', 0], ['#uvod h1', 350], ['#uvod h1 + p', 700], ['#uvod h1 ~ a', 1000], ['#uvod .hero-note', 1150], ['#uvod h1 ~ .font-script', 1350], ['#uvod img + p', 1350],
-        ['#prax img', 0], ['#prax h1', 350], ['#prax div:has(> p + svg)', 750], ['#prax .font-script', 1350]
+        ['#uvod img', 0], ['#uvod h1', 200], ['#uvod h1 + p', 400], ['#uvod h1 ~ a', 550], ['#uvod .hero-note', 650], ['#uvod h1 ~ .font-script', 800], ['#uvod img + p', 800],
+        ['#prax img', 0], ['#prax h1', 200], ['#prax div:has(> p + svg)', 450], ['#prax .font-script', 800]
       ];
       hero.forEach(([s, d]) => document.querySelectorAll(s).forEach(el => el.style.setProperty('--hero-delay', d + 'ms')));
       const html = document.documentElement;
       const show = () => requestAnimationFrame(() => requestAnimationFrame(() => {
         html.classList.add('hero-in');
-        setTimeout(() => html.classList.remove('hero-anim', 'hero-in'), 3800); // potom platia bežné hover prechody
+        setTimeout(() => html.classList.remove('hero-anim', 'hero-in'), 2600); // potom platia bežné hover prechody
       }));
       (document.fonts ? document.fonts.ready : Promise.resolve()).then(show, show);
     })();
@@ -1421,12 +1495,12 @@
       // Čo je vidno hneď pri načítaní, nabehne až po úvode
       let first = true;
       const io = new IntersectionObserver(entries => {
-        const base = first && document.querySelector('#uvod, #prax') ? 900 : 0;
+        const base = first && document.querySelector('#uvod, #prax') ? 600 : 0;
         first = false;
         let card = 0;
         entries.filter(e => e.isIntersecting).forEach((e, i) => {
-          // Ružové karty: každá o 160 ms po predchádzajúcej (len tie, ktoré sa objavia naraz)
-          const delay = base + (e.target.classList.contains('reveal--card') ? 120 + card++ * 160 : Math.min(i, 5) * 90);
+          // Ružové karty: každá o 110 ms po predchádzajúcej (len tie, ktoré sa objavia naraz)
+          const delay = base + (e.target.classList.contains('reveal--card') ? 100 + card++ * 110 : Math.min(i, 5) * 70);
           e.target.style.setProperty('--reveal-delay', delay + 'ms');
           e.target.classList.add('is-visible');
           // Po dobehnutí sa pomocné triedy odstránia (vrátia sa pôvodné hover prechody)

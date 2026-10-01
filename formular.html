@@ -62,7 +62,8 @@
     })();
   </script>
   <!-- MICROSOFT CLARITY END -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#F0E9D5">
   <title>Kontaktný formulár – Rodinná poradňa od A po Z</title>
   <meta name="description" content="Napíšte mi pár viet o tom, čo sa u vás deje. Ozvem sa vám e-mailom a spolu sa dohodneme, kedy a ako sa stretneme.">
 
@@ -143,6 +144,37 @@
     }
   </style>
   <!-- AUTOMATICKÉ VYPĹŇANIE END -->
+  <!-- FOCUS START -->
+  <!-- Viditeľný rámik pri ovládaní klávesnicou (Tab); myš ani dotyk ho nezobrazia. Tmavá čiara s krémovým lemom je vidieť na každom pozadí. -->
+  <style>
+    :is(a, button, summary, [tabindex]:not([tabindex="-1"])):focus-visible { outline: 2px solid #3D2217; outline-offset: 2px; box-shadow: 0 0 0 6px #F0E9D5; }
+  </style>
+  <!-- FOCUS END -->
+
+  <!-- APPLE DOLADENIE START -->
+  <!-- Prelínanie pri prechode medzi stránkami, bezpečné okraje iPhonu (výrez, spodná lišta) a vyšší kontrast pre toho, kto si ho zapne v systéme. Bežne sa vzhľad nemení. -->
+  <style>
+    @media (prefers-reduced-motion: no-preference) {
+      @view-transition { navigation: auto; }
+    }
+    /* Stránka siaha až po okraj displeja (viewport-fit=cover) – obsah a prilepené prvky sa vyhnú výrezu a spodnej lište; na bežnom displeji je to 0 */
+    body { padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right); }
+    #mobile-menu { padding: 0 env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left); }
+    #cookie-banner { bottom: max(1rem, env(safe-area-inset-bottom)); left: max(1rem, env(safe-area-inset-left)); right: max(1rem, env(safe-area-inset-right)); }
+    @media (min-width: 768px) { #cookie-banner { bottom: max(2rem, env(safe-area-inset-bottom)); left: max(2rem, env(safe-area-inset-left)); right: auto; } }
+    @media (min-width: 1024px) { #cookie-banner { left: max(4rem, env(safe-area-inset-left)); } }
+    /* Systémové „Zvýšiť kontrast“ */
+    /* Označený text vo farbách webu (ružová, tmavé písmo – čitateľné na svetlom aj tmavom pozadí) */
+    ::selection { background: #F1D1E7; color: #3D2217; }
+    @media (prefers-contrast: more) {
+      input, textarea { border-color: #644E45 !important; }
+      ::placeholder { color: #764B2A !important; }
+      .opacity-70 { opacity: 1 !important; }
+      #otazky details, #formular-dakujem, .bg-yellow-50.grain { outline: 1px solid #644E45; outline-offset: -1px; }
+      :is(a, button, summary, [tabindex]:not([tabindex="-1"])):focus-visible { outline-width: 3px; }
+    }
+  </style>
+  <!-- APPLE DOLADENIE END -->
   <!-- ANIMÁCIE START -->
   <style>
     html { scroll-behavior: smooth; }
@@ -152,11 +184,11 @@
     .reveal-anim .reveal {
       opacity: 0; translate: 0 24px;
       transition-property: opacity, translate, color, background-color, border-color;
-      transition-duration: .9s, .9s, .15s, .15s, .15s;
+      transition-duration: .6s, .6s, .15s, .15s, .15s;
       transition-timing-function: cubic-bezier(.22,1,.36,1), cubic-bezier(.22,1,.36,1), cubic-bezier(.4,0,.2,1), cubic-bezier(.4,0,.2,1), cubic-bezier(.4,0,.2,1);
       transition-delay: var(--reveal-delay, 0ms), var(--reveal-delay, 0ms), 0s, 0s, 0s;
     }
-    .reveal-anim .reveal.reveal--fade { translate: none; transition-duration: 1.2s, 1.2s, .15s, .15s, .15s; }
+    .reveal-anim .reveal.reveal--fade { translate: none; transition-duration: .8s, .8s, .15s, .15s, .15s; }
     .reveal-anim .reveal.is-visible { opacity: 1; translate: 0 0; }
     /* Plynulé rozbalenie kariet a otázok */
     details { transition: background-color .3s ease; }
@@ -168,7 +200,7 @@
     .reveal-anim .reveal.reveal--card { /* bez posunu – medzery medzi kartami ostávajú stále rovnaké */
       translate: none;
       transition-property: opacity, filter, background-color;
-      transition-duration: 1.6s, 1.4s, .15s;
+      transition-duration: 1s, .9s, .15s;
       transition-timing-function: cubic-bezier(.33,1,.68,1), cubic-bezier(.33,1,.68,1), cubic-bezier(.4,0,.2,1);
       transition-delay: var(--reveal-delay, 0ms), var(--reveal-delay, 0ms), 0s;
     }
@@ -176,10 +208,10 @@
     /* Úvod stránky – skrytý už pred prvým vykreslením, potom jemne dosadne */
     .hero-anim :is(#uvod h1, #uvod h1 ~ *, #uvod img + p, #prax h1, #prax .font-script, #prax div:has(> p + svg)) {
       opacity: 0; translate: 0 28px;
-      transition: opacity 1.6s cubic-bezier(.16,1,.3,1), translate 2s cubic-bezier(.16,1,.3,1), filter 1.6s cubic-bezier(.16,1,.3,1);
+      transition: opacity 1s cubic-bezier(.16,1,.3,1), translate 1.2s cubic-bezier(.16,1,.3,1), filter 1s cubic-bezier(.16,1,.3,1);
       transition-delay: var(--hero-delay, 0ms);
     }
-    .hero-anim :is(#uvod img, #prax img) { opacity: 0; transition: opacity .8s cubic-bezier(.16,1,.3,1); transition-delay: var(--hero-delay, 0ms); }
+    .hero-anim :is(#uvod img, #prax img) { opacity: 0; transition: opacity .6s cubic-bezier(.16,1,.3,1); transition-delay: var(--hero-delay, 0ms); }
     .hero-in :is(#uvod h1, #uvod h1 ~ *, #uvod img, #uvod img + p, #prax h1, #prax img, #prax .font-script, #prax div:has(> p + svg)) { opacity: 1; translate: 0 0; filter: none; }
     /* Mobilné menu */
     #mobile-menu.flex { animation: fade-in .3s ease-out; }
@@ -192,7 +224,7 @@
     @keyframes fade-up { from { opacity: 0; translate: 0 12px; } }
     /* Šípka v tlačidlách sa pri hoveri jemne posunie */
     a.rounded-full > svg:last-child, button.rounded-full > svg:last-child { transition: translate .3s cubic-bezier(.22,1,.36,1); }
-    a.rounded-full:hover > svg:last-child, button.rounded-full:hover > svg:last-child { translate: 3px 0; }
+    a.rounded-full:hover > svg:last-child, button.rounded-full:not([data-cookie-reject]):hover > svg:last-child { translate: 3px 0; }
     /* Kto má v systéme vypnuté animácie, nič sa nehýbe */
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
@@ -243,16 +275,16 @@
     </nav>
 
     <!-- Hamburger pre mobil a tablet -->
-    <button id="menu-open" class="lg:hidden w-10 h-10 inline-flex items-center justify-center text-primary-500" aria-label="Otvoriť menu">
+    <button id="menu-open" aria-expanded="false" aria-controls="mobile-menu" class="relative before:absolute before:-inset-0.5 before:content-[''] lg:hidden w-10 h-10 inline-flex items-center justify-center text-primary-500" aria-label="Otvoriť menu">
       <i data-lucide="menu" class="w-7 h-7 stroke-[1.25]"></i>
     </button>
   </div>
 
   <!-- Mobilné menu (celá obrazovka) -->
-  <div id="mobile-menu" class="fixed inset-0 bg-secondary-500 hidden flex-col lg:hidden">
+  <div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menu" class="fixed inset-0 bg-secondary-500 hidden flex-col lg:hidden">
     <div class="h-[72px] px-4 flex items-center justify-between">
       <span class="italic text-xl text-primary-500">Rodinná poradňa od A po Z</span>
-      <button id="menu-close" class="w-10 h-10 inline-flex items-center justify-center text-primary-500" aria-label="Zavrieť menu">
+      <button id="menu-close" class="relative before:absolute before:-inset-0.5 before:content-[''] w-10 h-10 inline-flex items-center justify-center text-primary-500" aria-label="Zavrieť menu">
         <i data-lucide="x" class="w-7 h-7 stroke-[1.25]"></i>
       </button>
     </div>
@@ -268,9 +300,21 @@
 
 <script>
   const menu = document.getElementById('mobile-menu');
-  document.getElementById('menu-open').onclick = () => { menu.classList.remove('hidden'); menu.classList.add('flex'); };
-  const closeMenu = () => { menu.classList.add('hidden'); menu.classList.remove('flex'); };
-  document.getElementById('menu-close').onclick = closeMenu;
+  // Po otvorení skočí kurzor klávesnice do menu, Escape menu zavrie a kurzor sa vráti na hamburger; Tab ostáva v menu
+  const menuOpen = document.getElementById('menu-open');
+  const menuClose = document.getElementById('menu-close');
+  menuOpen.onclick = () => { menu.classList.remove('hidden'); menu.classList.add('flex'); menuOpen.setAttribute('aria-expanded', 'true'); menuClose.focus(); };
+  const closeMenu = () => { menu.classList.add('hidden'); menu.classList.remove('flex'); menuOpen.setAttribute('aria-expanded', 'false'); };
+  menuClose.onclick = () => { closeMenu(); menuOpen.focus(); };
+  document.addEventListener('keydown', e => {
+    if (menu.classList.contains('hidden')) return;
+    if (e.key === 'Escape') { closeMenu(); menuOpen.focus(); }
+    if (e.key === 'Tab') {
+      const items = menu.querySelectorAll('button, a'), first = items[0], last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
   // Odkaz v mobilnom menu: skok rovno na miesto, bez plynulého posúvania
   document.querySelectorAll('.menu-link').forEach(a => a.onclick = () => {
     document.documentElement.style.scrollBehavior = 'auto';
@@ -337,35 +381,35 @@
           <div class="mt-4 flex flex-col gap-3">
             <label class="flex items-start gap-3 cursor-pointer">
               <span class="relative shrink-0 w-6 h-6 mt-px">
-                <input type="checkbox" name="Akú formu stretnutia preferujete?" value="Online, cez videohovor z domu" class="peer appearance-none block w-6 h-6 rounded-none border border-[#644E45] bg-yellow-50 cursor-pointer checked:bg-primary-500 checked:border-primary-500 outline-none focus-visible:ring-2 focus-visible:ring-accent-600 transition-colors">
+                <input type="checkbox" name="Akú formu stretnutia preferujete?" value="Online, cez videohovor z domu" class="peer appearance-none block w-6 h-6 rounded-none border border-[#644E45] bg-yellow-50 cursor-pointer checked:bg-primary-500 checked:border-primary-500 outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 focus-visible:ring-offset-secondary-500 transition-colors">
                 <svg class="pointer-events-none absolute inset-0 m-auto w-4 h-4 text-secondary-500 opacity-0 peer-checked:opacity-100 transition-opacity" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
               </span>
               <span class="text-xl leading-[1.3]">Online, cez videohovor z domu</span>
             </label>
             <label class="flex items-start gap-3 cursor-pointer">
               <span class="relative shrink-0 w-6 h-6 mt-px">
-                <input type="checkbox" name="Akú formu stretnutia preferujete?" value="Doma (Banská Bystrica a okolie)" class="peer appearance-none block w-6 h-6 rounded-none border border-[#644E45] bg-yellow-50 cursor-pointer checked:bg-primary-500 checked:border-primary-500 outline-none focus-visible:ring-2 focus-visible:ring-accent-600 transition-colors">
+                <input type="checkbox" name="Akú formu stretnutia preferujete?" value="Doma (Banská Bystrica a okolie)" class="peer appearance-none block w-6 h-6 rounded-none border border-[#644E45] bg-yellow-50 cursor-pointer checked:bg-primary-500 checked:border-primary-500 outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 focus-visible:ring-offset-secondary-500 transition-colors">
                 <svg class="pointer-events-none absolute inset-0 m-auto w-4 h-4 text-secondary-500 opacity-0 peer-checked:opacity-100 transition-opacity" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
               </span>
               <span class="text-xl leading-[1.3]">Doma <span class="text-neutral-500">(Banská Bystrica a okolie do pol hodiny cesty, ďalej po dohode)</span></span>
             </label>
             <label class="flex items-start gap-3 cursor-pointer">
               <span class="relative shrink-0 w-6 h-6 mt-px">
-                <input type="checkbox" name="Akú formu stretnutia preferujete?" value="Na prechádzke" class="peer appearance-none block w-6 h-6 rounded-none border border-[#644E45] bg-yellow-50 cursor-pointer checked:bg-primary-500 checked:border-primary-500 outline-none focus-visible:ring-2 focus-visible:ring-accent-600 transition-colors">
+                <input type="checkbox" name="Akú formu stretnutia preferujete?" value="Na prechádzke" class="peer appearance-none block w-6 h-6 rounded-none border border-[#644E45] bg-yellow-50 cursor-pointer checked:bg-primary-500 checked:border-primary-500 outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 focus-visible:ring-offset-secondary-500 transition-colors">
                 <svg class="pointer-events-none absolute inset-0 m-auto w-4 h-4 text-secondary-500 opacity-0 peer-checked:opacity-100 transition-opacity" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
               </span>
               <span class="text-xl leading-[1.3]">Na prechádzke</span>
             </label>
             <label class="flex items-start gap-3 cursor-pointer">
               <span class="relative shrink-0 w-6 h-6 mt-px">
-                <input type="checkbox" name="Akú formu stretnutia preferujete?" value="E-mailom" class="peer appearance-none block w-6 h-6 rounded-none border border-[#644E45] bg-yellow-50 cursor-pointer checked:bg-primary-500 checked:border-primary-500 outline-none focus-visible:ring-2 focus-visible:ring-accent-600 transition-colors">
+                <input type="checkbox" name="Akú formu stretnutia preferujete?" value="E-mailom" class="peer appearance-none block w-6 h-6 rounded-none border border-[#644E45] bg-yellow-50 cursor-pointer checked:bg-primary-500 checked:border-primary-500 outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 focus-visible:ring-offset-secondary-500 transition-colors">
                 <svg class="pointer-events-none absolute inset-0 m-auto w-4 h-4 text-secondary-500 opacity-0 peer-checked:opacity-100 transition-opacity" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
               </span>
               <span class="text-xl leading-[1.3]">E-mailom</span>
             </label>
             <label class="flex items-start gap-3 cursor-pointer">
               <span class="relative shrink-0 w-6 h-6 mt-px">
-                <input type="checkbox" name="Akú formu stretnutia preferujete?" value="Zatiaľ neviem" class="peer appearance-none block w-6 h-6 rounded-none border border-[#644E45] bg-yellow-50 cursor-pointer checked:bg-primary-500 checked:border-primary-500 outline-none focus-visible:ring-2 focus-visible:ring-accent-600 transition-colors">
+                <input type="checkbox" name="Akú formu stretnutia preferujete?" value="Zatiaľ neviem" class="peer appearance-none block w-6 h-6 rounded-none border border-[#644E45] bg-yellow-50 cursor-pointer checked:bg-primary-500 checked:border-primary-500 outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 focus-visible:ring-offset-secondary-500 transition-colors">
                 <svg class="pointer-events-none absolute inset-0 m-auto w-4 h-4 text-secondary-500 opacity-0 peer-checked:opacity-100 transition-opacity" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
               </span>
               <span class="text-xl leading-[1.3]">Zatiaľ neviem</span>
@@ -385,7 +429,7 @@
           <p class="font-bold text-xl leading-[1.3]">Súhlas so spracovaním osobných údajov</p>
           <label class="mt-4 flex items-start gap-3 cursor-pointer">
             <span class="relative shrink-0 w-6 h-6 mt-px">
-              <input id="f-suhlas" type="checkbox" required data-consent aria-describedby="f-suhlas-chyba" class="peer appearance-none block w-6 h-6 rounded-none border border-[#644E45] bg-yellow-50 cursor-pointer checked:bg-primary-500 checked:border-primary-500 outline-none focus-visible:ring-2 focus-visible:ring-accent-600 aria-[invalid=true]:ring-2 aria-[invalid=true]:ring-accent-600 transition-colors">
+              <input id="f-suhlas" type="checkbox" required data-consent aria-describedby="f-suhlas-chyba" class="peer appearance-none block w-6 h-6 rounded-none border border-[#644E45] bg-yellow-50 cursor-pointer checked:bg-primary-500 checked:border-primary-500 outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 focus-visible:ring-offset-secondary-500 aria-[invalid=true]:ring-2 aria-[invalid=true]:ring-accent-600 transition-colors">
               <svg class="pointer-events-none absolute inset-0 m-auto w-4 h-4 text-secondary-500 opacity-0 peer-checked:opacity-100 transition-opacity" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
             </span>
             <span class="text-xl leading-[1.3]">Súhlasím so spracovaním mojich osobných údajov na účel odpovede na túto správu. <a href="gdpr.html" class="underline underline-offset-2 hover:text-neutral-500 transition-colors">Ako s nimi narábam</a></span>
@@ -514,7 +558,7 @@
     </div>
 
     <div class="flex flex-col items-start gap-4 lg:gap-[22px] text-xl text-neutral-500">
-      <p class="text-base opacity-60">Moje sociálne siete</p>
+      <p class="text-base">Moje sociálne siete</p>
       <a href="https://www.instagram.com/rodinna_poradna_od_a_po_z/" target="_blank" rel="noopener" class="hover:text-primary-500 transition">Instagram</a>
       <a href="mailto:kontakt@rodinna-poradna.sk" class="underline underline-offset-2 hover:text-accent-600 transition-colors">kontakt@rodinna-poradna.sk</a>
     </div>
@@ -523,12 +567,12 @@
   <!-- Krízové kontakty (nonstop a zadarmo) -->
   <div class="border-t border-neutral-500">
     <div class="px-4 md:px-8 lg:px-16 py-6 md:py-5 flex flex-col md:flex-row md:flex-wrap gap-2 md:gap-x-8 md:gap-y-2 text-base text-neutral-500">
-      <p class="opacity-60">Ak ste v akútnej kríze, nečakajte na konzultáciu:</p>
-      <a href="tel:112" class="hover:text-primary-500 transition-colors">Tiesňová linka <strong class="font-bold">112</strong></a>
-      <a href="tel:0800800566" class="hover:text-primary-500 transition-colors">Linka dôvery Nezábudka <strong class="font-bold">0800 800 566</strong></a>
-      <a href="tel:116111" class="hover:text-primary-500 transition-colors">Linka detskej istoty <strong class="font-bold">116 111</strong></a>
-      <a href="tel:0800212212" class="hover:text-primary-500 transition-colors">Linka pre obete násilia <strong class="font-bold">0800 212 212</strong></a>
-      <a href="https://ipcko.sk" target="_blank" rel="noopener" class="underline underline-offset-2 hover:text-primary-500 transition-colors">IPčko – online chat</a>
+      <p>Ak ste v akútnej kríze, nečakajte na konzultáciu:</p>
+      <a href="tel:112" class="relative before:absolute before:-inset-1 before:content-[''] hover:text-primary-500 transition-colors">Tiesňová linka <strong class="font-bold">112</strong></a>
+      <a href="tel:0800800566" class="relative before:absolute before:-inset-1 before:content-[''] hover:text-primary-500 transition-colors">Linka dôvery Nezábudka <strong class="font-bold">0800 800 566</strong></a>
+      <a href="tel:116111" class="relative before:absolute before:-inset-1 before:content-[''] hover:text-primary-500 transition-colors">Linka detskej istoty <strong class="font-bold">116 111</strong></a>
+      <a href="tel:0800212212" class="relative before:absolute before:-inset-1 before:content-[''] hover:text-primary-500 transition-colors">Linka pre obete násilia <strong class="font-bold">0800 212 212</strong></a>
+      <a href="https://ipcko.sk" target="_blank" rel="noopener" class="relative before:absolute before:-inset-1 before:content-[''] underline underline-offset-2 hover:text-primary-500 transition-colors">IPčko – online chat</a>
     </div>
   </div>
 
@@ -545,7 +589,7 @@
 <!-- PÄTIČKA END -->
   <!-- COOKIES LIŠTA START -->
   <style>
-    #cookie-banner { opacity: 0; translate: 0 24px; transition: opacity 1.2s cubic-bezier(.16,1,.3,1), translate 1.4s cubic-bezier(.16,1,.3,1), filter 1.2s cubic-bezier(.16,1,.3,1); }
+    #cookie-banner { opacity: 0; translate: 0 24px; transition: opacity .8s cubic-bezier(.16,1,.3,1), translate .9s cubic-bezier(.16,1,.3,1), filter .8s cubic-bezier(.16,1,.3,1); }
     #cookie-banner.is-in { opacity: 1; translate: 0 0; filter: none; }
     #cookie-banner.is-out { opacity: 0; translate: 0 16px; transition-duration: .5s; }
     #cookie-banner [data-view]:not([hidden]) { animation: fade-up .5s cubic-bezier(.22,1,.36,1); }
@@ -556,7 +600,7 @@
     <div class="grain bg-yellow-50 text-primary-500 shadow-[2px_2px_4px_rgba(0,0,0,0.03),0_12px_40px_rgba(61,34,23,0.14)]">
 
       <!-- Krížik = pokračovať len s nevyhnutnými -->
-      <button type="button" data-cookie-reject title="Pokračovať len s nevyhnutnými" aria-label="Odmietnuť voliteľné cookies a zavrieť" class="absolute top-3 right-3 z-10 w-9 h-9 inline-flex items-center justify-center rounded-full text-neutral-500 opacity-50 hover:opacity-100 hover:bg-accent-500 transition">
+      <button type="button" data-cookie-reject title="Pokračovať len s nevyhnutnými" aria-label="Odmietnuť voliteľné cookies a zavrieť" class="absolute top-3 right-3 z-10 w-9 h-9 before:absolute before:-inset-1 before:content-[''] inline-flex items-center justify-center rounded-full text-neutral-500 opacity-70 hover:opacity-100 hover:bg-accent-500 transition">
         <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
       </button>
 
@@ -692,7 +736,7 @@
       // Lišta sa ukáže až po dobehnutí úvodnej animácie
       // Na testovanie: adresa s ?cookies (napr. index.html?cookies) zobrazí lištu vždy
       if (saved && !/[?&]cookies\b/.test(location.search)) apply(saved);
-      else setTimeout(() => open('main'), document.querySelector('#uvod, #prax') ? 2600 : 600);
+      else setTimeout(() => open('main'), document.querySelector('#uvod, #prax') ? 1800 : 600);
     })();
   </script>
   <!-- COOKIES LIŠTA END -->
@@ -762,14 +806,14 @@
     // Úvod: počká na font, potom text postupne dosadne
     (() => {
       const hero = [
-        ['#uvod img', 0], ['#uvod h1', 350], ['#uvod h1 + p', 700], ['#uvod h1 ~ a', 1000], ['#uvod .hero-note', 1150], ['#uvod h1 ~ .font-script', 1350], ['#uvod img + p', 1350],
-        ['#prax img', 0], ['#prax h1', 350], ['#prax div:has(> p + svg)', 750], ['#prax .font-script', 1350]
+        ['#uvod img', 0], ['#uvod h1', 200], ['#uvod h1 + p', 400], ['#uvod h1 ~ a', 550], ['#uvod .hero-note', 650], ['#uvod h1 ~ .font-script', 800], ['#uvod img + p', 800],
+        ['#prax img', 0], ['#prax h1', 200], ['#prax div:has(> p + svg)', 450], ['#prax .font-script', 800]
       ];
       hero.forEach(([s, d]) => document.querySelectorAll(s).forEach(el => el.style.setProperty('--hero-delay', d + 'ms')));
       const html = document.documentElement;
       const show = () => requestAnimationFrame(() => requestAnimationFrame(() => {
         html.classList.add('hero-in');
-        setTimeout(() => html.classList.remove('hero-anim', 'hero-in'), 3800); // potom platia bežné hover prechody
+        setTimeout(() => html.classList.remove('hero-anim', 'hero-in'), 2600); // potom platia bežné hover prechody
       }));
       (document.fonts ? document.fonts.ready : Promise.resolve()).then(show, show);
     })();
@@ -784,12 +828,12 @@
       // Čo je vidno hneď pri načítaní, nabehne až po úvode
       let first = true;
       const io = new IntersectionObserver(entries => {
-        const base = first && document.querySelector('#uvod, #prax') ? 900 : 0;
+        const base = first && document.querySelector('#uvod, #prax') ? 600 : 0;
         first = false;
         let card = 0;
         entries.filter(e => e.isIntersecting).forEach((e, i) => {
-          // Ružové karty: každá o 160 ms po predchádzajúcej (len tie, ktoré sa objavia naraz)
-          const delay = base + (e.target.classList.contains('reveal--card') ? 120 + card++ * 160 : Math.min(i, 5) * 90);
+          // Ružové karty: každá o 110 ms po predchádzajúcej (len tie, ktoré sa objavia naraz)
+          const delay = base + (e.target.classList.contains('reveal--card') ? 100 + card++ * 110 : Math.min(i, 5) * 70);
           e.target.style.setProperty('--reveal-delay', delay + 'ms');
           e.target.classList.add('is-visible');
           // Po dobehnutí sa pomocné triedy odstránia (vrátia sa pôvodné hover prechody)
