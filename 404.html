@@ -78,25 +78,6 @@
   </style>
   <!-- FONT END -->
 
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      future: { hoverOnlyWhenSupported: true }, // hover len pri myši/touchpade – na mobile sa ťuknutím „neprilepí“
-      theme: {
-        extend: {
-          colors: {
-            primary:   { 500: '#3D2217' },
-            secondary: { 500: '#F0E9D5' },
-            neutral:   { 500: '#764B2A', 600: '#6B4426' },
-            accent:    { 300: '#F6E0EF', 500: '#F1D1E7', 600: '#ECC0DE' },
-            tertiary:  { 300: '#DEE1B7', 500: '#B8BA87' },
-            yellow:    { 50: '#FDEDD3', 500: '#F5AA33' }
-          }
-        }
-      }
-    }
-  </script>
   <!-- ZRNITÁ TEXTÚRA START -->
   <style>
     .grain { position: relative; isolation: isolate; }
@@ -145,6 +126,8 @@
     @media (prefers-reduced-motion: reduce) { .settle { animation: none; opacity: 1; translate: none; filter: none; } }
   </style>
   <!-- ANIMÁCIE END -->
+  <!-- Tailwind CSS (vygenerovaný súbor – po zmene tried spusti css-build.cmd) -->
+  <link rel="stylesheet" href="/styles.css">
 </head>
 <body class="bg-secondary-500 text-primary-500 antialiased">
 

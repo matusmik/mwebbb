@@ -98,28 +98,7 @@
   </style>
   <!-- FONT END -->
 
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      future: { hoverOnlyWhenSupported: true }, // hover len pri myši/touchpade – na mobile sa ťuknutím „neprilepí“
-      theme: {
-        extend: {
-          colors: {
-            primary:   { 500: '#3D2217' },
-            secondary: { 500: '#F0E9D5' },
-            neutral:   { 500: '#764B2A', 600: '#6B4426' },
-            accent:    { 300: '#F6E0EF', 500: '#F1D1E7', 600: '#ECC0DE' },
-            tertiary:  { 300: '#DEE1B7', 500: '#B8BA87' },
-            yellow:    { 50: '#FDEDD3', 500: '#F5AA33' }
-          }
-        }
-      }
-    }
-  </script>
 
-  <!-- Lucide ikony -->
-  <script src="https://unpkg.com/lucide@latest"></script>
     <!-- ZRNITÁ TEXTÚRA START -->
   <style>
     .grain { position: relative; isolation: isolate; }
@@ -255,7 +234,10 @@
       setTimeout(() => { html.classList.add('hero-in'); if (!window.revealReady) html.classList.remove('reveal-anim'); }, 4000);
     }
   </script>
-  <!-- ANIMÁCIE END --></head>
+  <!-- ANIMÁCIE END -->
+  <!-- Tailwind CSS (vygenerovaný súbor – po zmene tried spusti css-build.cmd) -->
+  <link rel="stylesheet" href="styles.css">
+</head>
 <body class="bg-secondary-500 text-primary-500 antialiased">
 
   <!-- HEADER START -->
@@ -276,7 +258,7 @@
 
     <!-- Hamburger pre mobil a tablet -->
     <button id="menu-open" aria-expanded="false" aria-controls="mobile-menu" class="relative before:absolute before:-inset-0.5 before:content-[''] lg:hidden w-10 h-10 inline-flex items-center justify-center text-primary-500" aria-label="Otvoriť menu">
-      <i data-lucide="menu" class="w-7 h-7 stroke-[1.25]"></i>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7 stroke-[1.25]" aria-hidden="true"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></svg>
     </button>
   </div>
 
@@ -285,7 +267,7 @@
     <div class="h-[72px] px-4 flex items-center justify-between">
       <span class="italic text-xl text-primary-500">Rodinná poradňa od A po Z</span>
       <button id="menu-close" class="relative before:absolute before:-inset-0.5 before:content-[''] w-10 h-10 inline-flex items-center justify-center text-primary-500" aria-label="Zavrieť menu">
-        <i data-lucide="x" class="w-7 h-7 stroke-[1.25]"></i>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-7 h-7 stroke-[1.25]" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
       </button>
     </div>
     <nav class="flex-1 flex flex-col items-center justify-center gap-[43px] text-2xl text-primary-500">
@@ -852,7 +834,6 @@
     })();
   </script>
   <!-- ANIMÁCIE SKRIPT END -->
-  <script>lucide.createIcons();</script>
 </body>
 </html>
 <!-- ZÁKLADNÁ KOSTRA END -->

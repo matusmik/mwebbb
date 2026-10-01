@@ -3,3 +3,6 @@
 # …okrem robots.txt, ten na web patrí
 !robots.txt
 design/
+
+# Tailwind CLI (stiahne ho css-build.cmd)
+tools/
