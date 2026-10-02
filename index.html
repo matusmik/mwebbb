@@ -315,14 +315,11 @@
     }
     .reveal-anim .reveal.reveal--fade { translate: none; transition-duration: .8s, .8s, .15s, .15s, .15s; }
     .reveal-anim .reveal.is-visible { opacity: 1; translate: 0 0; }
-    /* Plynulé rozbalenie kariet a otázok */
+    /* Plynulé rozbalenie kariet a otázok – výšku karty animuje skript (funkcia toggleCard), rovnako vo všetkých prehliadačoch vrátane Safari */
     details { transition: background-color .45s ease; }
-    /* zatváranie – mäkké, obsah pri tom jemne zosvetlie */
-    details::details-content { block-size: 0; opacity: 0; overflow: clip; transition: block-size .4s cubic-bezier(.4,0,.2,1), opacity .3s ease, content-visibility .4s allow-discrete; }
-    /* otváranie – pomalšie, na konci jemne dobehne */
-    details[open]::details-content { block-size: auto; opacity: 1; transition: block-size .55s cubic-bezier(.25,1,.5,1), opacity .2s ease, content-visibility .55s allow-discrete; }
-    /* stará karta sa pri otvorení novej zatvára pomaly a súčasne s ňou (stránku drží na mieste skript) */
-    details.swap-close::details-content { transition: block-size .55s cubic-bezier(.65,0,.35,1), opacity .35s ease, content-visibility .55s allow-discrete; }
+    /* počas animácie sa obsah karty nepreskladáva (len sa odkrýva) – menej práce pre telefón */
+    details[data-group] > summary + div { contain: layout style; }
+    details[data-group] > summary + div.is-sliding { overflow: hidden; }
     /* Ružové karty: po chvíli sa mínus zmení na tlačidlo „Napíšte mi“ (na PC v hlavičke karty, inde dole v karte) */
     .card-icons > * { grid-area: 1 / 1; }
     .card-cta { visibility: hidden; opacity: 0; }
@@ -380,9 +377,13 @@
     /* ikona mínus sa pri otvorení jemne pretočí */
     details[open] > summary > svg:last-child { animation: icon-turn .5s cubic-bezier(.22,1,.36,1); }
     @keyframes bubble-in { from { opacity: 0; translate: 0 14px; filter: blur(4px); } }
-    /* na mobile/tablete bez rozmazania – telefón ho počas posúvania nestíha plynulo prekresľovať */
-    @media (max-width: 1023px) { @keyframes bubble-in { from { opacity: 0; translate: 0 14px; } } }
     @keyframes chip-in { from { opacity: 0; scale: .85; translate: 0 6px; } }
+    /* na mobile/tablete text a štítky len pokojne zosvetlia na mieste – bez posunu, zväčšovania a rozmazania
+       (počas otvárania karty a posúvania stránky by poskakovali) */
+    @media (max-width: 1023px) {
+      @keyframes bubble-in { from { opacity: 0; } }
+      @keyframes chip-in { from { opacity: 0; } }
+    }
     @keyframes icon-turn { from { rotate: -90deg; opacity: .3; } }
     /* Ružové karty v Službách – pomalšia, plynulá kaskáda */
     .reveal-anim .reveal.reveal--card { /* bez posunu – medzery medzi kartami ostávajú stále rovnaké */
@@ -992,7 +993,11 @@
     // Blok pokojne prejde z pôvodného miesta (y0) k cieľu; zatváranie blokov nad ním sa vyrovná samo meraním
     const move = y0 - target;
     const dur = still ? 0 : Math.max(SWAP, Math.min(1000, 450 + Math.abs(move) * 0.5));
-    const place = p => window.scrollBy(0, el.getBoundingClientRect().top - (y0 - move * (dur ? ease(Math.min(1, p / dur)) : 1)));
+    // posun na celé pixely a len keď sa naozaj zmení – iPhone zlomky pixelov zaokrúhľuje a stránka by sa triasla hore-dole
+    const place = p => {
+      const y = Math.round(scrollY + el.getBoundingClientRect().top - (y0 - move * (dur ? ease(Math.min(1, p / dur)) : 1)));
+      if (Math.abs(y - scrollY) >= 1) window.scrollTo(0, y);
+    };
     const ctrl = new AbortController();
     followStop = () => { cancelAnimationFrame(follow); ctrl.abort(); html.style.scrollBehavior = ''; html.style.overflowAnchor = ''; window.autoScroll = false; followStop = null; };
     // Keď človek sám scrolluje, skript ho nechá tak
@@ -1046,19 +1051,44 @@
     });
   });
 
-  // Karty Služieb a Otázky (skupina = data-group); samotné zatvorenie karty nechá prehliadač s animáciou
+  // Karty Služieb a Otázky (skupina = data-group). Výšku obsahu animuje skript (Web Animations) – rovnako plynulo
+  // v Chrome aj v Safari na iPhone (Safari nevie animovať výšku „auto“ cez CSS, karta tam predtým len skočila).
+  // Pri zatváraní ostáva karta otvorená, kým sa obsah nezbalí; až potom sa mínus zmení na plus.
+  const toggleCard = (d, open, swap) => {
+    const box = d.querySelector('summary + div');
+    const running = box.getAnimations().find(a => a.id === 'card');
+    const from = running ? box.offsetHeight : null; // prerušená animácia pokračuje z aktuálnej výšky
+    if (running) running.cancel();
+    d.dataset.closing = open ? '' : '1';
+    if (open) d.open = true;
+    if (reduceMotion()) { box.classList.remove('is-sliding'); if (!open) { d.open = false; d.classList.add('just-closed'); } return box.offsetHeight; }
+    const cs = getComputedStyle(box);
+    const full = { height: box.scrollHeight + 'px', paddingBottom: cs.paddingBottom, opacity: 1 };
+    const none = { height: '0px', paddingBottom: '0px', opacity: 0 };
+    if (from !== null) (open ? none : full).height = from + 'px';
+    box.classList.add('is-sliding');
+    const anim = box.animate(open ? [none, full] : [full, none], open
+      ? { duration: 600, easing: 'cubic-bezier(.33,1,.68,1)' }                        // otvorenie – mäkko dobehne
+      : { duration: swap ? SWAP : 420, easing: swap ? 'cubic-bezier(.65,0,.35,1)' : 'cubic-bezier(.45,0,.55,1)' });
+    anim.id = 'card';
+    anim.onfinish = () => {
+      box.classList.remove('is-sliding');
+      if (!open) { d.classList.add('just-closed'); d.open = false; d.dataset.closing = ''; }
+    };
+    return parseFloat(full.height);
+  };
   document.addEventListener('click', e => {
     const summary = e.target.closest('details[data-group] > summary');
     if (!summary) return;
-    if (summary.parentElement.open) { summary.parentElement.classList.add('just-closed'); return; } // zatvorenie (mínus → plus)
     e.preventDefault();
     const d = summary.parentElement;
-    const others = [...document.querySelectorAll(`details[data-group="${d.dataset.group}"][open]`)];
+    if (d.open && !d.dataset.closing) { toggleCard(d, false); return; } // zatvorenie
+    const others = [...document.querySelectorAll(`details[data-group="${d.dataset.group}"][open]`)].filter(o => o !== d && !o.dataset.closing);
+    let fullH = 0;
     openOnly(d, () => {
-      others.forEach(o => { o.classList.add('swap-close', 'just-closed'); o.open = false; });
-      d.open = true;
-    }, () => d.querySelector('summary').offsetHeight + d.querySelector('summary + div').offsetHeight);
-    setTimeout(() => others.forEach(o => o.classList.remove('swap-close')), 650);
+      others.forEach(o => toggleCard(o, false, true));
+      fullH = toggleCard(d, true);
+    }, () => d.querySelector('summary').offsetHeight + fullH);
   });
 
   // Plus = vodorovná + zvislá čiarka zvlášť, aby zvislá mohla pri zatvorení karty vyrásť (mínus → plus)

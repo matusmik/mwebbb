@@ -196,5 +196,5 @@ Používateľ posiela SVG export z Figmy (text je v ňom prevedený na krivky, f
 - Overiť, že hlavičky stĺpcov v Google Sheets presne sedia s názvami polí formulára (pozri `formular.html` vyššie).
 - E-mail je všade `kontakt@rodinna-poradna.sk` (kontakt, pätička, gdpr).
 - Sľuby na webe (držať všade rovnako): **prvá odpoveď je nezáväzná a zadarmo**, **odpoveď do dvoch dní**, vo formulári **„Správu čítam len ja a je dôverná.“** Sú v: Služby (úvod), úvod na mobile, otázka „Ako to prebieha?“, karta „Nenašli ste odpoveď“, kontakt, formulár.
-- Prepínanie kariet (Služby, Otázky, „Viac informácií“): stará karta sa zatvára súčasne s otváraním novej (`.swap-close`, 0,55 s – v CSS aj v skripte `SWAP = 550`, musia sa zhodovať) a funkcia `openOnly` počas toho každú snímku drží novú kartu na obrazovke a prípadne ju pokojne dovezie pod hlavičku.
+- Prepínanie kariet (Služby, Otázky, „Viac informácií“): výšku kariet Služieb a Otázok animuje skript (`toggleCard`, Web Animations – CSS animácia výšky „auto“ v Safari nefunguje); stará karta sa zatvára súčasne s otváraním novej (`SWAP = 550` ms) a funkcia `openOnly` počas toho každú snímku zmeria novú kartu a posunie stránku len toľko, aby bola celá vidno.
 - Text karty „Online“ je vo Figme krémový (pravdepodobne chyba) – v kóde je tmavý ako ostatné.
