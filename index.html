@@ -167,7 +167,20 @@
   <style>
     @media (prefers-reduced-motion: no-preference) {
       @view-transition { navigation: auto; }
+      /* Prechod medzi stránkami v štýle iOS: stará stránka sa jemne vzdiali a zosvetlí, nová sa vynorí zdola; hlavička ostáva stáť */
+      ::view-transition { background: #F0E9D5; }
+      #site-header { view-transition-name: hlavicka; }
+      #site-header:has(#mobile-menu.flex) { view-transition-name: none; } /* z otvoreného menu odíde celá obrazovka naraz */
+      ::view-transition-old(root) { animation: vt-out .3s cubic-bezier(.4,0,1,1) both; }
+      ::view-transition-new(root) { animation: vt-in .55s cubic-bezier(.22,1,.36,1) .1s both; }
+      ::view-transition-group(hlavicka) { animation-duration: .5s; animation-timing-function: cubic-bezier(.32,.72,0,1); }
+      @keyframes vt-out { to { opacity: 0; scale: .98; translate: 0 -10px; } }
+      @keyframes vt-in { from { opacity: 0; translate: 0 18px; } }
+      /* Prehliadače bez prechodu (staršie iPhony, Firefox): stránka pred odchodom jemne zmizne (skript nižšie) */
+      html.page-leave body { opacity: 0; translate: 0 -10px; transition: opacity .25s cubic-bezier(.4,0,1,1), translate .25s cubic-bezier(.4,0,1,1); }
     }
+    /* Pozadie aj pod stránkou – pri načítaní nebliká biela */
+    html { background-color: #F0E9D5; }
     /* Stránka siaha až po okraj displeja (viewport-fit=cover) – obsah a prilepené prvky sa vyhnú výrezu a spodnej lište; na bežnom displeji je to 0 */
     body { padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right); }
     #mobile-menu { padding: 0 env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left); }
@@ -185,7 +198,108 @@
       :is(a, button, summary, [tabindex]:not([tabindex="-1"])):focus-visible { outline-width: 3px; }
     }
   </style>
+  <script>
+    // Odchod zo stránky tam, kde prehliadač nevie prechod medzi stránkami (staršie iPhony, Firefox)
+    if (!('onpagereveal' in window) && matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+      document.addEventListener('click', e => {
+        const a = e.target.closest('a[href]');
+        if (!a || e.defaultPrevented || e.button || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || a.target || a.hasAttribute('download')) return;
+        const url = new URL(a.href, location.href);
+        if (url.origin !== location.origin || (url.pathname === location.pathname && url.search === location.search)) return;
+        e.preventDefault();
+        document.documentElement.classList.add('page-leave');
+        setTimeout(() => { location.href = url.href; }, 250);
+      });
+      // návrat tlačidlom Späť – stránka z pamäte sa ukáže hneď
+      addEventListener('pageshow', e => { if (e.persisted) document.documentElement.classList.remove('page-leave'); });
+    }
+  </script>
   <!-- APPLE DOLADENIE END -->
+  <!-- RUČNÉ PÍSMO START -->
+  <!-- Ručne písané popisky (.font-script) sa pri zobrazení „dopíšu“ rukou – zľava doprava, riadok po riadku. Rovnaký blok na všetkých stránkach. -->
+  <style>
+    /* obal textu: o kúsok väčší (aby sa neorezali ťahy písma), rozloženie sa nemení */
+    .hand { display: inline-block; padding: .35em .5em; margin: -.35em -.5em; }
+    .hand-anim .font-script:not(.hand-ready) { visibility: hidden; }
+    .hand-anim .font-script:not(.hand-done) > .hand { -webkit-mask-image: linear-gradient(transparent, transparent); mask-image: linear-gradient(transparent, transparent); }
+  </style>
+  <script>
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window && CSS.supports('(mask-image: none) or (-webkit-mask-image: none)')) (() => {
+      const html = document.documentElement;
+      html.classList.add('hand-anim');
+      setTimeout(() => { if (!window.handReady) html.classList.remove('hand-anim'); }, 4000); // poistka
+      // jemný rozbeh a dobeh len na začiatku a konci celého popisku – medzi riadkami pero nespomaľuje
+      const pace = t => .6 * t + .4 * (.5 - Math.cos(Math.PI * t) / 2);
+      const write = span => {
+        const p = span.parentElement;
+        // riadky textu sa zmerajú bez natočenia popisku (len na okamih, nič sa nevykreslí)
+        const keep = p.style.transform;
+        p.style.transform = 'none';
+        const box = span.getBoundingClientRect();
+        const range = document.createRange();
+        range.selectNodeContents(span);
+        const lines = [];
+        for (const r of range.getClientRects()) {
+          if (r.width < 1) continue;
+          const l = lines.find(l => Math.abs(l.top - r.top) < r.height / 2);
+          if (l) { l.x0 = Math.min(l.x0, r.left); l.x1 = Math.max(l.x1, r.right); }
+          else lines.push({ top: r.top, x0: r.left, x1: r.right });
+        }
+        p.style.transform = keep;
+        if (!lines.length) { p.classList.add('hand-done'); return; }
+        lines.sort((a, b) => a.top - b.top);
+        const W = box.width, H = box.height, S = 22, jump = 14; // S = mäkký hrot pera, jump = presun na ďalší riadok
+        let c = 0;
+        const parts = lines.map((l, i) => {
+          const y = i ? l.top - box.top : 0, y2 = i < lines.length - 1 ? lines[i + 1].top - box.top : H;
+          const part = { y, h: y2 - y, x0: l.x0 - box.left, len: l.x1 - l.x0 + S, at: c };
+          c += part.len + jump;
+          return part;
+        });
+        const D = c - jump;
+        // tempo písania: ~65 ms na písmeno (celý popisok 0,7–2,4 s), pero ide stále rovnako rýchlo cez všetky riadky
+        const T = Math.min(2400, Math.max(700, span.textContent.trim().length * 65));
+        const set = (k, v) => { span.style[k] = v; span.style['webkit' + k[0].toUpperCase() + k.slice(1)] = v; };
+        // každý riadok má vlastnú masku: čierna = vidno; mäkký okraj (hrot pera) ide po skutočnom texte riadku
+        set('maskImage', parts.map(() => `linear-gradient(90deg, #000 ${W}px, transparent ${W + S}px)`).join(','));
+        set('maskRepeat', 'no-repeat');
+        set('maskSize', parts.map(q => `${2 * W + S}px ${q.h}px`).join(','));
+        let t0;
+        const frame = now => {
+          t0 ??= now;
+          const t = Math.min(1, (now - t0) / T), d = pace(t) * D;
+          set('maskPosition', parts.map(q => `${q.x0 + Math.min(q.len, Math.max(0, d - q.at)) - W - S}px ${q.y}px`).join(','));
+          if (t < 1) return requestAnimationFrame(frame);
+          ['maskImage', 'maskRepeat', 'maskSize', 'maskPosition'].forEach(k => set(k, ''));
+          p.classList.add('hand-done');
+        };
+        frame(performance.now()); // hneď skrytý presne podľa riadkov
+        requestAnimationFrame(frame);
+      };
+      addEventListener('DOMContentLoaded', () => {
+        window.handReady = true;
+        const io = new IntersectionObserver(entries => entries.forEach(e => {
+          if (!e.isIntersecting) return;
+          io.unobserve(e.target);
+          const p = e.target;
+          // začne, keď sa popisok objaví (rešpektuje oneskorenie úvodu / objavovania pri scrollovaní)
+          (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => requestAnimationFrame(() => {
+            const d = parseFloat(p.style.getPropertyValue('--hero-delay') || p.style.getPropertyValue('--reveal-delay') || p.style.getPropertyValue('--d')) || 0;
+            setTimeout(() => write(p.firstElementChild), d * .6); // začne ešte počas objavovania
+          }));
+        }), { threshold: .5 });
+        document.querySelectorAll('.font-script').forEach(p => {
+          const span = document.createElement('span');
+          span.className = 'hand';
+          span.append(...p.childNodes);
+          p.append(span);
+          p.classList.add('hand-ready');
+          io.observe(p);
+        });
+      });
+    })();
+  </script>
+  <!-- RUČNÉ PÍSMO END -->
   <!-- ANIMÁCIE START -->
   <style>
     html { scroll-behavior: smooth; }
@@ -212,14 +326,42 @@
     /* Ružové karty: po chvíli sa mínus zmení na tlačidlo „Napíšte mi“ (na PC v hlavičke karty, inde dole v karte) */
     .card-icons > * { grid-area: 1 / 1; }
     .card-cta { visibility: hidden; opacity: 0; }
-    details[open] .card-icons > .card-cta { animation: cta-in .5s cubic-bezier(.22,1,.36,1) .75s forwards; }
+    /* Tlačidlo sa „nakreslí rukou“: pero obtiahne nedokonalú elipsu (na PC začne z mínusu, na mobile/tablete z ničoho),
+       keď sa obrys uzavrie, vyplní sa farbou tlačidla a objaví sa text. Obrys (.cta-line) pridáva skript v Službách. */
+    details[open] .card-icons > .card-cta { --cta-delay: .75s; }
+    details[open] > summary + div > a.card-cta { --cta-delay: .35s; } /* prebije aj postupné vynáranie obsahu karty */
+    /* časová os 2,4 s: pero kreslí 0–1,4 s, výplň 1,3–2,1 s, text 1,75–2,4 s, obrys sa rozplynie vo výplni */
+    details[open] .card-cta { animation: cta-fill 2.4s linear var(--cta-delay) backwards; }
+    details[open] .card-icons > .card-cta { animation: cta-show .01s linear var(--cta-delay) forwards, cta-fill 2.4s linear var(--cta-delay) backwards; }
+    details[open] .card-cta::after { animation: cta-grain 2.4s linear var(--cta-delay) backwards; }
+    details[open] .card-cta .cta-line { animation: cta-line 2.4s linear var(--cta-delay) both; }
+    details[open] .card-cta .cta-line path { animation: cta-pen 1.4s cubic-bezier(.4,.05,.45,1) var(--cta-delay) both; }
+    .cta-line { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; opacity: 0;
+      fill: none; stroke: #764B2A; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+    .cta-line path { --from: 1.02; stroke-dasharray: 1 2; stroke-dashoffset: 1.02; } /* 1.02 = pred začiatkom nesvieti ani bodka */
+    .cta-line--minus path { --from: .962; } /* na začiatku je vidno len prvý kúsok čiary = mínus */
     details[open] .card-icons > svg:last-of-type { animation: icon-turn .5s cubic-bezier(.22,1,.36,1); }
     @media (min-width: 1024px) {
-      details[open] .card-icons > svg:last-of-type { animation: icon-turn .5s cubic-bezier(.22,1,.36,1), icon-out .35s ease .65s forwards; pointer-events: none; }
+      /* mínus zmizne presne vo chvíli, keď ho na tom istom mieste nahradí začiatok obrysu (rovnaká farba aj hrúbka) */
+      details[open] .card-icons > svg:last-of-type { animation: icon-turn .5s cubic-bezier(.22,1,.36,1), icon-out .01s linear .75s forwards; pointer-events: none; }
     }
     details[open] > div > .card-cta { visibility: visible; opacity: 1; }
-    @keyframes cta-in { from { visibility: visible; opacity: 0; scale: .9; translate: 8px 0; } to { visibility: visible; opacity: 1; scale: 1; translate: 0 0; } }
-    @keyframes icon-out { to { opacity: 0; rotate: 90deg; scale: .6; } }
+    @keyframes cta-show { to { visibility: visible; opacity: 1; } }
+    @keyframes cta-pen { from { stroke-dashoffset: var(--from); } to { stroke-dashoffset: 0; } }
+    @keyframes cta-line { 0%, 72% { opacity: 1; } 92%, 100% { opacity: 0; } }
+    /* kým pero kreslí, tlačidlo je prázdne; potom sa pomaly vyplní a nakoniec ukáže text (bez „forwards“, aby fungoval hover) */
+    @keyframes cta-fill {
+      0%, 54% { background-color: rgb(61 34 23 / 0); color: transparent; box-shadow: none; animation-timing-function: cubic-bezier(.45,0,.55,1); }
+      73% { color: transparent; animation-timing-function: cubic-bezier(.45,0,.55,1); }
+      88% { background-color: #3D2217; }
+    }
+    @keyframes cta-grain { 0%, 54% { opacity: 0; } 88% { opacity: 1; } }
+    @keyframes icon-out { to { opacity: 0; } }
+    /* Pri zatvorení karty sa z mínusu stane plus – ikona sa otočí o pol kruhu a zvislá čiarka pri tom pomaly vyrastie zo stredu (triedu pridáva skript) */
+    .just-closed > summary svg:has(.plus-v) { animation: plus-turn .9s cubic-bezier(.45,0,.25,1); }
+    .just-closed > summary .plus-v { transform-box: fill-box; transform-origin: center; animation: plus-grow .8s cubic-bezier(.3,0,.2,1) .1s backwards; }
+    @keyframes plus-turn { from { rotate: -180deg; } }
+    @keyframes plus-grow { from { scale: 1 0; } }
     /* Šípka v tlačidlách sa pri hoveri jemne posunie */
     a.rounded-full > svg:last-child, button.rounded-full > svg:last-child { transition: translate .3s cubic-bezier(.22,1,.36,1); }
     a.rounded-full:hover > svg:last-child, button.rounded-full:not([data-cookie-reject]):hover > svg:last-child { translate: 3px 0; }
@@ -594,18 +736,24 @@
     const summary = d.querySelector('summary');
     const title = summary.querySelector('span').textContent.trim();
     const arrow = '<svg width="13" height="8" viewBox="408 617 13 8" fill="currentColor" aria-hidden="true"><path d="M420.354 621.211C420.549 621.016 420.549 620.699 420.354 620.504L417.172 617.322C416.976 617.127 416.66 617.127 416.464 617.322C416.269 617.517 416.269 617.834 416.464 618.029L419.293 620.858L416.464 623.686C416.269 623.881 416.269 624.198 416.464 624.393C416.66 624.588 416.976 624.588 417.172 624.393L420.354 621.211ZM408 620.858V621.358H420V620.858V620.358H408V620.858Z"/></svg>';
-    const cta = extra => {
+    // Ručne kreslený obrys tlačidla (tlačidlo má ~134×46 px). Na PC začína čiarkou mínusu (vpravo v strede, 114–130 px),
+    // na mobile/tablete začína pero hore vľavo. Obrys sa schválne neuzavrie presne – koniec trochu prebehne cez začiatok.
+    const lines = {
+      minus: 'M114 23 L130 23 C133.5 14 127 4.5 112 3.2 C96 2 86 1.2 70 2.4 C55 3.4 42 1 26 2.2 C10 3.4 1.4 12 2 24 C2.6 36.5 11 44.8 25 44 C42 43.2 56 46 72 45 C88 44 100 45.8 112 44.3 C126.5 42.6 134.2 33.5 132.6 21 C131.6 13 127 7.6 120 4.6 C117 3.4 114 3.1 111.5 3.5',
+      free: 'M36 3.6 C50 1.4 64 2.9 80 2.1 C96 1.3 104 3 113 2.6 C127.5 2.2 134.4 12 133.2 24.4 C132.2 36 123.6 45.2 109.5 44.3 C94 43.4 82 45.9 66 45 C50 44.1 38 45.6 24 44.5 C9.6 43.5 1.2 35 1.8 22.6 C2.4 10.6 11 2.4 25.5 3 C33.5 3.3 41 5 47.5 8.6'
+    };
+    const cta = (extra, line) => {
       const a = document.createElement('a');
       a.href = 'formular.html?tema=' + encodeURIComponent(title);
       a.className = 'card-cta grain inline-flex items-center gap-2 h-[46px] px-6 rounded-full bg-primary-500 text-secondary-500 italic text-base shadow-[2px_2px_6px_rgba(0,0,0,0.02)] hover:bg-accent-600 hover:text-primary-500 active:bg-secondary-500 transition-colors ' + extra;
-      a.innerHTML = 'Napíšte mi ' + arrow;
+      a.innerHTML = `<svg class="cta-line${line === 'minus' ? ' cta-line--minus' : ''}" viewBox="0 0 134 46" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="${lines[line]}"/></svg>Napíšte mi ${arrow}`;
       return a;
     };
     const icons = document.createElement('span');
     icons.className = 'card-icons shrink-0 grid justify-items-end items-center';
-    icons.append(...summary.querySelectorAll(':scope > svg'), cta('hidden lg:inline-flex'));
+    icons.append(...summary.querySelectorAll(':scope > svg'), cta('hidden lg:inline-flex', 'minus'));
     summary.append(icons);
-    d.querySelector('summary + div').append(cta('mt-6 lg:hidden'));
+    d.querySelector('summary + div').append(cta('mt-6 lg:hidden', 'free'));
   });
 </script>
 <!-- SLUŽBY SEKCIA END -->
@@ -816,36 +964,35 @@
   // Naraz je otvorený len jeden blok v skupine. Pri otvorení nového:
   // 1. starý sa zatvára pomaly a súčasne s otváraním nového,
   // 2. skript počas toho každú snímku drží nový blok na obrazovke (nič neposkočí hore ani dole),
-  // 3. a zároveň ho pokojne dovezie pod hlavičku – len ak nie je dobre vidno jeho začiatok.
+  // 3. a zároveň ho pokojne posunie len toľko, aby bol celý vidno (ak je vyšší ako obrazovka, začiatok pod hlavičku).
   const html = document.documentElement;
   const reduceMotion = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
   const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
   // Zatváranie starého bloku trvá 550 ms s rovnakou krivkou (cubic-bezier(.65,0,.35,1) = ease vyššie)
   const SWAP = 550;
   let follow, followStop;
-  // finalShift vráti top = kde bude blok (pri terajšom scrolle), keď sa všetko dotvorí; animated = staré bloky sa zatvárajú plynulo
-  // Poloha sa počíta vopred a stránka sa posúva len podľa času – nič sa počas animácie nemeria ani nedorovnáva,
-  // preto na konci nič nedoskakuje
-  const openOnly = (el, change, finalShift) => {
+  // Poloha bloku sa každú snímku zmeria (pred vykreslením) a stránka sa posunie presne tak, aby bol tam, kde má byť.
+  // Nič sa nepredpovedá – nezáleží na tom, ako rýchlo prehliadač zatvára starý blok (Safari na iPhone to robí inak ako Chrome),
+  // preto stránka nikdy neodskočí hore ani dole
+  // fullHeight vráti výšku bloku po úplnom otvorení
+  const openOnly = (el, change, fullHeight) => {
     if (followStop) followStop();
     // Vypne „ukotvenie scrollu“ prehliadača – polohu počas animácie riadi skript
     html.style.overflowAnchor = 'none';
     html.style.scrollBehavior = 'auto';
     window.autoScroll = true; // hlavička sa počas toho neskrýva ani neukazuje
-    const header = document.getElementById('site-header').offsetHeight;
     const y0 = el.getBoundingClientRect().top;
-    const s0 = scrollY;
     change();
-    const { top, animated } = finalShift();
-    const shift = y0 - top;
     const still = reduceMotion();
-    // Ak je začiatok bloku pohodlne vidno (horná polovica obrazovky), ostane tam, kde je
-    const target = y0 >= header && y0 <= innerHeight * 0.5 ? y0 : header + 40;
-    // Scroll = vyrovnanie zatvárajúcich sa blokov nad ním (-shift, v rytme ich animácie) + pokojný presun k cieľu (move)
+    // Posun len toľko, aby bol otvorený blok celý vidno; ak už vidno je, stránka sa nehne.
+    // Vyšší blok ako obrazovka – jeho začiatok príde pod hlavičku (ak je skrytá, k hornému okraju)
+    const top = Math.max(0, document.getElementById('site-header').getBoundingClientRect().bottom) + 16;
+    const bottom = innerHeight - 24;
+    const target = Math.max(top, Math.min(y0, bottom - fullHeight()));
+    // Blok pokojne prejde z pôvodného miesta (y0) k cieľu; zatváranie blokov nad ním sa vyrovná samo meraním
     const move = y0 - target;
     const dur = still ? 0 : Math.max(SWAP, Math.min(1000, 450 + Math.abs(move) * 0.5));
-    const closeDur = still || !animated ? 0 : SWAP;
-    const place = p => window.scrollTo(0, s0 - shift * (closeDur ? ease(Math.min(1, p / closeDur)) : 1) + move * (dur ? ease(Math.min(1, p / dur)) : 1));
+    const place = p => window.scrollBy(0, el.getBoundingClientRect().top - (y0 - move * (dur ? ease(Math.min(1, p / dur)) : 1)));
     const ctrl = new AbortController();
     followStop = () => { cancelAnimationFrame(follow); ctrl.abort(); html.style.scrollBehavior = ''; html.style.overflowAnchor = ''; window.autoScroll = false; followStop = null; };
     // Keď človek sám scrolluje, skript ho nechá tak
@@ -853,12 +1000,14 @@
     if (!dur) { place(0); followStop(); return; }
     // Hneď teraz (ešte pred vykreslením) – ak sa staré bloky zatvoria bez animácie, dorovná sa to naraz
     place(0);
+    // Drží blok aj po presune, kým sa staré bloky celkom nezatvoria
+    const end = Math.max(dur, SWAP + 150);
     let t0;
     const step = now => {
       t0 ??= now; // animácie výšky štartujú v tej istej snímke
       const p = now - t0;
       place(p);
-      p < dur ? follow = requestAnimationFrame(step) : followStop();
+      p < end ? follow = requestAnimationFrame(step) : followStop();
     };
     follow = requestAnimationFrame(step);
   };
@@ -871,6 +1020,7 @@
     if (show) box.classList.remove('hidden');
     if (reduceMotion()) { box.classList.toggle('hidden', !show); return; }
     const full = { height: box.offsetHeight + 'px', marginTop: getComputedStyle(box).marginTop, opacity: 1 };
+    box.fullHeight = box.offsetHeight + parseFloat(full.marginTop); // o koľko karta po rozbalení narastie
     const none = { height: '0px', marginTop: '0px', opacity: show ? 1 : 0 };
     if (show) { void box.offsetWidth; box.classList.add('more-open'); }
     box.style.overflow = 'hidden';
@@ -890,31 +1040,37 @@
       btn.setAttribute('aria-expanded', true);
       slide(btn.previousElementSibling, true);
     }, () => {
-      // Konečnú polohu zistí tak, že animácie na okamih pretočí na koniec (pred vykreslením, nič nevidno)
-      const anims = [...more].flatMap(b => b.previousElementSibling.getAnimations());
-      anims.forEach(a => a.currentTime = a.effect.getComputedTiming().endTime - .01); // tesne pred koniec, aby sa nespustil onfinish
-      const top = btn.parentElement.getBoundingClientRect().top;
-      anims.forEach(a => a.currentTime = 0);
-      return { top, animated: anims.length > 0 };
+      // karta teraz (text ešte zbalený) + rozbaľovaný text; pri vypnutých animáciách je už rozbalený
+      const box = btn.previousElementSibling;
+      return btn.parentElement.offsetHeight + (box.getAnimations().length ? box.fullHeight : 0);
     });
   });
 
   // Karty Služieb a Otázky (skupina = data-group); samotné zatvorenie karty nechá prehliadač s animáciou
   document.addEventListener('click', e => {
     const summary = e.target.closest('details[data-group] > summary');
-    if (!summary || summary.parentElement.open) return;
+    if (!summary) return;
+    if (summary.parentElement.open) { summary.parentElement.classList.add('just-closed'); return; } // zatvorenie (mínus → plus)
     e.preventDefault();
     const d = summary.parentElement;
     const others = [...document.querySelectorAll(`details[data-group="${d.dataset.group}"][open]`)];
-    // Karty sú pod sebou – posun = obsah otvorenej karty nad touto (po zatvorení ostane len hlavička)
-    const top = d.getBoundingClientRect().top - others.filter(o => o.compareDocumentPosition(d) & Node.DOCUMENT_POSITION_FOLLOWING)
-      .reduce((s, o) => s + o.offsetHeight - o.querySelector('summary').offsetHeight, 0);
     openOnly(d, () => {
-      others.forEach(o => { o.classList.add('swap-close'); o.open = false; });
+      others.forEach(o => { o.classList.add('swap-close', 'just-closed'); o.open = false; });
       d.open = true;
-    }, () => ({ top, animated: CSS.supports('interpolate-size', 'allow-keywords') }));
+    }, () => d.querySelector('summary').offsetHeight + d.querySelector('summary + div').offsetHeight);
     setTimeout(() => others.forEach(o => o.classList.remove('swap-close')), 650);
   });
+
+  // Plus = vodorovná + zvislá čiarka zvlášť, aby zvislá mohla pri zatvorení karty vyrásť (mínus → plus)
+  // (až po načítaní celej stránky – Otázky sú nižšie ako tento skript)
+  addEventListener('DOMContentLoaded', () => document.querySelectorAll('details[data-group] > summary path[d="M5 12h14M12 5v14"]').forEach(p => {
+    p.setAttribute('d', 'M5 12h14');
+    p.insertAdjacentHTML('afterend', '<path class="plus-v" d="M12 5v14"/>');
+  }));
+  // trieda sa pridá hneď pri kliknutí (v tej istej snímke ako zatvorenie); pri otvorení sa zmaže, aby sa animácia nabudúce spustila znova
+  document.addEventListener('toggle', e => {
+    if (e.target.matches?.('details[data-group]') && e.target.open) e.target.classList.remove('just-closed');
+  }, true);
 </script>
 <!-- STRETNEME SA SEKCIA END -->
  <!-- OTÁZKY SEKCIA START -->
