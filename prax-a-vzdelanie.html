@@ -174,6 +174,8 @@
     /* obal textu: o kúsok väčší (aby sa neorezali ťahy písma), rozloženie sa nemení */
     .hand { display: inline-block; padding: .35em .5em; margin: -.35em -.5em; }
     .hand-anim .font-script:not(.hand-ready) { visibility: hidden; }
+    /* písanie je samo osebe objavenie – popisok sa už navyše nevynára (priehľadnosť/posun by natočený text v Chrome rozmazali) */
+    .hand-anim .font-script { opacity: 1 !important; translate: none !important; transition: none !important; }
     .hand-anim .font-script:not(.hand-done) > .hand { -webkit-mask-image: linear-gradient(transparent, transparent); mask-image: linear-gradient(transparent, transparent); }
   </style>
   <script>
